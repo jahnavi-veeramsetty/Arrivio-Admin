@@ -34,6 +34,9 @@ export default function ProfilePanel() {
     navigate('/login');
   };
 
+  const isSuperAdmin = user?.roles?.includes('super_admin');
+  const rolesToDisplay = isSuperAdmin ? Object.keys(roleConfig) : (user?.roles || []);
+
   return (
     <div
       className="w-64 flex-shrink-0 rounded-2xl overflow-hidden sticky top-0"
@@ -78,13 +81,13 @@ export default function ProfilePanel() {
       </div>
 
       {/* ── Switch Role View ── */}
-      {user?.roles?.length > 0 && (
+      {rolesToDisplay.length > 0 && (
         <div className="p-4 border-b" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
           <p className="text-[10px] font-bold uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.35)' }}>
             Switch Role View
           </p>
           <div className="space-y-0.5">
-            {user.roles.map(roleId => {
+            {rolesToDisplay.map(roleId => {
               const meta = roleConfig[roleId] || { label: roleId, dot: 'bg-gray-400' };
               const isActive = roleId === role;
               return (

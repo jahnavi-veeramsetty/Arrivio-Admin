@@ -3,6 +3,7 @@ import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import ProtectedRoute from './routes/ProtectedRoute';
 import AdminLayout from './components/layout/AdminLayout';
+import ScrollToTop from './components/ui/ScrollToTop';
 import AdminLogin from './pages/AdminLogin';
 import AdminRoles from './pages/AdminRoles';
 import Dashboard from './pages/Dashboard';
@@ -46,6 +47,7 @@ export default function App() {
     <ThemeProvider>
       <AuthProvider>
         <Router>
+          <ScrollToTop />
           <Routes>
 
             {/* ── Public Routes ── */}
