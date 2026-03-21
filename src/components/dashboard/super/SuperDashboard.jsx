@@ -1,18 +1,18 @@
-// src/components/dashboard/SuperDashboard.jsx
+// src/components/dashboard/super/SuperDashboard.jsx
 import React from 'react';
-import { dashboardData } from '../../mockdata/dashboardData';
+import { dashboardData } from '../../../mockdata/dashboardData';
 
 // Row 1-3 Components
-import SuperMetricCards from './super/SuperMetricCards';
-import RevenueChart from './super/RevenueChart';
-import OccupancyByCity from './super/OccupancyByCity';
-import GeoMap from './super/GeoMap';
-import ApplicationFunnel from './super/ApplicationFunnel';
+import SuperMetricCards from './SuperMetricCards';
+import RevenueChart from './RevenueChart';
+import OccupancyByCity from './OccupancyByCity';
+import GeoMap from './GeoMap';
+import ApplicationFunnel from './ApplicationFunnel';
 
 // Row 4 Components
-import RecentActivityFeed from './RecentActivityFeed';
-import PortfolioSnapshot from './super/PortfolioSnapshot';
-import ActionsNeeded from './ActionsNeeded';
+import RecentActivityFeed from '../RecentActivityFeed';
+import PortfolioSnapshot from './PortfolioSnapshot';
+import ActionsNeeded from '../ActionsNeeded';
 
 export default function SuperDashboard() {
   return (

@@ -1,5 +1,5 @@
 import { useAuth } from '../context/AuthContext';
-import SuperDashboard      from '../components/dashboard/SuperDashboard';
+import SuperDashboard      from '../components/dashboard/super/SuperDashboard';
 import OpsDashboard        from '../components/dashboard/OpsDashboard';
 import FinanceDashboard    from '../components/dashboard/FinanceDashboard';
 import SalesDashboard      from '../components/dashboard/SalesDashboard';
