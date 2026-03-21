@@ -1,0 +1,120 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Dark mode CSS variables ───────────────────────── */
+:root {
+  --bg-main:     #f2f2f2;
+  --bg-surface:  #ffffff;
+  --bg-sidebar:  #ffffff;
+  --border:      #f0f0f0;
+  --text-primary:#111827;
+  --text-muted:  #6b7280;
+}
+
+html.dark {
+  --bg-main:     #0f1117;
+  --bg-surface:  #1a1d23;
+  --bg-sidebar:  #141619;
+  --border:      rgba(255,255,255,0.07);
+  --text-primary:#f3f4f6;
+  --text-muted:  #9ca3af;
+}
+
+html, body, #root {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #e5e7eb;
+}
+::-webkit-scrollbar-thumb {
+  background: #186b53;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0f4c3a;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+/* Walking Animation Keyframes */
+@keyframes walkLegLeft {
+  0%, 100% { transform: rotate(25deg); transform-origin: 50px 58px; }
+  50% { transform: rotate(-25deg); transform-origin: 50px 58px; }
+}
+@keyframes walkLegRight {
+  0%, 100% { transform: rotate(-25deg); transform-origin: 50px 58px; }
+  50% { transform: rotate(25deg); transform-origin: 50px 58px; }
+}
+@keyframes walkArmLeft {
+  0%, 100% { transform: rotate(-35deg); transform-origin: 50px 36px; }
+  50% { transform: rotate(35deg); transform-origin: 50px 36px; }
+}
+@keyframes walkArmRight {
+  0%, 100% { transform: rotate(35deg); transform-origin: 50px 36px; }
+  50% { transform: rotate(-35deg); transform-origin: 50px 36px; }
+}
+@keyframes bodySway {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.anim-leg-left { animation: walkLegLeft 1.6s infinite cubic-bezier(0.4, 0, 0.6, 1); }
+.anim-leg-right { animation: walkLegRight 1.6s infinite cubic-bezier(0.4, 0, 0.6, 1); }
+.anim-arm-left { animation: walkArmLeft 1.6s infinite cubic-bezier(0.4, 0, 0.6, 1); }
+.anim-arm-right { animation: walkArmRight 1.6s infinite cubic-bezier(0.4, 0, 0.6, 1); }
+.anim-body-sway { animation: bodySway 0.8s infinite ease-in-out; }
+
+/* Intro Sequence Animations */
+@keyframes introTextSequence {
+  0% { transform: translateX(0); opacity: 0; }
+  10% { transform: translateX(0); opacity: 1; }
+  50% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(90vw); opacity: 0; }
+}
+
+@keyframes characterWalkIn {
+  0%, 49% { transform: translateX(-35vw); opacity: 0; }
+  50% { transform: translateX(-35vw); opacity: 1; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+.anim-intro-text {
+  animation: introTextSequence 4.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.anim-character-in {
+  /* Linear ensures constant walking velocity, avoiding the sliding/skating illusion */
+  animation: characterWalkIn 4.5s linear forwards;
+}
