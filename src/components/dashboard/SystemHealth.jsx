@@ -10,7 +10,7 @@ export default function SystemHealth({ health }) {
     >
       {health.map((h, i) => (
         <div key={i} className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 last:border-0 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
-          <span className="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-tight">{h.service}</span>
+          <span className="text-sm text-gray-700 dark:text-gray-300 uppercase">{h.service}</span>
           <Badge color={h.color}>{h.status}</Badge>
         </div>
       ))}

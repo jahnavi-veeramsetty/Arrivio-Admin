@@ -23,14 +23,14 @@ const mockData = {
 };
 
 function Badge({ children, color }) {
-  return <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${color}`}>{children}</span>;
+  return <span className={`text-[10px] uppercase tracking-wide px-2 py-0.5 rounded-full ${color}`}>{children}</span>;
 }
 
 function Block({ title, badge, children }) {
   return (
     <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm transition-colors">
       <div className="bg-gray-50 dark:bg-gray-900/50 px-4 py-3 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
-        <span className="text-sm font-black italic text-gray-800 dark:text-gray-100 uppercase tracking-tight">{title}</span>
+        <span className="text-sm text-gray-800 dark:text-gray-100 uppercase tracking-wide">{title}</span>
         {badge}
       </div>
       {children}
@@ -43,12 +43,12 @@ export default function CommunityDashboard() {
     <div className="p-6 space-y-6">
       {/* Metrics — 5 cards */}
       <div>
-        <p className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] mb-4">Overview</p>
+        <p className="text-[10px] text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-4">Overview</p>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
           {mockData.metrics.map((m, i) => (
             <div key={i} className="bg-gray-50 dark:bg-gray-900/40 rounded-xl p-4 border border-transparent dark:border-white/5 transition-colors">
-              <p className="text-[10px] text-gray-400 dark:text-gray-500 font-black uppercase tracking-tight mb-2">{m.label}</p>
-              <p className={`text-2xl font-black italic font-mono ${m.color}`}>{m.value}</p>
+              <p className="text-[10px] text-gray-400 dark:text-gray-500 uppercase tracking-tight mb-2">{m.label}</p>
+              <p className={`text-2xl ${m.color}`}>{m.value}</p>
             </div>
           ))}
         </div>
@@ -60,8 +60,8 @@ export default function CommunityDashboard() {
           {mockData.events.map((e, i) => (
             <div key={i} className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 last:border-0 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
               <div className="flex-grow min-w-0">
-                <p className="text-sm font-black italic text-gray-800 dark:text-gray-100">{e.name}</p>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight">{e.detail}</p>
+                <p className="text-sm text-gray-800 dark:text-gray-100">{e.name}</p>
+                <p className="text-[10px] text-gray-400 uppercase tracking-tight">{e.detail}</p>
               </div>
               <Badge color={e.color}>{e.badge}</Badge>
             </div>
@@ -76,8 +76,8 @@ export default function CommunityDashboard() {
           {mockData.clubs.map((c, i) => (
             <div key={i} className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 last:border-0 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
               <div className="flex-grow min-w-0">
-                <p className="text-sm font-black italic text-gray-800 dark:text-gray-100">{c.name}</p>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight">{c.requests}</p>
+                <p className="text-sm text-gray-800 dark:text-gray-100">{c.name}</p>
+                <p className="text-[10px] text-gray-400 uppercase tracking-tight">{c.requests}</p>
               </div>
               <Badge color="bg-amber-50 dark:bg-amber-900/20 text-amber-800 dark:text-amber-400">Approve?</Badge>
             </div>
@@ -92,8 +92,8 @@ export default function CommunityDashboard() {
           {mockData.flagged.map((f, i) => (
             <div key={i} className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 last:border-0 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
               <div className="flex-grow min-w-0">
-                <p className="text-sm font-black italic text-gray-800 dark:text-gray-100">{f.post}</p>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight">{f.by}</p>
+                <p className="text-sm text-gray-800 dark:text-gray-100">{f.post}</p>
+                <p className="text-[10px] text-gray-400 uppercase tracking-tight">{f.by}</p>
               </div>
               <Badge color="bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-400">Review</Badge>
             </div>

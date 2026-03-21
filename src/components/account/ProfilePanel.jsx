@@ -46,16 +46,16 @@ export default function ProfilePanel() {
       <div className="p-5 border-b" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
         <div className="flex items-center gap-3 mb-4">
           <div
-            className="h-11 w-11 rounded-xl font-bold text-base flex items-center justify-center flex-shrink-0"
+            className="h-11 w-11 rounded-xl text-base flex items-center justify-center flex-shrink-0"
             style={{ background: '#1a6644', color: 'white' }}
           >
             {initials}
           </div>
           <div className="min-w-0">
-            <p className="text-sm font-bold text-white truncate">{user?.name}</p>
+            <p className="text-sm text-white truncate">{user?.name}</p>
             <p className="text-xs text-gray-400 truncate">{user?.email}</p>
             <span
-              className="inline-block mt-1 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider"
+              className="inline-block mt-1 text-[10px] px-2 py-0.5 rounded-full uppercase"
               style={{ background: 'rgba(255,255,255,0.1)', color: '#d1fae5' }}
             >
               {roleMeta.label}
@@ -83,7 +83,7 @@ export default function ProfilePanel() {
       {/* ── Switch Role View ── */}
       {rolesToDisplay.length > 0 && (
         <div className="p-4 border-b" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
-          <p className="text-[10px] font-bold uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.35)' }}>
+          <p className="text-[10px] uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.35)' }}>
             Switch Role View
           </p>
           <div className="space-y-0.5">
@@ -108,7 +108,7 @@ export default function ProfilePanel() {
                   </span>
                   {isActive && (
                     <span
-                      className="text-[10px] font-bold px-2 py-0.5 rounded-full"
+                      className="text-[10px] px-2 py-0.5 rounded-full"
                       style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.6)' }}
                     >
                       current
@@ -123,20 +123,20 @@ export default function ProfilePanel() {
 
       {/* ── Appearance / Theme Toggle ── */}
       <div className="p-4 border-b" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
-        <p className="text-[10px] font-bold uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.35)' }}>
+        <p className="text-[10px] uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.35)' }}>
           Appearance
         </p>
         <div className="flex items-center justify-between bg-white/5 rounded-xl p-1">
           <button
             onClick={() => theme === 'dark' && toggleTheme()}
-            className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-xs font-semibold transition-all
+            className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-xs transition-all
               ${theme === 'light' ? 'bg-white text-gray-800 shadow-sm' : 'text-gray-500 hover:text-gray-300'}`}
           >
             <Sun size={13} /> Light
           </button>
           <button
             onClick={() => theme === 'light' && toggleTheme()}
-            className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-xs font-semibold transition-all
+            className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-xs transition-all
               ${theme === 'dark' ? 'bg-white/20 text-white shadow-sm' : 'text-gray-500 hover:text-gray-300'}`}
           >
             <Moon size={13} /> Dark

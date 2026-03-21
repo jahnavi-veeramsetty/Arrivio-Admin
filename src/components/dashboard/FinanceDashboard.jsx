@@ -27,14 +27,14 @@ const mockData = {
 };
 
 function Badge({ children, color }) {
-  return <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${color}`}>{children}</span>;
+  return <span className={`text-[10px] uppercase tracking-wide px-2 py-0.5 rounded-full ${color}`}>{children}</span>;
 }
 
 function Block({ title, badge, children }) {
   return (
     <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm transition-colors">
       <div className="bg-gray-50 dark:bg-gray-900/50 px-4 py-3 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
-        <span className="text-sm font-black italic text-gray-800 dark:text-gray-100 uppercase tracking-tight">{title}</span>
+        <span className="text-sm text-gray-800 dark:text-gray-100 uppercase tracking-wide">{title}</span>
         {badge}
       </div>
       {children}
@@ -47,12 +47,12 @@ export default function FinanceDashboard() {
     <div className="p-6 space-y-6">
       {/* Metrics */}
       <div>
-        <p className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] mb-4">Overview</p>
+        <p className="text-[10px] text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-4">Overview</p>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
           {mockData.metrics.map((m, i) => (
             <div key={i} className="bg-gray-50 dark:bg-gray-900/40 rounded-xl p-4 border border-transparent dark:border-white/5 transition-colors">
-              <p className="text-[10px] text-gray-400 dark:text-gray-500 font-black uppercase tracking-tight mb-2">{m.label}</p>
-              <p className={`text-2xl font-black italic font-mono ${m.color}`}>{m.value}</p>
+              <p className="text-[10px] text-gray-400 dark:text-gray-500 uppercase tracking-tight mb-2">{m.label}</p>
+              <p className={`text-2xl ${m.color}`}>{m.value}</p>
             </div>
           ))}
         </div>
@@ -67,8 +67,8 @@ export default function FinanceDashboard() {
           {mockData.overdue.map((o, i) => (
             <div key={i} className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 last:border-0 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
               <div className="flex-grow min-w-0">
-                <p className="text-sm font-black italic text-gray-800 dark:text-gray-100">{o.partner}</p>
-                <p className="text-[10px] font-bold text-gray-400 uppercase">{o.invoice}</p>
+                <p className="text-sm text-gray-800 dark:text-gray-100">{o.partner}</p>
+                <p className="text-[10px] text-gray-400 uppercase">{o.invoice}</p>
               </div>
               <Badge color={o.color}>{o.days}</Badge>
             </div>
@@ -80,10 +80,10 @@ export default function FinanceDashboard() {
           {mockData.upcoming.map((u, i) => (
             <div key={i} className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 last:border-0 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
               <div className="flex-grow min-w-0">
-                <p className="text-sm font-black italic text-gray-800 dark:text-gray-100">{u.partner}</p>
-                <p className="text-[10px] font-bold text-gray-400 uppercase">{u.due}</p>
+                <p className="text-sm text-gray-800 dark:text-gray-100">{u.partner}</p>
+                <p className="text-[10px] text-gray-400 uppercase">{u.due}</p>
               </div>
-              <Badge color="bg-gray-100 dark:bg-gray-900/50 text-gray-600 dark:text-gray-400 font-mono italic">{u.amount}</Badge>
+              <Badge color="bg-gray-100 dark:bg-gray-900/50 text-gray-600 dark:text-gray-400">{u.amount}</Badge>
             </div>
           ))}
         </Block>
@@ -96,10 +96,10 @@ export default function FinanceDashboard() {
           {mockData.refunds.map((r, i) => (
             <div key={i} className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 last:border-0 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
               <div className="flex-grow min-w-0">
-                <p className="text-sm font-black italic text-gray-800 dark:text-gray-100">{r.name}</p>
-                <p className="text-[10px] font-bold text-gray-400 uppercase">{r.reason}</p>
+                <p className="text-sm text-gray-800 dark:text-gray-100">{r.name}</p>
+                <p className="text-[10px] text-gray-400 uppercase">{r.reason}</p>
               </div>
-              <Badge color="bg-amber-50 dark:bg-amber-900/20 text-amber-800 dark:text-amber-400 font-mono italic">{r.amount}</Badge>
+              <Badge color="bg-amber-50 dark:bg-amber-900/20 text-amber-800 dark:text-amber-400">{r.amount}</Badge>
             </div>
           ))}
         </Block>

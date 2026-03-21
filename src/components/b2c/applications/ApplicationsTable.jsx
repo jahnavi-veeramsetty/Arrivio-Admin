@@ -28,7 +28,7 @@ export default function ApplicationsTable({ apps, onSelect, canAction, showToast
 
   const setSort = (key) => { if (sortKey === key) setSortDir(d => d === 'asc' ? 'desc' : 'asc'); else { setSortKey(key); setSortDir('desc'); } };
 
-  const thCls = 'text-left text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider px-3 py-3 cursor-pointer select-none hover:text-gray-600 dark:hover:text-gray-300';
+  const thCls = 'text-left text-[11px] text-gray-400 dark:text-gray-500 uppercase tracking-wide px-3 py-3 cursor-pointer select-none hover:text-gray-600 dark:hover:text-gray-300';
   const tdCls = 'px-3 py-3 text-sm text-gray-700 dark:text-gray-300';
 
   return (
@@ -36,11 +36,11 @@ export default function ApplicationsTable({ apps, onSelect, canAction, showToast
       {/* Bulk actions */}
       {selected.length > 0 && canAction && (
         <div className="flex items-center gap-3 mb-3 px-4 py-2.5 bg-[#1a6644]/5 dark:bg-[#1a6644]/10 border border-[#1a6644]/20 rounded-xl">
-          <span className="text-sm font-semibold text-[#1a6644]">{selected.length} selected</span>
-          <button onClick={() => showToast(`Assigned reviewer to ${selected.length} apps`, 'success')} className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 dark:text-gray-300 hover:text-[#1a6644] transition-colors">
+          <span className="text-sm text-[#1a6644]">{selected.length} selected</span>
+          <button onClick={() => showToast(`Assigned reviewer to ${selected.length} apps`, 'success')} className="flex items-center gap-1.5 text-xs text-gray-600 dark:text-gray-300 hover:text-[#1a6644] transition-colors">
             <UserCheck size={13} /> Assign reviewer
           </button>
-          <button onClick={() => showToast('Exporting CSV…', 'success')} className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 dark:text-gray-300 hover:text-[#1a6644] transition-colors">
+          <button onClick={() => showToast('Exporting CSV…', 'success')} className="flex items-center gap-1.5 text-xs text-gray-600 dark:text-gray-300 hover:text-[#1a6644] transition-colors">
             <Download size={13} /> Export CSV
           </button>
           <button onClick={() => setSelected([])} className="ml-auto text-xs text-gray-400 hover:text-gray-600">Clear</button>
@@ -83,20 +83,20 @@ export default function ApplicationsTable({ apps, onSelect, canAction, showToast
                     </td>
                   )}
                   <td className={tdCls}>
-                    <p className="font-semibold text-gray-800 dark:text-gray-100">{app.name}</p>
+                    <p className="text-gray-800 dark:text-gray-100">{app.name}</p>
                     <p className="text-xs text-gray-400">{app.id}</p>
                   </td>
                   <td className={tdCls}>{app.unit}</td>
                   <td className={tdCls}>{app.city}</td>
                   <td className={tdCls}>{app.submitted}</td>
                   <td className={tdCls}>
-                    <span className={`inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full border ${statusBadge[app.status] || ''}`}>
+                    <span className={`inline-block text-xs px-2.5 py-0.5 rounded-full border ${statusBadge[app.status] || ''}`}>
                       {app.status}
                     </span>
                   </td>
                   <td className={`${tdCls} text-gray-500 dark:text-gray-400`}>{app.reviewer}</td>
                   <td className={tdCls}>
-                    <span className={`text-xs font-bold ${app.days > 20 ? 'text-red-600 dark:text-red-400' : app.days > 10 ? 'text-amber-600 dark:text-amber-400' : 'text-gray-500'}`}>
+                    <span className={`text-xs ${app.days > 20 ? 'text-red-600 dark:text-red-400' : app.days > 10 ? 'text-amber-600 dark:text-amber-400' : 'text-gray-500'}`}>
                       {app.days}d
                     </span>
                   </td>

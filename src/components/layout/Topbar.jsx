@@ -32,16 +32,16 @@ export default function Topbar() {
       <div className="flex items-center gap-2 text-sm">
         {sectionLabel ? (
           <>
-            <span className="text-gray-400 dark:text-gray-500 font-medium">{sectionLabel}</span>
+            <span className="text-gray-400 dark:text-gray-500">{sectionLabel}</span>
             {subLabel && subLabel !== sectionLabel && (
               <>
                 <span className="text-gray-300 dark:text-gray-700">/</span>
-                <span className="text-gray-700 dark:text-gray-200 font-semibold">{subLabel}</span>
+                <span className="text-gray-700 dark:text-gray-200">{subLabel}</span>
               </>
             )}
           </>
         ) : (
-          <span className="text-gray-400 dark:text-gray-500 font-medium">Arrivio Admin</span>
+          <span className="text-gray-400 dark:text-gray-500">Arrivio Admin</span>
         )}
       </div>
 

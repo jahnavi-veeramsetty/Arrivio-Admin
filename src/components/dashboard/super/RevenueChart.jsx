@@ -7,9 +7,9 @@ const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 p-3 rounded-lg shadow-xl">
-        <p className="text-[10px] font-black text-gray-400 uppercase mb-2">{label}</p>
+        <p className="text-[10px] text-gray-400 uppercase mb-2">{label}</p>
         {payload.map((p, i) => (
-          <p key={i} className="text-sm font-bold flex items-center gap-2" style={{ color: p.color }}>
+          <p key={i} className="text-sm flex items-center gap-2" style={{ color: p.color }}>
             <span className="w-2 h-2 rounded-full" style={{ backgroundColor: p.color }} />
             {p.name}: £{(p.value / 1000).toFixed(0)}k
           </p>
@@ -27,8 +27,8 @@ export default function RevenueChart({ data }) {
     <div className="bg-white dark:bg-[#0f1724] border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden shadow-sm p-6 relative">
       <div className="flex justify-between items-start mb-6">
         <div>
-          <p className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] mb-1">Total Revenue</p>
-          <p className="text-4xl font-black italic font-mono text-emerald-500">£{(totalCombined / 1000).toFixed(0)}k</p>
+          <p className="text-[10px] text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1">Total Revenue</p>
+          <p className="text-4xl text-emerald-500">£{(totalCombined / 1000).toFixed(0)}k</p>
         </div>
         <button className="p-2 hover:bg-gray-50 dark:hover:bg-white/5 rounded-lg text-gray-400 transition-colors">
           <Download className="w-4 h-4" />
@@ -43,7 +43,7 @@ export default function RevenueChart({ data }) {
               dataKey="month" 
               axisLine={false} 
               tickLine={false} 
-              tick={{ fontSize: 10, fontWeight: 900, textTransform: 'uppercase' }}
+              tick={{ fontSize: 10, fontWeight: 400, textTransform: 'uppercase' }}
               className="text-gray-400 dark:text-gray-600"
               dy={10}
             />
@@ -51,7 +51,7 @@ export default function RevenueChart({ data }) {
               axisLine={false} 
               tickLine={false} 
               tickFormatter={(value) => `£${value / 1000}k`}
-              tick={{ fontSize: 10, fontWeight: 900 }}
+              tick={{ fontSize: 10, fontWeight: 400 }}
               className="text-gray-400 dark:text-gray-600"
             />
             <Tooltip content={<CustomTooltip />} />
@@ -59,7 +59,7 @@ export default function RevenueChart({ data }) {
               verticalAlign="bottom" 
               align="right" 
               iconType="circle"
-              wrapperStyle={{ fontSize: 10, fontWeight: 900, textTransform: 'uppercase', paddingTop: 20 }}
+              wrapperStyle={{ fontSize: 10, fontWeight: 400, textTransform: 'uppercase', paddingTop: 20 }}
             />
             <Line 
               name="B2C"

@@ -74,7 +74,7 @@ export default function Sidebar() {
                   // always toggle open/closed
                   setOpenSections(prev => ({ ...prev, [section.id]: !prev[section.id] }));
                 }}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors group
+                className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors group
                   ${isActiveSection
                     ? 'text-[#1a6644] bg-[#1a6644]/5 dark:bg-[#1a6644]/10'
                     : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-white/5'
@@ -105,8 +105,8 @@ export default function Sidebar() {
                         onClick={() => navigate(sub.route)}
                         className={`w-full text-left px-3 py-1.5 rounded-md text-sm transition-all duration-150 border-l-2
                           ${isActive
-                            ? 'text-[#1a6644] border-[#1a6644] bg-[#1a6644]/5 dark:bg-[#1a6644]/10 font-semibold'
-                            : 'text-gray-500 dark:text-gray-500 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 font-normal'
+                            ? 'text-[#1a6644] border-[#1a6644] bg-[#1a6644]/5 dark:bg-[#1a6644]/10'
+                            : 'text-gray-500 dark:text-gray-500 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5'
                           }`}
                       >
                         {sub.label}
@@ -129,12 +129,12 @@ export default function Sidebar() {
               ? 'bg-[#1a6644]/5 dark:bg-[#1a6644]/10'
               : 'hover:bg-gray-50 dark:hover:bg-white/5'}`}
         >
-          <div className={`h-8 w-8 rounded-full ${badge.bg} ${badge.text} flex items-center justify-center text-xs font-bold flex-shrink-0`}>
+          <div className={`h-8 w-8 rounded-full ${badge.bg} ${badge.text} flex items-center justify-center text-xs flex-shrink-0`}>
             {initials}
           </div>
           <div className="min-w-0 flex-grow">
-            <p className="text-xs font-semibold text-gray-800 dark:text-gray-200 truncate">{user?.name}</p>
-            <span className={`inline-block text-[10px] font-bold px-1.5 py-0.5 rounded ${badge.bg} ${badge.text} uppercase tracking-wide`}>
+            <p className="text-xs text-gray-800 dark:text-gray-200 truncate">{user?.name}</p>
+            <span className={`inline-block text-[10px] px-1.5 py-0.5 rounded ${badge.bg} ${badge.text} uppercase tracking-wide`}>
               {badge.label}
             </span>
           </div>
