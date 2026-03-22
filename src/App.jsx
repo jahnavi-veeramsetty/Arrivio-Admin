@@ -76,7 +76,10 @@ export default function App() {
                 <Route path="/admin/b2c/applications" element={<ApplicationsPage />} />
                 <Route path="/admin/b2c/documents" element={<DocumentsPage />} />
                 <Route path="/admin/b2c/documents/:appId" element={<DocumentsPage />} />
-                <Route path="/admin/b2c/units" element={<UnitsPage />} />
+                <Route path="/admin/b2c/properties" element={<UnitsPage />} />
+                <Route path="/admin/b2c/properties/:propertyId" element={<UnitsPage />} />
+                <Route path="/admin/b2c/properties/:propertyId/:unitId" element={<UnitsPage />} />
+                <Route path="/admin/b2c/units" element={<Navigate to="/admin/b2c/properties" replace />} />
                 <Route path="/admin/b2c/move" element={<MovePage />} />
                 <Route path="/admin/b2c/waitlist" element={<WaitlistPage />} />
 

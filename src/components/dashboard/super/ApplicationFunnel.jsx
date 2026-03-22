@@ -4,7 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell, LabelList } fro
 
 export default function ApplicationFunnel({ data }) {
   // We use a custom CSS bar list for a premium minimalist feel
-  const colors = ['#ecfdf5', '#d1fae5', '#a7f3d0', '#6ee7b7', '#10b981'];
+  const colors = ['#10b981', '#34d399', '#6ee7b7', '#a7f3d0', '#d1fae5'];
   const maxCount = Math.max(...data.map(d => d.count), 1);
 
   return (

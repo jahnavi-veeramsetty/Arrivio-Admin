@@ -9,6 +9,13 @@
   --border:      #f0f0f0;
   --text-primary:#111827;
   --text-muted:  #6b7280;
+  
+  --color-primary: #1a6b3a;
+  --color-primary-light: #f0f7f3;
+  --color-border-primary: #a8d5b8;
+  --color-background-primary: #ffffff;
+  --color-text-secondary: #6b7280;
+  --color-border-tertiary: #f0f0f0;
 }
 
 html.dark {
@@ -18,6 +25,13 @@ html.dark {
   --border:      rgba(255,255,255,0.07);
   --text-primary:#f3f4f6;
   --text-muted:  #9ca3af;
+
+  --color-primary: #34d399;
+  --color-primary-light: rgba(52, 211, 153, 0.1);
+  --color-border-primary: rgba(52, 211, 153, 0.2);
+  --color-background-primary: #1a1d23;
+  --color-text-secondary: #9ca3af;
+  --color-border-tertiary: rgba(255, 255, 255, 0.05);
 }
 
 html, body, #root {

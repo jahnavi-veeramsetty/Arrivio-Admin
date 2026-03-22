@@ -61,7 +61,7 @@ export default function Sidebar() {
         {visibleSections.map(section => {
           const Icon = section.icon;
           const isOpen = openSections[section.id] ?? false;
-          const isActiveSub    = section.subs.some(s => s.route === location.pathname);
+          const isActiveSub = section.subs.some(s => s.route === location.pathname);
           const isActiveHeader = section.route && location.pathname === section.route;
           const isActiveSection = isActiveSub || isActiveHeader;
 
@@ -83,17 +83,17 @@ export default function Sidebar() {
                 <div className="flex items-center gap-2.5">
                   <Icon
                     size={16}
-                  className={isActiveSection ? 'text-[#1a6644]' : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300'}
-                  strokeWidth={isActiveSection ? 2.5 : 2}
-                />
-                <span>{section.label}</span>
-              </div>
-              {section.subs.length > 0 && (
-                isOpen
-                  ? <ChevronDown size={14} className="text-gray-400 dark:text-gray-600" />
-                  : <ChevronRight size={14} className="text-gray-400 dark:text-gray-600" />
-              )}
-            </button>
+                    className={isActiveSection ? 'text-[#1a6644]' : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300'}
+                    strokeWidth={isActiveSection ? 2.5 : 2}
+                  />
+                  <span>{section.label}</span>
+                </div>
+                {section.subs.length > 0 && (
+                  isOpen
+                    ? <ChevronDown size={14} className="text-gray-400 dark:text-gray-600" />
+                    : <ChevronRight size={14} className="text-gray-400 dark:text-gray-600" />
+                )}
+              </button>
 
               {isOpen && (
                 <div className="mt-0.5 ml-5 space-y-0.5">

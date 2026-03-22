@@ -27,7 +27,7 @@ export const navConfig = [
     subs: [
       { id: 'b2c_applications',  label: 'All Applications',    route: '/admin/b2c/applications', roles: ['super_admin', 'ops_manager', 'support_agent'] },
       { id: 'b2c_documents',     label: 'Documents',           route: '/admin/b2c/documents',    roles: ['super_admin', 'ops_manager'] },
-      { id: 'b2c_units',         label: 'Units & Listings',    route: '/admin/b2c/units',        roles: ['super_admin', 'ops_manager'] },
+      { id: 'b2c_units',         label: 'Properties & Units',  route: '/admin/b2c/properties',   roles: ['super_admin', 'ops_manager'] },
       { id: 'b2c_move',          label: 'Move-ins / Move-outs',route: '/admin/b2c/move',         roles: ['super_admin', 'ops_manager'] },
       { id: 'b2c_waitlist',      label: 'Waitlist',            route: '/admin/b2c/waitlist',     roles: ['super_admin', 'ops_manager', 'support_agent'] },
     ],

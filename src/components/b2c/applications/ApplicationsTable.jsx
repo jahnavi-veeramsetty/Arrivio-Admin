@@ -14,7 +14,15 @@ export default function ApplicationsTable({ apps, onSelect, canAction, showToast
   const [sortDir,  setSortDir]  = useState('desc');
   const [selected, setSelected] = useState([]);
 
+  const statusPriority = { 'Pending': 0, 'Approved': 1, 'Rejected': 2 };
+
   const sorted = [...apps].sort((a, b) => {
+    // Primary sort by status priority
+    const pa = statusPriority[a.status] ?? 99;
+    const pb = statusPriority[b.status] ?? 99;
+    if (pa !== pb) return pa - pb;
+
+    // Secondary sort by user's selected key
     const av = a[sortKey], bv = b[sortKey];
     return sortDir === 'asc' ? (av > bv ? 1 : -1) : (av < bv ? 1 : -1);
   });

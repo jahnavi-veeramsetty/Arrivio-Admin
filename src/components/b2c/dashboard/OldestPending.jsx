@@ -21,10 +21,10 @@ export default function OldestPending() {
               <p className="text-xs text-gray-400 dark:text-gray-500">{app.city} · {app.id}</p>
             </div>
             <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
-              app.days > 20 ? 'bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-400'
+              (app.days * 24) > 24 ? 'bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-400'
               : 'bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400'
             }`}>
-              {app.days}d waiting
+              {Math.round(app.days * 24)}h waiting
             </span>
           </div>
         ))}

@@ -1,134 +1,76 @@
-import { useState } from 'react';
-import { Building2, Plus, CheckSquare } from 'lucide-react';
+import React, { useState } from 'react';
+import UnitsMetrics from './UnitsMetrics';
+import UnitCard from './UnitCard';
 
-const statusBadge = {
-  Available:   'bg-green-50 text-green-700 border-green-100 dark:bg-green-900/30 dark:text-green-400',
-  Occupied:    'bg-blue-50 text-blue-700 border-blue-100 dark:bg-blue-900/30 dark:text-blue-400',
-  Reserved:    'bg-amber-50 text-amber-700 border-amber-100 dark:bg-amber-900/30 dark:text-amber-400',
-  Maintenance: 'bg-red-50 text-red-700 border-red-100 dark:bg-red-900/30 dark:text-red-400',
-};
-
-function UnitDetail({ unit, canAction, onClose, showToast }) {
-  if (!unit) return null;
+export default function UnitsTable({ property, units, onSelectUnit, onBack, onSearch, searchValue, unitStatus, onStatusChange }) {
   return (
-    <>
-      <div className="fixed inset-0 bg-black/30 z-40" onClick={onClose} />
-      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white dark:bg-gray-900 shadow-2xl z-50 overflow-y-auto">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700">
-          <div>
-            <h2 className="text-base font-bold text-gray-900 dark:text-white">{unit.type} · Floor {unit.floor}</h2>
-            <p className="text-xs text-gray-400">{unit.property} · {unit.city}</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full border ${statusBadge[unit.status]}`}>{unit.status}</span>
-            <button onClick={onClose} className="text-gray-400 hover:text-gray-600">✕</button>
-          </div>
-        </div>
-
-        <div className="px-6 py-5 space-y-5">
-          {/* Photo placeholder */}
-          <div className="bg-gray-100 dark:bg-gray-800 h-40 rounded-xl flex items-center justify-center">
-            <Building2 size={40} className="text-gray-300 dark:text-gray-600" />
-          </div>
-
-          {/* Details */}
-          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 space-y-2">
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Unit Details</p>
-            {[['Unit ID', unit.id], ['Monthly Rent', `£${unit.rent.toLocaleString()}`], ['Tenant', unit.tenant || '—'], ['Status', unit.status]].map(([k,v]) => (
-              <div key={k} className="flex justify-between text-sm">
-                <span className="text-gray-500 dark:text-gray-400">{k}</span>
-                <span className="font-semibold text-gray-800 dark:text-gray-200">{v}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Amenities */}
-          <div>
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Amenities</p>
-            <div className="flex flex-wrap gap-2">
-              {unit.amenities.map(a => (
-                <span key={a} className="flex items-center gap-1 text-xs bg-[#1a6644]/5 text-[#1a6644] border border-[#1a6644]/20 px-2.5 py-0.5 rounded-full">
-                  <CheckSquare size={10} /> {a}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* RBAC-gated actions */}
-          {canAction && (
-            <div className="grid grid-cols-2 gap-3 pt-2">
-              <button onClick={() => showToast('Unit assigned — rental agreement generation triggered.', 'success')}
-                className="py-2.5 bg-[#1a6644] text-white text-sm font-semibold rounded-xl hover:bg-[#155236] transition-colors">
-                Assign to Applicant
-              </button>
-              <button onClick={() => showToast('Unit details updated.', 'success')}
-                className="py-2.5 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 text-sm font-semibold rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
-                Edit Details
-              </button>
-              <button onClick={() => showToast('Availability status updated.', 'success')}
-                className="col-span-2 py-2.5 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 text-sm font-semibold rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
-                Change Availability Status
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-    </>
-  );
-}
-
-export default function UnitsTable({ units, canAction, showToast }) {
-  const [selected, setSelected] = useState(null);
-
-  const thCls = 'text-left text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider px-4 py-3';
-  const tdCls = 'px-4 py-3 text-sm text-gray-700 dark:text-gray-300';
-
-  return (
-    <>
-      {canAction && (
-        <div className="flex justify-end">
-          <button onClick={() => showToast('New unit form — coming soon.', 'success')}
-            className="flex items-center gap-2 px-4 py-2 bg-[#1a6644] text-white text-sm font-semibold rounded-xl hover:bg-[#155236] transition-colors">
-            <Plus size={14} /> Add Unit
+    <div className="space-y-6 animate-in fade-in duration-500">
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={onBack}
+            className="p-2 hover:bg-white dark:hover:bg-gray-800 rounded-full transition-all border border-transparent hover:border-gray-200 dark:hover:border-gray-700 shadow-sm active:scale-95 transition-shadow"
+          >
+            <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
           </button>
-        </div>
-      )}
-
-      <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="border-b border-gray-100 dark:border-gray-700">
-              <tr>
-                <th className={thCls}>Type</th>
-                <th className={thCls}>Property</th>
-                <th className={thCls}>City</th>
-                <th className={thCls}>Floor</th>
-                <th className={thCls}>Status</th>
-                <th className={thCls}>Monthly Rent</th>
-                <th className={thCls}>Tenant</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-50 dark:divide-gray-700">
-              {units.map(unit => (
-                <tr key={unit.id} onClick={() => setSelected(unit)}
-                  className="hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer transition-colors">
-                  <td className={tdCls}><span className="font-semibold text-gray-800 dark:text-gray-100">{unit.type}</span></td>
-                  <td className={tdCls}>{unit.property}</td>
-                  <td className={tdCls}>{unit.city}</td>
-                  <td className={tdCls}>{unit.floor}</td>
-                  <td className={tdCls}>
-                    <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full border ${statusBadge[unit.status]}`}>{unit.status}</span>
-                  </td>
-                  <td className={tdCls}>£{unit.rent.toLocaleString()}</td>
-                  <td className={`${tdCls} text-gray-400 dark:text-gray-500`}>{unit.tenant || '—'}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white uppercase tracking-tight">{property.name}</h2>
+            <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-[0.2em]">Regional Property Profile</p>
+          </div>
         </div>
       </div>
 
-      <UnitDetail unit={selected} canAction={canAction} onClose={() => setSelected(null)} showToast={showToast} />
-    </>
+      <UnitsMetrics units={property.units} />
+
+      {/* Filter Bar */}
+      <div className="bg-gray-50 dark:bg-gray-900/50 p-4 rounded-2xl border border-gray-100 dark:border-gray-800 flex flex-col md:flex-row items-stretch md:items-center gap-4">
+        {/* Search Input */}
+        <div className="relative flex-grow">
+          <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input
+            type="text"
+            value={searchValue}
+            placeholder="Search units, types, or tenants..."
+            className="w-full pl-12 pr-4 py-3 bg-white dark:bg-gray-800 border-none rounded-xl text-sm font-semibold shadow-sm focus:ring-2 focus:ring-[#1a6644] transition-all outline-none"
+            onChange={(e) => onSearch(e.target.value)}
+          />
+        </div>
+
+        {/* Status Filter Dropdown */}
+        <div className="relative min-w-[180px]">
+          <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <select
+            value={unitStatus}
+            onChange={(e) => onStatusChange(e.target.value)}
+            className="w-full pl-11 pr-10 py-3 bg-white dark:bg-gray-800 border-none rounded-xl text-xs font-bold uppercase tracking-widest text-gray-700 dark:text-gray-200 cursor-pointer appearance-none focus:ring-2 focus:ring-[#1a6644] transition-all shadow-sm outline-none"
+          >
+            <option value="All">All Status</option>
+            <option value="Available">Available</option>
+            <option value="Occupied">Occupied</option>
+            <option value="Reserved">Reserved</option>
+            <option value="Maintenance">Maintenance</option>
+          </select>
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {units.map(unit => (
+          <UnitCard key={unit.id} unit={unit} onClick={onSelectUnit} />
+        ))}
+      </div>
+    </div>
   );
 }

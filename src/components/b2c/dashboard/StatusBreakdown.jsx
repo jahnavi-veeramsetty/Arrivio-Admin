@@ -1,33 +1,75 @@
+import { useNavigate } from 'react-router-dom';
 import { statusBreakdown } from '../../../mockdata/b2cData';
-
-const total = Object.values(statusBreakdown).reduce((s, v) => s + v.count, 0);
+import { ChevronRight } from 'lucide-react';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 export default function StatusBreakdown() {
-  return (
-    <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-5">
-      <h2 className="text-sm font-bold text-gray-700 dark:text-gray-300 mb-4">Applications by Status</h2>
+  const navigate = useNavigate();
+  
+  const data = Object.entries(statusBreakdown).map(([label, {count, color, statusKey}]) => ({
+    name: label,
+    value: count,
+    color: color,
+    statusKey: statusKey
+  }));
 
-      {/* Stacked bar */}
-      <div className="flex h-3 rounded-full overflow-hidden mb-5 gap-0.5">
-        {Object.entries(statusBreakdown).map(([label, {count, color}]) => (
-          <div key={label} style={{ width:`${(count/total)*100}%`, background:color }} title={`${label}: ${count}`} />
-        ))}
+  const total = data.reduce((s, d) => s + d.value, 0);
+
+  return (
+    <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-6 shadow-sm h-full flex flex-col items-center">
+      <h2 className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] mb-8 self-start">Applications by Status</h2>
+
+      {/* Chart Section */}
+      <div className="h-44 w-full relative mb-6">
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={data}
+              cx="50%"
+              cy="50%"
+              innerRadius={60}
+              outerRadius={80}
+              paddingAngle={2}
+              dataKey="value"
+              stroke="none"
+              animationBegin={0}
+              animationDuration={1500}
+            >
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color} />
+              ))}
+            </Pie>
+            <Tooltip 
+              contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', fontSize: '11px' }}
+              itemStyle={{ fontWeight: 'bold' }}
+            />
+          </PieChart>
+        </ResponsiveContainer>
       </div>
 
-      {/* Legend */}
-      <div className="space-y-2">
-        {Object.entries(statusBreakdown).map(([label, {count, color}]) => (
-          <div key={label} className="flex items-center justify-between">
+      {/* Primary Metric Below */}
+      <div className="text-center mb-8">
+        <p className="text-lg font-bold text-emerald-600 dark:text-emerald-400 leading-tight">
+          {total} applications active
+        </p>
+        <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+          Tracking processing stages across the portfolio
+        </p>
+      </div>
+
+      {/* Legend Grid Below */}
+      <div className="grid grid-cols-2 gap-x-8 gap-y-3 w-full max-w-[320px]">
+        {data.map((item) => (
+          <div 
+            key={item.name} 
+            onClick={() => navigate('/admin/b2c/applications', { state: { filterStatus: item.statusKey } })}
+            className="flex items-center justify-between group cursor-pointer"
+          >
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: color }} />
-              <span className="text-xs text-gray-600 dark:text-gray-400">{label}</span>
+              <div className="w-1.5 h-1.5 rounded-full" style={{ background: item.color }} />
+              <span className="text-[11px] text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors uppercase tracking-wider font-bold">{item.name}</span>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-24 bg-gray-100 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
-                <div className="h-full rounded-full" style={{ width:`${(count/total)*100}%`, background:color }} />
-              </div>
-              <span className="text-xs font-bold text-gray-700 dark:text-gray-300 w-4 text-right">{count}</span>
-            </div>
+            <span className="text-xs font-bold text-gray-700 dark:text-gray-200 tabular-nums">{item.value}</span>
           </div>
         ))}
       </div>

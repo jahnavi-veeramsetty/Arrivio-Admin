@@ -1,6 +1,6 @@
 import { Search, Filter, MapPin, User, LayoutGrid, RotateCcw } from 'lucide-react';
 
-export default function ApplicationFilters({ filters, onChange, statuses, cities, reviewers, onReset }) {
+export default function DocumentFilters({ filters, onChange, statuses, cities, reviewers, onReset }) {
   const set = (key, val) => onChange({ ...filters, [key]: val });
   
   const labelCls = "text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1 block ml-1";
@@ -10,7 +10,7 @@ export default function ApplicationFilters({ filters, onChange, statuses, cities
     <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 items-end bg-gray-50/50 dark:bg-white/5 p-4 rounded-2xl border border-gray-100 dark:border-gray-800">
       {/* Search */}
       <div className="md:col-span-1 lg:col-span-2">
-        <label className={labelCls}>Search Applications</label>
+        <label className={labelCls}>Search Documents</label>
         <div className="relative">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input

@@ -11,7 +11,6 @@ const moveInsWeek  = mockMoveEvents.filter(e => e.type === 'Move-in' && e.status
 const cards = [
   { label:'Total Applications', value:`${total}`, sub:`${thisMonth} this month`,   flag: null     },
   { label:'Pending Review',     value:`${pending}`, sub:'awaiting decision',        flag: pending > 10 ? 'amber' : null },
-  { label:'Avg Days to Approval',value:`${avgDays}d`, sub:'mean approval time',    flag: avgDays > 5 ? 'red' : null },
   { label:'Unsigned Agreements', value:`${unsigned}`, sub:'approved, awaiting countersign', flag: unsigned > 0 ? 'red' : null },
   { label:'Action Required',     value:`${actionReq}`, sub:'awaiting resubmission', flag: actionReq > 0 ? 'amber' : null },
   { label:'Move-ins This Week',  value:`${moveInsWeek}`, sub:'next 7 days',         flag: 'green'  },
@@ -21,7 +20,7 @@ const flagStyle = { amber:'bg-amber-50 border-amber-200 text-amber-700', red:'bg
 
 export default function MetricCards() {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
       {cards.map((c,i) => (
         <div
           key={i}
