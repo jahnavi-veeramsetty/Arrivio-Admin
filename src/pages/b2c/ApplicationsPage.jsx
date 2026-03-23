@@ -2,14 +2,16 @@ import { useState, useEffect } from 'react';
 import ApplicationFilters from '../../components/b2c/applications/ApplicationFilters';
 import ApplicationsTable from '../../components/b2c/applications/ApplicationsTable';
 import ApplicationDetail from '../../components/b2c/applications/ApplicationDetail';
-import { useToast, ToastContainer } from '../../components/ui/Toast';
+import { useToast } from '../../components/ui/Toast';
 import { useRole } from '../../utils/rbac';
+import { useNotification } from '../../context/NotificationContext';
 import { mockApplications, applicantDocData } from '../../mockdata/b2cData';
 
 export default function ApplicationsPage() {
   const canAction = useRole(['super_admin', 'ops_manager']);
   const isSupport = useRole(['support_agent']);
-  const { toasts, show, dismiss } = useToast();
+  const { show, addToast } = useToast();
+  const { refreshCounts } = useNotification();
 
   const [apps, setApps] = useState(() => {
     const saved = localStorage.getItem('arrivio_b2c_apps');
@@ -31,7 +33,8 @@ export default function ApplicationsPage() {
 
   useEffect(() => {
     localStorage.setItem('arrivio_b2c_apps', JSON.stringify(apps));
-  }, [apps]);
+    refreshCounts();
+  }, [apps, refreshCounts]);
 
   const [selected, setSelected] = useState(null);
   const [filters, setFilters] = useState({ search: '', status: 'All', city: 'All', reviewer: 'All' });
@@ -110,7 +113,6 @@ export default function ApplicationsPage() {
         />
       )}
 
-      <ToastContainer toasts={toasts} dismiss={dismiss} />
     </div>
   );
 }

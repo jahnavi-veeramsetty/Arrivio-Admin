@@ -3,13 +3,15 @@ import { Lock } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 import DocumentFilters from '../../components/b2c/documents/DocumentFilters';
 import DocumentsTable from '../../components/b2c/documents/DocumentsTable';
-import { useToast, ToastContainer } from '../../components/ui/Toast';
+import { useToast } from '../../components/ui/Toast';
 import { useRole } from '../../utils/rbac';
+import { useNotification } from '../../context/NotificationContext';
 import { mockApplications, applicantDocData } from '../../mockdata/b2cData';
 
 export default function DocumentsPage() {
   const canAccess = useRole(['super_admin', 'ops_manager']);
-  const { toasts, show, dismiss } = useToast();
+  const { show, addToast } = useToast();
+  const { refreshCounts } = useNotification();
   const [searchParams] = useSearchParams();
   const appId = searchParams.get('appId');
 
@@ -33,7 +35,8 @@ export default function DocumentsPage() {
 
   useEffect(() => {
     localStorage.setItem('arrivio_b2c_apps', JSON.stringify(apps));
-  }, [apps]);
+    refreshCounts();
+  }, [apps, refreshCounts]);
 
   const [filters, setFilters] = useState({ search: '', status: 'All', city: 'All', reviewer: 'All' });
 
@@ -71,7 +74,7 @@ export default function DocumentsPage() {
     if (!docs) return 'N/A';
     const statuses = Object.values(docs).map(d => d.status);
     if (statuses.every(s => s === 'Verified')) return 'Verified';
-    if (statuses.some(s => s === 'Rejected')) return 'Has Rejections';
+    if (statuses.some(s => s === 'Rejected')) return 'Rejected';
     return 'Pending Review';
   };
 
@@ -87,7 +90,7 @@ export default function DocumentsPage() {
     return true;
   });
 
-  const statuses = ['All', 'Verified', 'Has Rejections', 'Pending Review'];
+  const statuses = ['All', 'Verified', 'Rejected', 'Pending Review'];
   const cities = ['All', ...new Set(apps.map(a => a.city))].sort();
   const reviewers = ['All', ...new Set(apps.map(a => a.reviewer))].sort();
 
@@ -117,7 +120,6 @@ export default function DocumentsPage() {
         initialAppId={appId}
       />
       
-      <ToastContainer toasts={toasts} dismiss={dismiss} />
     </div>
   );
 }

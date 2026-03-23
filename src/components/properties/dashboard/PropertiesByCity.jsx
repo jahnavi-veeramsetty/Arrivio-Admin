@@ -27,8 +27,8 @@ export default function PropertiesByCity({ properties, cities }) {
                     <img src={prop.image} alt={prop.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute top-4 right-4 px-3 py-1 bg-white/90 backdrop-blur-md rounded-full shadow-sm">
                        <div className="flex items-center gap-1.5">
-                          <div className={`w-1.5 h-1.5 rounded-full ${prop.occupancy > 85 ? 'bg-green-500' : prop.occupancy < 75 ? 'bg-red-500' : 'bg-amber-500'}`} />
-                          <span className="text-[10px] font-black italic">{prop.occupancy}% OCC</span>
+                          <div className={`w-1.5 h-1.5 rounded-full ${prop.occupancyRate > 85 ? 'bg-green-500' : prop.occupancyRate < 75 ? 'bg-red-500' : 'bg-amber-500'}`} />
+                          <span className="text-[10px] font-black italic">{prop.occupancyRate}% OCC</span>
                        </div>
                     </div>
                  </div>
@@ -38,8 +38,7 @@ export default function PropertiesByCity({ properties, cities }) {
                     
                     <div className="grid grid-cols-2 gap-3 pt-4 border-t border-gray-50 dark:border-gray-700">
                        <div className="flex items-center gap-2">
-                          <Building size={14} className="text-gray-300" />
-                          <span className="text-[10px] font-black uppercase tracking-tight text-gray-500">{prop.units} Units</span>
+                          <span className="text-[10px] font-black uppercase tracking-tight text-gray-500">{prop.units?.length || 0} Units</span>
                        </div>
                        <div className="flex items-center gap-2 justify-end">
                           <Users size={14} className="text-gray-300" />

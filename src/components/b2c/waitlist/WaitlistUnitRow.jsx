@@ -59,9 +59,8 @@ export default function WaitlistUnitRow({ unit, canAction, showToast }) {
                 <tr className="bg-gray-50/50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-800">
                   <th className="px-4 py-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest w-12 text-center">#</th>
                   <th className="px-4 py-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Applicant</th>
-                  <th className="px-4 py-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Date Added</th>
-                  <th className="px-4 py-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Days Waiting</th>
-                  <th className="px-4 py-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest text-right">Actions</th>
+                  <th className="px-4 py-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Stay Period</th>
+                  <th className="px-4 py-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest text-right">Waiting</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
@@ -75,41 +74,24 @@ export default function WaitlistUnitRow({ unit, canAction, showToast }) {
                       </span>
                     </td>
                     <td className="px-4 py-4">
-                      <div>
-                        <p className="text-xs font-bold text-gray-900 dark:text-white">{entry.name}</p>
-                        <div className="flex items-center gap-1.5 mt-0.5 text-[10px] text-gray-400">
-                          <Mail size={10} />
-                          <span>{entry.email}</span>
+                      <p className="text-xs font-bold text-gray-900 dark:text-white">{entry.name}</p>
+                    </td>
+                    <td className="px-4 py-4">
+                      <div className="flex flex-col gap-0.5">
+                        <div className="flex items-center gap-1.5 text-[9px]">
+                          <span className="font-bold text-emerald-600 uppercase">In:</span>
+                          <span className="text-gray-600 dark:text-gray-400">{entry.moveIn ? new Date(entry.moveIn).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : '—'}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-[9px]">
+                          <span className="font-bold text-rose-500 uppercase">Out:</span>
+                          <span className="text-gray-600 dark:text-gray-400">{entry.moveOut ? new Date(entry.moveOut).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : '—'}</span>
                         </div>
                       </div>
                     </td>
-                    <td className="px-4 py-4 text-xs font-medium text-gray-600 dark:text-gray-400">
-                      {new Date(entry.dateAdded).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
-                    </td>
-                    <td className="px-4 py-4">
+                    <td className="px-4 py-4 text-right">
                       <span className={`text-xs font-bold ${entry.daysWaiting > 60 ? 'text-rose-600' : 'text-gray-900 dark:text-white'}`}>
                         {entry.daysWaiting}d
                       </span>
-                    </td>
-                    <td className="px-4 py-4 text-right">
-                      <div className="flex items-center justify-end gap-2">
-                        {idx === 0 ? (
-                          <button 
-                            onClick={(e) => { e.stopPropagation(); showToast('Notification sent to ' + entry.name, 'success'); }}
-                            className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all shadow-sm shadow-emerald-900/20 active:scale-95"
-                          >
-                            <Bell size={12} />
-                            Notify
-                          </button>
-                        ) : (
-                          <button 
-                            onClick={(e) => { e.stopPropagation(); showToast('Applicant removed from list', 'info'); }}
-                            className="p-1.5 text-gray-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/20 rounded-lg transition-all"
-                          >
-                            <Trash2 size={14} />
-                          </button>
-                        )}
-                      </div>
                     </td>
                   </tr>
                 ))}

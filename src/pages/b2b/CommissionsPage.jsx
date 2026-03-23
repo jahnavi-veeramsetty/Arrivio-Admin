@@ -3,7 +3,7 @@ import PageHeader from '../../components/layout/PageHeader';
 import CommissionMetrics from '../../components/b2b/commissions/CommissionMetrics';
 import CommissionsTable from '../../components/b2b/commissions/CommissionsTable';
 import { mockCommissions } from '../../mockdata/b2bData';
-import { useToast, ToastContainer } from '../../components/ui/Toast';
+import { useToast } from '../../components/ui/Toast';
 import { Search, Download } from 'lucide-react';
 import { useRole } from '../../utils/rbac';
 
@@ -12,7 +12,7 @@ export default function CommissionsPage() {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
   
-  const { toasts, show, dismiss } = useToast();
+  const { show, addToast } = useToast();
   const canModify = useRole(['super_admin', 'finance_manager']);
 
   const filteredCommissions = useMemo(() => {
@@ -77,7 +77,6 @@ export default function CommissionsPage() {
         onProcessPayment={handleProcessPayment}
       />
 
-      <ToastContainer toasts={toasts} dismiss={dismiss} />
     </div>
   );
 }

@@ -7,6 +7,7 @@ import {
   BarChart3,
   Settings,
   Building,
+  UserCheck,
 } from 'lucide-react';
 
 export const navConfig = [
@@ -25,8 +26,8 @@ export const navConfig = [
     route: '/admin/b2c',
     roles: ['super_admin', 'ops_manager', 'support_agent'],
     subs: [
-      { id: 'b2c_applications',  label: 'All Applications',    route: '/admin/b2c/applications', roles: ['super_admin', 'ops_manager', 'support_agent'] },
-      { id: 'b2c_documents',     label: 'Documents',           route: '/admin/b2c/documents',    roles: ['super_admin', 'ops_manager'] },
+      { id: 'b2c_applications',  label: 'All Applications',    route: '/admin/b2c/applications', badgeKey: 'pending_b2c', roles: ['super_admin', 'ops_manager', 'support_agent'] },
+      { id: 'b2c_documents',     label: 'Documents',           route: '/admin/b2c/documents',    badgeKey: 'pending_docs', roles: ['super_admin', 'ops_manager'] },
       { id: 'b2c_units',         label: 'Properties & Units',  route: '/admin/b2c/properties',   roles: ['super_admin', 'ops_manager'] },
       { id: 'b2c_move',          label: 'Move-ins / Move-outs',route: '/admin/b2c/move',         roles: ['super_admin', 'ops_manager'] },
       { id: 'b2c_waitlist',      label: 'Waitlist',            route: '/admin/b2c/waitlist',     roles: ['super_admin', 'ops_manager', 'support_agent'] },
@@ -44,6 +45,19 @@ export const navConfig = [
       { id: 'b2b_employees', label: 'Employee Tracker', route: '/admin/b2b/employees', roles: ['super_admin', 'ops_manager', 'sales_partnership'] },
       { id: 'b2b_comms', label: 'Communications', route: '/admin/b2b/comms', roles: ['super_admin', 'sales_partnership', 'support_agent'] },
       { id: 'b2b_commissions', label: 'Commissions', route: '/admin/b2b/commissions', roles: ['super_admin', 'sales_partnership', 'finance_manager'] },
+    ],
+  },
+  {
+    id: 'tenants',
+    label: 'Tenants',
+    icon: UserCheck,
+    route: '/admin/tenants',
+    roles: ['super_admin', 'ops_manager', 'support_agent', 'community_manager'],
+    subs: [
+      { id: 'tenants_all',     label: 'All Tenants',   route: '/admin/tenants/all',   roles: ['super_admin', 'ops_manager', 'support_agent'] },
+      { id: 'tenants_b2b',     label: 'B2B Companies', route: '/admin/tenants/b2b',   roles: ['super_admin', 'ops_manager'] },
+      { id: 'tenants_leases',  label: 'Leases',        route: '/admin/tenants/leases',roles: ['super_admin', 'ops_manager'] },
+      { id: 'tenants_ledger',  label: 'Rent Ledger',   route: '/admin/tenants/ledger',roles: ['super_admin', 'finance_manager'] },
     ],
   },
   {

@@ -1,11 +1,11 @@
 import MoveCalendar from '../../components/b2c/move/MoveCalendar';
-import { useToast, ToastContainer } from '../../components/ui/Toast';
+import { useToast } from '../../components/ui/Toast';
 import { useRole } from '../../utils/rbac';
 import { mockMoveEvents } from '../../mockdata/b2cData';
 
 export default function MovePage() {
   const canAction = useRole(['super_admin', 'ops_manager']);
-  const { toasts, show, dismiss } = useToast();
+  const { show, addToast } = useToast();
 
   return (
     <div className="space-y-8 pb-12">
@@ -21,7 +21,6 @@ export default function MovePage() {
       
       <MoveCalendar events={mockMoveEvents} />
       
-      <ToastContainer toasts={toasts} dismiss={dismiss} />
     </div>
   );
 }

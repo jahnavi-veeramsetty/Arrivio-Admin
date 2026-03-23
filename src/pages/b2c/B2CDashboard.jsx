@@ -5,14 +5,13 @@ import UnsignedAgreements  from '../../components/b2c/dashboard/UnsignedAgreemen
 import BlockedApplications from '../../components/b2c/dashboard/BlockedApplications';
 import WeekSchedule        from '../../components/b2c/dashboard/WeekSchedule';
 import LeaseExpiryRadar    from '../../components/b2c/dashboard/LeaseExpiryRadar';
-import { useToast, ToastContainer } from '../../components/ui/Toast';
+import { useToast } from '../../components/ui/Toast';
 
 export default function B2CDashboard() {
-  const { toasts, show, dismiss } = useToast();
+  const { show, addToast } = useToast();
 
   return (
     <div className="space-y-8 max-w-[1600px] mx-auto pb-10">
-      <ToastContainer toasts={toasts} dismiss={dismiss} />
 
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">

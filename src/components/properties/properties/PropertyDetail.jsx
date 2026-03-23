@@ -41,11 +41,11 @@ export default function PropertyDetail({ property, isOpen, onClose, onAction, ca
                  </div>
                  <div className="space-y-1">
                     <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Performance</p>
-                    <p className="text-base font-bold flex items-center gap-2"><ShieldCheck size={14} className="text-green-600" /> {property.occupancy}% Occupied</p>
+                    <p className="text-base font-bold flex items-center gap-2"><ShieldCheck size={14} className="text-green-600" /> {property.occupancyRate}% Occupied</p>
                  </div>
                  <div className="space-y-1">
                     <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Inventory</p>
-                    <p className="text-base font-bold flex items-center gap-2"><Building size={14} className="text-blue-600" /> {property.units} Units</p>
+                    <p className="text-base font-bold flex items-center gap-2"><Building size={14} className="text-blue-600" /> {(property.units?.length || 0)} Units</p>
                  </div>
               </div>
               
@@ -82,12 +82,12 @@ export default function PropertyDetail({ property, isOpen, onClose, onAction, ca
                        </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
-                       {property.inventory?.map((unit, i) => (
+                       {(property.units || []).map((unit, i) => (
                           <tr key={i} className="hover:bg-gray-50/50 transition-colors group">
                              <td className="px-8 py-4 text-sm font-black italic">{unit.id}</td>
                              <td className="px-8 py-4 text-xs font-bold text-gray-500 uppercase">{unit.type}</td>
                              <td className="px-8 py-4 text-xs font-bold text-gray-500 uppercase">{unit.floor}</td>
-                             <td className="px-8 py-4 text-xs font-black font-mono text-[#1a6644]">£{unit.price}</td>
+                             <td className="px-8 py-4 text-xs font-black font-mono text-[#1a6644]">£{unit.rent}</td>
                              <td className="px-8 py-4">
                                 <span className={`px-2 py-0.5 rounded-full text-[9px] font-black uppercase border ${
                                    unit.status === 'Occupied' ? 'bg-blue-50 text-blue-700 border-blue-100' :
@@ -139,10 +139,10 @@ export default function PropertyDetail({ property, isOpen, onClose, onAction, ca
                     Property lifecycle management. Archiving is irreversible and requires zero active leases.
                  </p>
                  <button 
-                   disabled={!canArchive || property.occupancy > 0}
+                   disabled={!canArchive || (property.occupancyRate || 0) > 0}
                    className="w-full py-4 border-2 border-red-500/30 text-red-500 rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-red-500"
                  >
-                    {property.occupancy > 0 ? 'Archive Blocked (Units Occupied)' : 'Archive Property'}
+                    {(property.occupancyRate || 0) > 0 ? 'Archive Blocked (Units Occupied)' : 'Archive Property'}
                  </button>
               </section>
            </div>

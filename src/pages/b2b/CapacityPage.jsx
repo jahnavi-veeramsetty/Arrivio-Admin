@@ -3,7 +3,7 @@ import PageHeader from '../../components/layout/PageHeader';
 import CapacityTable from '../../components/b2b/capacity/CapacityTable';
 import ReservationDetail from '../../components/b2b/capacity/ReservationDetail';
 import { mockPartners, mockReservations } from '../../mockdata/b2bData';
-import { useToast, ToastContainer } from '../../components/ui/Toast';
+import { useToast } from '../../components/ui/Toast';
 import { Search } from 'lucide-react';
 
 export default function CapacityPage() {
@@ -12,7 +12,7 @@ export default function CapacityPage() {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
   
-  const { toasts, show, dismiss } = useToast();
+  const { show, addToast } = useToast();
 
   const filteredReservations = useMemo(() => {
     return reservations.filter(r => {
@@ -79,7 +79,6 @@ export default function CapacityPage() {
         />
       )}
 
-      <ToastContainer toasts={toasts} dismiss={dismiss} />
     </div>
   );
 }

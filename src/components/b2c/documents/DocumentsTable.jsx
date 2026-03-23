@@ -9,7 +9,7 @@ import { applicantSections } from '../../../mockdata/b2cData';
 
 const statusStyles = {
   'Verified': 'bg-green-50 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400',
-  'Has Rejections': 'bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-400',
+  'Rejected': 'bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-400',
   'Pending Review': 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400',
 };
 
@@ -85,7 +85,7 @@ function DocReviewPanel({ applicant, onDocUpdate, onClose, showToast }) {
             )}
             {overallState === 'rejected' && (
               <span className="flex items-center gap-1 text-xs font-bold text-red-600 bg-red-50 dark:bg-red-900/30 px-2.5 py-1 rounded-full border border-red-100 dark:border-red-800">
-                <XCircle size={11} /> Has Rejections
+                <XCircle size={11} /> Rejected
               </span>
             )}
             <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"><X size={18} /></button>
@@ -223,11 +223,11 @@ export default function DocumentsTable({ apps, onUpdate, showToast, initialAppId
   const getOverallStatus = (docs) => {
     const statuses = Object.values(docs).map(d => d.status);
     if (statuses.every(s => s === 'Verified')) return 'Verified';
-    if (statuses.some(s => s === 'Rejected')) return 'Has Rejections';
+    if (statuses.some(s => s === 'Rejected')) return 'Rejected';
     return 'Pending Review';
   };
 
-  const statusPriority = { 'Pending Review': 0, 'Has Rejections': 1, 'Verified': 2 };
+  const statusPriority = { 'Pending Review': 0, 'Rejected': 1, 'Verified': 2 };
 
   const sorted = [...apps].sort((a, b) => {
     const pa = statusPriority[getOverallStatus(a.docs)] ?? 99;

@@ -3,7 +3,7 @@ import PageHeader from '../../components/layout/PageHeader';
 import EmployeesTable from '../../components/b2b/employees/EmployeesTable';
 import EmployeeDetail from '../../components/b2b/employees/EmployeeDetail';
 import { mockEmployees } from '../../mockdata/b2bData';
-import { useToast, ToastContainer } from '../../components/ui/Toast';
+import { useToast } from '../../components/ui/Toast';
 import { Search } from 'lucide-react';
 
 export default function EmployeesPage() {
@@ -13,7 +13,7 @@ export default function EmployeesPage() {
   const [statusFilter, setStatusFilter] = useState('All');
   const [cityFilter, setCityFilter] = useState('All');
   
-  const { toasts, show, dismiss } = useToast();
+  const { show, addToast } = useToast();
 
   const cities = useMemo(() => ['All', ...new Set(mockEmployees.map(e => e.city))], []);
 
@@ -88,7 +88,6 @@ export default function EmployeesPage() {
         />
       )}
 
-      <ToastContainer toasts={toasts} dismiss={dismiss} />
     </div>
   );
 }

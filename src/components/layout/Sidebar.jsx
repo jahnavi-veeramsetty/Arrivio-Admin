@@ -6,6 +6,8 @@ import { navConfig } from './navConfig';
 import greenLogo from '../../assets/greenlogo.png';
 import whiteLogo from '../../assets/whitelogo.png';
 import { useTheme } from '../../context/ThemeContext';
+import { useNotification } from '../../context/NotificationContext';
+import { mockApplications, applicantDocData } from '../../mockdata/b2cData';
 
 const roleBadgeMap = {
   super_admin: { bg: 'bg-red-100 dark:bg-red-900/40', text: 'text-red-700 dark:text-red-400', label: 'Super Admin' },
@@ -30,6 +32,9 @@ export default function Sidebar() {
     });
     return initial;
   });
+
+  const { counts } = useNotification();
+  const badgeCounts = counts;
 
   const role = activeRole || (user?.roles?.[0]);
   const badge = roleBadgeMap[role] || { bg: 'bg-gray-100', text: 'text-gray-700', label: role };
@@ -88,11 +93,18 @@ export default function Sidebar() {
                   />
                   <span>{section.label}</span>
                 </div>
-                {section.subs.length > 0 && (
-                  isOpen
-                    ? <ChevronDown size={14} className="text-gray-400 dark:text-gray-600" />
-                    : <ChevronRight size={14} className="text-gray-400 dark:text-gray-600" />
-                )}
+                <div className="flex items-center gap-2">
+                  {section.badgeKey && badgeCounts[section.badgeKey] > 0 && (
+                    <span className="flex items-center justify-center min-w-[18px] h-[18px] px-1 bg-rose-500 text-white text-[10px] font-bold rounded-full border-2 border-white dark:border-[#141619] shadow-sm">
+                      {badgeCounts[section.badgeKey]}
+                    </span>
+                  )}
+                  {section.subs.length > 0 && (
+                    isOpen
+                      ? <ChevronDown size={14} className="text-gray-400 dark:text-gray-600" />
+                      : <ChevronRight size={14} className="text-gray-400 dark:text-gray-600" />
+                  )}
+                </div>
               </button>
 
               {isOpen && (
@@ -103,13 +115,18 @@ export default function Sidebar() {
                       <button
                         key={sub.id}
                         onClick={() => navigate(sub.route)}
-                        className={`w-full text-left px-3 py-1.5 rounded-md text-sm transition-all duration-150 border-l-2
+                        className={`w-full flex items-center justify-between px-3 py-1.5 rounded-md text-sm transition-all duration-150 border-l-2
                           ${isActive
                             ? 'text-[#1a6644] border-[#1a6644] bg-[#1a6644]/5 dark:bg-[#1a6644]/10'
                             : 'text-gray-500 dark:text-gray-500 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5'
                           }`}
                       >
-                        {sub.label}
+                        <span>{sub.label}</span>
+                        {sub.badgeKey && badgeCounts[sub.badgeKey] > 0 && (
+                          <span className="flex items-center justify-center min-w-[16px] h-[16px] px-1 bg-rose-500 text-white text-[9px] font-bold rounded-full">
+                            {badgeCounts[sub.badgeKey]}
+                          </span>
+                        )}
                       </button>
                     );
                   })}

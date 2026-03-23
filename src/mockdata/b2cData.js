@@ -246,114 +246,105 @@ export const leaseExpiries = [
 // ── Waitlist Hierarchical Data ─────────────────────────────────
 export const waitlistProperties = [
   {
-    city: 'Singapore',
+    city: 'Aachen',
     properties: [
       {
-        id: 'P-SG-01',
-        name: 'Arrivio Marina Bay',
-        address: '8 Marina View, Singapore 018960',
-        totalUnits: 42,
-        occupiedUnits: 38,
-        availableUnits: 4,
-        waitingCount: 12,
+        id: 'P-AA-01',
+        name: 'Arrivio Lousberg',
+        address: 'Lousbergstraße 14, 52072 Aachen',
+        totalUnits: 15,
+        occupiedUnits: 12,
+        availableUnits: 3,
+        waitingCount: 5,
         units: [
           {
-            id: 'U-010',
-            name: 'Studio 6A',
+            id: 'U-AA-101',
+            name: 'Studio 1A',
             type: 'Studio',
             status: 'Occupied',
             waitlist: [
-              { id: 'WL-101', position: 1, name: 'Ivan Petrov', email: 'ivan.p@domain.ru', dateAdded: '2026-01-15', daysWaiting: 67 },
-              { id: 'WL-102', position: 2, name: 'Sofia Rossi', email: 'sofia.r@italy.mail', dateAdded: '2026-02-01', daysWaiting: 50 }
+              { id: 'WL-101', position: 1, name: 'Hans Müller', email: 'hans.m@gmail.de', dateAdded: '2026-02-15', moveIn: '2026-04-10', moveOut: '2026-06-10', daysWaiting: 36 },
+              { id: 'WL-102', position: 2, name: 'Petra Schmidt', email: 'petra.s@web.de', dateAdded: '2026-03-01', moveIn: '2026-06-14', moveOut: '2026-08-14', daysWaiting: 22 }
             ]
           },
           {
-            id: 'U-012',
-            name: '2BR 14C',
-            type: '2BR',
+            id: 'U-AA-102',
+            name: '1BR 2C',
+            type: '1BR',
             status: 'Occupied',
             waitlist: [
-              { id: 'WL-103', position: 1, name: 'Chen Wei', email: 'chen.w@tech.cn', dateAdded: '2026-01-20', daysWaiting: 62 }
+              { id: 'WL-103', position: 1, name: 'Lucas Wagner', email: 'l.wagner@tech.de', dateAdded: '2026-03-10', moveIn: '2026-04-20', moveOut: '2026-06-20', daysWaiting: 13 }
             ]
-          },
+          }
+        ]
+      }
+    ]
+  },
+  {
+    city: 'Berlin',
+    properties: [
+      {
+        id: 'P-BE-01',
+        name: 'Arrivio Alexanderplatz',
+        address: 'Karl-Liebknecht-Str. 5, 10178 Berlin',
+        totalUnits: 45,
+        occupiedUnits: 43,
+        availableUnits: 2,
+        waitingCount: 18,
+        units: [
           {
-            id: 'U-011',
+            id: 'U-BE-301',
             name: '1BR 9A',
             type: '1BR',
-            status: 'Available',
-            waitlist: []
-          }
-        ]
-      }
-    ]
-  },
-  {
-    city: 'Dubai',
-    properties: [
-      {
-        id: 'P-DXB-01',
-        name: 'Arrivio DIFC',
-        address: 'Burj Daman, DIFC, Dubai',
-        totalUnits: 28,
-        occupiedUnits: 26,
-        availableUnits: 2,
-        waitingCount: 8,
-        units: [
-          {
-            id: 'U-007',
-            name: 'Studio 12A',
-            type: 'Studio',
             status: 'Occupied',
             waitlist: [
-              { id: 'WL-201', position: 1, name: 'Mei Lin', email: 'mei.lin@asia-logistics.com', dateAdded: '2026-01-22', daysWaiting: 60 },
-              { id: 'WL-202', position: 2, name: 'Ahmed Hassan', email: 'ahmed.h@uae.net', dateAdded: '2026-02-10', daysWaiting: 41 }
+              { id: 'WL-201', position: 1, name: 'Elena Fischer', email: 'elena.f@berlin-ops.de', dateAdded: '2026-01-20', moveIn: '2026-03-30', moveOut: '2026-05-30', daysWaiting: 62 },
+              { id: 'WL-202', position: 2, name: 'Markus Weber', email: 'm.weber@design.de', dateAdded: '2026-02-10', moveIn: '2026-06-03', moveOut: '2026-08-03', daysWaiting: 41 },
+              { id: 'WL-203', position: 3, name: 'Sarah Hoffmann', email: 'sarah.h@media.berlin', dateAdded: '2026-03-05', moveIn: '2026-08-07', moveOut: '2026-10-07', daysWaiting: 18 }
             ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    city: 'London',
-    properties: [
-      {
-        id: 'P-LDN-01',
-        name: 'Arrivio Canary Wharf',
-        address: '10 Upper Bank St, London E14',
-        totalUnits: 35,
-        occupiedUnits: 32,
-        availableUnits: 3,
-        waitingCount: 15,
-        units: [
+          },
           {
-            id: 'U-001',
-            name: 'Studio 4B',
+            id: 'U-BE-302',
+            name: 'Studio 4F',
             type: 'Studio',
             status: 'Occupied',
             waitlist: [
-              { id: 'WL-301', position: 1, name: 'James Hartley', email: 'james.h@london-finance.co.uk', dateAdded: '2026-01-18', daysWaiting: 64 },
-              { id: 'WL-302', position: 2, name: 'Hannah Schmidt', email: 'hannah.s@berlin-tech.de', dateAdded: '2026-02-05', daysWaiting: 46 },
-              { id: 'WL-303', position: 3, name: 'Kwame Asante', email: 'kwame.a@accra-ops.com', dateAdded: '2026-02-12', daysWaiting: 39 }
+              { id: 'WL-204', position: 1, name: 'Jonas Keller', email: 'jonas.k@startup.io', dateAdded: '2026-02-28', moveIn: '2026-04-05', moveOut: '2026-06-05', daysWaiting: 23 }
             ]
           }
         ]
       },
       {
-        id: 'P-LDN-02',
-        name: 'Arrivio Shoreditch',
-        address: '25-27 Hackney Rd, London E2',
-        totalUnits: 24,
-        occupiedUnits: 22,
+        id: 'P-BE-02',
+        name: 'Arrivio Kreuzberg',
+        address: 'Oranienstraße 20, 10999 Berlin',
+        totalUnits: 20,
+        occupiedUnits: 20,
+        availableUnits: 0,
+        waitingCount: 0,
+        units: [] // No waitlist for this property
+      }
+    ]
+  },
+  {
+    city: 'Bonn',
+    properties: [
+      {
+        id: 'P-BN-01',
+        name: 'Arrivio Rheinaue',
+        address: 'Ludwig-Erhard-Allee 20, 53175 Bonn',
+        totalUnits: 30,
+        occupiedUnits: 28,
         availableUnits: 2,
-        waitingCount: 5,
+        waitingCount: 4,
         units: [
           {
-            id: 'U-005',
-            name: '1BR 5E',
-            type: '1BR',
+            id: 'U-BN-501',
+            name: '2BR 5C',
+            type: '2BR',
             status: 'Occupied',
             waitlist: [
-              { id: 'WL-401', position: 1, name: 'Sophie Laurent', email: 'sophie.l@paris-design.fr', dateAdded: '2026-02-18', daysWaiting: 33 }
+              { id: 'WL-301', position: 1, name: 'Anja Richter', email: 'a.richter@telekom.de', dateAdded: '2026-03-12', moveIn: '2026-05-01', moveOut: '2026-07-01', daysWaiting: 11 }
             ]
           }
         ]

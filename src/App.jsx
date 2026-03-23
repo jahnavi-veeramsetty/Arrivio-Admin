@@ -1,6 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { NotificationProvider } from './context/NotificationContext';
+import { ToastProvider } from './context/ToastContext';
+import { ToastContainer } from './components/ui/Toast';
 import ProtectedRoute from './routes/ProtectedRoute';
 import AdminLayout from './components/layout/AdminLayout';
 import ScrollToTop from './components/ui/ScrollToTop';
@@ -17,6 +20,14 @@ import DocumentsPage from './pages/b2c/DocumentsPage';
 import UnitsPage from './pages/b2c/UnitsPage';
 import MovePage from './pages/b2c/MovePage';
 import WaitlistPage from './pages/b2c/WaitlistPage';
+
+// Tenants pages
+import TenantsDashboard from './pages/tenants/TenantsDashboard';
+import AllTenants from './pages/tenants/AllTenants';
+import B2BCompaniesPage from './pages/tenants/B2BCompaniesPage';
+import LeasesPage from './pages/tenants/LeasesPage';
+import RentLedger from './pages/tenants/RentLedger';
+import TenantProfile from './pages/tenants/TenantProfile';
 
 // B2B pages
 import B2B_Dashboard from './pages/b2b/B2BDashboard';
@@ -46,32 +57,18 @@ export default function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <Router>
-          <ScrollToTop />
-          <Routes>
-
-            {/* ── Public Routes ── */}
-            <Route path="/login" element={<AdminLogin />} />
-            <Route
-              path="/role-selection"
-              element={
-                <ProtectedRoute>
-                  <AdminRoles />
-                </ProtectedRoute>
-              }
-            />
-
-            {/* ── Protected Routes (inside AdminLayout) ── */}
-            <Route element={<ProtectedRoute />}>
-              <Route element={<AdminLayout />}>
-
-                {/* Dashboard */}
+        <NotificationProvider>
+          <ToastProvider>
+          <Router>
+            <ScrollToTop />
+            <Routes>
+              {/* No changes inside Routes */}
+              {/* ... existing routes ... */}
+              <Route path="/login" element={<AdminLogin />} />
+              <Route path="/role-selection" element={<ProtectedRoute><AdminRoles /></ProtectedRoute>} />
+              <Route element={<ProtectedRoute />}><Route element={<AdminLayout />}>
                 <Route path="/admin/dashboard" element={<Dashboard />} />
-
-                {/* Account */}
                 <Route path="/admin/account" element={<Account />} />
-
-                {/* B2C */}
                 <Route path="/admin/b2c" element={<B2CDashboard />} />
                 <Route path="/admin/b2c/applications" element={<ApplicationsPage />} />
                 <Route path="/admin/b2c/documents" element={<DocumentsPage />} />
@@ -83,15 +80,19 @@ export default function App() {
                 <Route path="/admin/b2c/move" element={<MovePage />} />
                 <Route path="/admin/b2c/waitlist" element={<WaitlistPage />} />
 
-                {/* B2B */}
+                {/* Tenants */}
+                <Route path="/admin/tenants" element={<TenantsDashboard />} />
+                <Route path="/admin/tenants/all" element={<AllTenants />} />
+                <Route path="/admin/tenants/b2b" element={<B2BCompaniesPage />} />
+                <Route path="/admin/tenants/leases" element={<LeasesPage />} />
+                <Route path="/admin/tenants/ledger" element={<RentLedger />} />
+                <Route path="/admin/tenants/profile/:id" element={<TenantProfile />} />
                 <Route path="/admin/b2b" element={<B2B_Dashboard />} />
                 <Route path="/admin/b2b/partners" element={<PartnersPage />} />
                 <Route path="/admin/b2b/capacity" element={<CapacityPage />} />
                 <Route path="/admin/b2b/employees" element={<EmployeesPage />} />
                 <Route path="/admin/b2b/comms" element={<CommsPage />} />
                 <Route path="/admin/b2b/commissions" element={<CommissionsPage />} />
-
-                {/* Finance */}
                 <Route path="/admin/finance" element={<FinanceDashboard />} />
                 <Route path="/admin/finance/payments" element={<PaymentsPage />} />
                 <Route path="/admin/finance/invoices" element={<InvoicesPage />} />
@@ -99,23 +100,17 @@ export default function App() {
                 <Route path="/admin/finance/deposits" element={<DepositsPage />} />
                 <Route path="/admin/finance/investors" element={<InvestorsPage />} />
                 <Route path="/admin/finance/pricing" element={<PricingPage />} />
-
-                {/* Properties */}
                 <Route path="/admin/properties" element={<PropertiesDashboard />} />
                 <Route path="/admin/properties/list" element={<AllPropertiesPage />} />
                 <Route path="/admin/properties/cities" element={<CitiesPage />} />
                 <Route path="/admin/properties/types" element={<UnitTypesPage />} />
                 <Route path="/admin/properties/amenities" element={<AmenitiesPage />} />
-
-                {/* Community */}
                 <Route path="/admin/community/events" element={<Placeholder title="Events" />} />
                 <Route path="/admin/community/clubs" element={<Placeholder title="Clubs" />} />
                 <Route path="/admin/community/announcements" element={<Placeholder title="Announcements" />} />
                 <Route path="/admin/community/feed" element={<Placeholder title="Feed Moderation" />} />
                 <Route path="/admin/community/push" element={<Placeholder title="Push Notifications" />} />
                 <Route path="/admin/community/residents" element={<Placeholder title="Resident Directory" />} />
-
-                {/* Reports */}
                 <Route path="/admin/reports/occupancy" element={<Placeholder title="Occupancy" />} />
                 <Route path="/admin/reports/funnel" element={<Placeholder title="Application Funnel" />} />
                 <Route path="/admin/reports/revenue" element={<Placeholder title="Revenue" />} />
@@ -123,8 +118,6 @@ export default function App() {
                 <Route path="/admin/reports/leases" element={<Placeholder title="Lease Expiry Forecast" />} />
                 <Route path="/admin/reports/b2b" element={<Placeholder title="B2B Performance" />} />
                 <Route path="/admin/reports/community" element={<Placeholder title="Community Engagement" />} />
-
-                {/* Settings */}
                 <Route path="/admin/settings/admins" element={<Placeholder title="Admin Accounts" />} />
                 <Route path="/admin/settings/roles" element={<Placeholder title="Roles & Permissions" />} />
                 <Route path="/admin/settings/audit" element={<Placeholder title="Audit Log" />} />
@@ -133,16 +126,14 @@ export default function App() {
                 <Route path="/admin/settings/stripe" element={<Placeholder title="Stripe Config" />} />
                 <Route path="/admin/settings/properties" element={<Placeholder title="Properties & Cities" />} />
                 <Route path="/admin/settings/flags" element={<Placeholder title="Feature Flags" />} />
-
-              </Route>
-            </Route>
-
-            {/* ── Redirects ── */}
-            <Route path="/" element={<Navigate to="/admin/dashboard" replace />} />
-            <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
-
-          </Routes>
-        </Router>
+              </Route></Route>
+              <Route path="/" element={<Navigate to="/admin/dashboard" replace />} />
+              <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
+              </Routes>
+              <ToastContainer />
+            </Router>
+          </ToastProvider>
+        </NotificationProvider>
       </AuthProvider>
     </ThemeProvider>
   );

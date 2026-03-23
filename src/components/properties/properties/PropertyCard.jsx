@@ -13,8 +13,8 @@ export default function PropertyCard({ property, onClick }) {
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
         />
         <div className="absolute top-4 right-4 px-3 py-1 bg-white/90 backdrop-blur-md rounded-full shadow-sm flex items-center gap-1.5 border border-gray-100">
-           <div className={`w-1.5 h-1.5 rounded-full ${property.occupancy > 85 ? 'bg-green-500' : property.occupancy < 75 ? 'bg-red-500' : 'bg-amber-500'}`} />
-           <span className="text-[10px] font-black italic text-gray-800">{property.occupancy}% OCC</span>
+           <div className={`w-1.5 h-1.5 rounded-full ${property.occupancyRate > 85 ? 'bg-green-500' : property.occupancyRate < 75 ? 'bg-red-500' : 'bg-amber-500'}`} />
+           <span className="text-[10px] font-black italic text-gray-800">{property.occupancyRate}% OCC</span>
         </div>
         <div className="absolute bottom-4 left-4">
            <span className="px-3 py-1 bg-[#1a6644] text-white rounded-full text-[9px] font-black uppercase tracking-widest shadow-lg shadow-[#1a6644]/20">
@@ -40,7 +40,7 @@ export default function PropertyCard({ property, onClick }) {
               <span className="text-[8px] font-black text-gray-400 uppercase tracking-widest block">Unit Inventory</span>
               <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
                  <Building size={14} className="text-gray-300" />
-                 <span className="text-xs font-black">{property.units} Rooms</span>
+                 <span className="text-xs font-black">{property.units?.length || 0} Rooms</span>
               </div>
            </div>
            <div className="space-y-1 text-right">

@@ -5,7 +5,7 @@ import PartnersTable from '../../components/b2b/partners/PartnersTable';
 import PartnerDetail from '../../components/b2b/partners/PartnerDetail';
 import { mockPartners } from '../../mockdata/b2bData';
 import { useRole } from '../../utils/rbac';
-import { useToast, ToastContainer } from '../../components/ui/Toast';
+import { useToast } from '../../components/ui/Toast';
 
 export default function PartnersPage() {
   const [partners, setPartners] = useState(mockPartners);
@@ -14,7 +14,7 @@ export default function PartnersPage() {
   const [typeFilter, setTypeFilter] = useState('All');
   const [statusFilter, setStatusFilter] = useState('All');
   
-  const { toasts, show, dismiss } = useToast();
+  const { show, addToast } = useToast();
   const canExport = useRole(['super_admin', 'sales_partnership']);
 
   const filteredPartners = useMemo(() => {
@@ -65,7 +65,6 @@ export default function PartnersPage() {
         />
       )}
 
-      <ToastContainer toasts={toasts} dismiss={dismiss} />
     </div>
   );
 }

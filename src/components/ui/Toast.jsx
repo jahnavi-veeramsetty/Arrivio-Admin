@@ -1,23 +1,7 @@
-import { useState, useCallback } from 'react';
 import { CheckCircle2, XCircle, AlertTriangle, X } from 'lucide-react';
+import { useToast } from '../../context/ToastContext';
 
-let _id = 0;
-
-export function useToast() {
-  const [toasts, setToasts] = useState([]);
-
-  const show = useCallback((message, type = 'success') => {
-    const id = ++_id;
-    setToasts(prev => [...prev, { id, message, type }]);
-    setTimeout(() => setToasts(prev => prev.filter(t => t.id !== id)), 3500);
-  }, []);
-
-  const dismiss = useCallback((id) => {
-    setToasts(prev => prev.filter(t => t.id !== id));
-  }, []);
-
-  return { toasts, show, dismiss };
-}
+export { useToast };
 
 const icons = {
   success: <CheckCircle2 size={15} className="text-green-500 flex-shrink-0" />,
@@ -25,8 +9,9 @@ const icons = {
   warn:    <AlertTriangle size={15} className="text-amber-500 flex-shrink-0" />,
 };
 
-export function ToastContainer({ toasts, dismiss }) {
-  if (!toasts.length) return null;
+export function ToastContainer() {
+  const { toasts, dismiss } = useToast();
+  if (!toasts || !toasts.length) return null;
   return (
     <div className="fixed bottom-5 right-5 z-[999] flex flex-col gap-2 pointer-events-none">
       {toasts.map(t => (
