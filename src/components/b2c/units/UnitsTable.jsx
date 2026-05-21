@@ -1,8 +1,24 @@
 import React, { useState } from 'react';
+import { LayoutGrid, List } from 'lucide-react';
 import UnitsMetrics from './UnitsMetrics';
 import UnitCard from './UnitCard';
 
 export default function UnitsTable({ property, units, onSelectUnit, onBack, onSearch, searchValue, unitStatus, onStatusChange }) {
+  const [viewMode, setViewMode] = useState('grid');
+
+  const getStatusStyle = (status) => {
+    switch (status) {
+      case 'Occupied': return 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400 border-emerald-100 dark:border-emerald-800/50';
+      case 'Available': return 'bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400 border-blue-100 dark:border-blue-800/50';
+      case 'Reserved': return 'bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400 border-amber-100 dark:border-amber-800/50';
+      case 'Maintenance': return 'bg-rose-50 text-rose-700 dark:bg-rose-900/20 dark:text-rose-400 border-rose-100 dark:border-rose-800/50';
+      default: return 'bg-gray-50 text-gray-700 dark:bg-gray-900/20 dark:text-gray-400 border-gray-100 dark:border-gray-800/50';
+    }
+  };
+
+  const thCls = "text-left text-[10px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 px-6 py-4 border-b border-gray-100 dark:border-gray-800";
+  const tdCls = "px-6 py-4 text-sm font-semibold text-gray-700 dark:text-gray-300 border-b border-gray-50 dark:border-gray-800/50";
+
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="flex items-center justify-between gap-4">
@@ -64,13 +80,86 @@ export default function UnitsTable({ property, units, onSelectUnit, onBack, onSe
             </svg>
           </div>
         </div>
+
+        {/* View Mode Toggle */}
+        <div className="flex bg-white dark:bg-gray-800 p-1 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+          <button
+            onClick={() => setViewMode('grid')}
+            className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-[#1a6644] text-white shadow-md' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-200'}`}
+            title="Grid View"
+          >
+            <LayoutGrid size={18} />
+          </button>
+          <button
+            onClick={() => setViewMode('list')}
+            className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-[#1a6644] text-white shadow-md' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-200'}`}
+            title="List View"
+          >
+            <List size={18} />
+          </button>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {units.map(unit => (
-          <UnitCard key={unit.id} unit={unit} onClick={onSelectUnit} />
-        ))}
-      </div>
+      {viewMode === 'grid' ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {units.map(unit => (
+            <UnitCard key={unit.id} unit={unit} onClick={onSelectUnit} />
+          ))}
+        </div>
+      ) : (
+        <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-3xl overflow-hidden shadow-sm">
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-gray-50/50 dark:bg-gray-900/50">
+                  <th className={thCls}>Unit ID</th>
+                  <th className={thCls}>Type</th>
+                  <th className={thCls}>Status</th>
+                  <th className={thCls}>Monthly Rent</th>
+                  <th className={thCls}>Floor Level</th>
+                  <th className={thCls}>Current Occupant</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-50 dark:divide-gray-800/50">
+                {units.map(unit => (
+                  <tr 
+                    key={unit.id} 
+                    onClick={() => onSelectUnit(unit.id)}
+                    className="hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer transition-colors group"
+                  >
+                    <td className={`${tdCls} text-blue-600 dark:text-blue-400 font-bold`}>{unit.id}</td>
+                    <td className={`${tdCls} text-gray-500 uppercase text-[10px] tracking-wider`}>{unit.type}</td>
+                    <td className={tdCls}>
+                      <span className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-wider border ${getStatusStyle(unit.status)}`}>
+                        {unit.status}
+                      </span>
+                    </td>
+                    <td className={tdCls}>${unit.rent.toLocaleString()}</td>
+                    <td className={tdCls}>{unit.floor}</td>
+                    <td className={tdCls}>
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 flex items-center justify-center text-[9px] font-bold text-gray-400 shrink-0">
+                          {unit.tenant ? unit.tenant.name.split(' ').map(n => n[0]).join('') : '--'}
+                        </div>
+                        <span className={`truncate ${!unit.tenant ? 'text-gray-400 font-normal italic' : ''}`}>
+                          {unit.tenant ? unit.tenant.name : 'No Tenant Assigned'}
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+                {units.length === 0 && (
+                  <tr>
+                    <td colSpan="6" className="px-6 py-12 text-center text-gray-400 italic">
+                      No units found matching your search.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

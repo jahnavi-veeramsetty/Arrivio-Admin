@@ -75,45 +75,9 @@ export default function UnitsPage() {
   return (
     <div className="max-w-7xl mx-auto pb-12">
       {/* Breadcrumbs / Header Context */}
-      <div className="mb-8 group">
-        <nav className="flex text-[10px] text-gray-400 dark:text-gray-500 mb-2 font-black uppercase tracking-[0.2em]">
-          <span 
-            className="hover:text-blue-600 transition-colors cursor-pointer" 
-            onClick={() => navigate('/admin/b2c')}
-          >
-            B2C Admin
-          </span>
-          <span className="mx-3 opacity-30">/</span>
-          <span 
-            className={`transition-colors cursor-pointer ${level === 'properties' ? 'text-blue-600 dark:text-blue-400 font-black' : 'hover:text-blue-600'}`}
-            onClick={handleBackToProperties}
-          >
-            Properties
-          </span>
-          {selectedProperty && (
-            <>
-              <span className="mx-3 opacity-30">/</span>
-              <span 
-                className={`transition-colors cursor-pointer ${level === 'units' ? 'text-blue-600 dark:text-blue-400 font-black' : 'hover:text-blue-600'}`}
-                onClick={handleBackToUnits}
-              >
-                {selectedProperty.name}
-              </span>
-            </>
-          )}
-          {selectedUnit && (
-            <>
-              <span className="mx-3 opacity-30">/</span>
-              <span className="text-blue-600 dark:text-blue-400 font-black">
-                Unit {selectedUnit.id}
-              </span>
-            </>
-          )}
-        </nav>
-        <h1 className="text-3xl font-black text-gray-900 dark:text-white mt-1 tracking-tight">
-          {level === 'units' && 'Property Inventory'}
-          {level === 'unit' && 'Unit Specifications'}
-        </h1>
+      {/* Header */}
+      <div className="mb-8">
+        <p className="text-[10px] text-[#1a6644] font-bold uppercase tracking-[0.2em] mb-1">B2C OPERATION | PROPERTY INVENTORY</p>
       </div>
 
       {/* Levels */}

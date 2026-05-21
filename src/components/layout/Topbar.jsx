@@ -11,6 +11,11 @@ export default function Topbar() {
   let sectionLabel = '';
   let subLabel = '';
   for (const section of navConfig) {
+    if (section.route === location.pathname) {
+      sectionLabel = section.label;
+      subLabel = '';
+      break;
+    }
     const match = section.subs.find(s => s.route === location.pathname);
     if (match) {
       sectionLabel = section.label;

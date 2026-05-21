@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import PageHeader from '../../components/layout/PageHeader';
+
 import EmployeesTable from '../../components/b2b/employees/EmployeesTable';
 import EmployeeDetail from '../../components/b2b/employees/EmployeeDetail';
 import { mockEmployees } from '../../mockdata/b2bData';
@@ -37,11 +37,11 @@ export default function EmployeesPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader 
-        title="Employee Tracker" 
-        breadcrumb="B2B Partners → Employees"
-        description="Track B2B employee housing status and lease agreements."
-      />
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <p className="text-[10px] text-[#1a6644] font-bold uppercase tracking-[0.2em] mb-1">B2B OPERATION | EMPLOYEE TRACKER</p>
+        </div>
+      </div>
 
       {/* Filters */}
       <div className="flex flex-col md:flex-row gap-3 items-center justify-between bg-white dark:bg-gray-800 p-4 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm">

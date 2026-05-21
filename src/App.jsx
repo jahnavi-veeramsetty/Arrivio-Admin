@@ -12,6 +12,7 @@ import AdminRoles from './pages/AdminRoles';
 import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
 import Placeholder from './pages/Placeholder';
+import Contract from './pages/contracts/Contract';
 
 // B2C pages
 import B2CDashboard from './pages/b2c/B2CDashboard';
@@ -69,6 +70,7 @@ export default function App() {
               <Route element={<ProtectedRoute />}><Route element={<AdminLayout />}>
                 <Route path="/admin/dashboard" element={<Dashboard />} />
                 <Route path="/admin/account" element={<Account />} />
+                <Route path="/admin/contracts" element={<Contract />} />
                 <Route path="/admin/b2c" element={<B2CDashboard />} />
                 <Route path="/admin/b2c/applications" element={<ApplicationsPage />} />
                 <Route path="/admin/b2c/documents" element={<DocumentsPage />} />

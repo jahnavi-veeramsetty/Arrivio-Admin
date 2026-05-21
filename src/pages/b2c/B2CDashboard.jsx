@@ -1,10 +1,10 @@
-import MetricCards        from '../../components/b2c/dashboard/MetricCards';
-import StatusBreakdown     from '../../components/b2c/dashboard/StatusBreakdown';
-import OldestPending       from '../../components/b2c/dashboard/OldestPending';
-import UnsignedAgreements  from '../../components/b2c/dashboard/UnsignedAgreements';
+import MetricCards from '../../components/b2c/dashboard/MetricCards';
+import StatusBreakdown from '../../components/b2c/dashboard/StatusBreakdown';
+import OldestPending from '../../components/b2c/dashboard/OldestPending';
+import UnsignedAgreements from '../../components/b2c/dashboard/UnsignedAgreements';
 import BlockedApplications from '../../components/b2c/dashboard/BlockedApplications';
-import WeekSchedule        from '../../components/b2c/dashboard/WeekSchedule';
-import LeaseExpiryRadar    from '../../components/b2c/dashboard/LeaseExpiryRadar';
+import WeekSchedule from '../../components/b2c/dashboard/WeekSchedule';
+import LeaseExpiryRadar from '../../components/b2c/dashboard/LeaseExpiryRadar';
 import { useToast } from '../../components/ui/Toast';
 
 export default function B2CDashboard() {
@@ -16,11 +16,7 @@ export default function B2CDashboard() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <p className="text-[10px] text-[#1a6644] font-bold uppercase tracking-[0.2em] mb-1">B2C Operations</p>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">Portfolio Overview</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 max-w-2xl">
-            Live snapshot of the B2C tenant lifecycle — from application funnel status and processing bottlenecks to upcoming move-ins and renewals.
-          </p>
+          <p className="text-[10px] text-[#1a6644] font-bold uppercase tracking-[0.2em] mb-1">B2C OPERATION | DASHBOARD</p>
         </div>
       </div>
 

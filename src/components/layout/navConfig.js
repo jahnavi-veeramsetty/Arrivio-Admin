@@ -8,6 +8,7 @@ import {
   Settings,
   Building,
   UserCheck,
+  FileSignature,
 } from 'lucide-react';
 
 export const navConfig = [
@@ -46,6 +47,14 @@ export const navConfig = [
       { id: 'b2b_comms', label: 'Communications', route: '/admin/b2b/comms', roles: ['super_admin', 'sales_partnership', 'support_agent'] },
       { id: 'b2b_commissions', label: 'Commissions', route: '/admin/b2b/commissions', roles: ['super_admin', 'sales_partnership', 'finance_manager'] },
     ],
+  },
+  {
+    id: 'contracts',
+    label: 'Contracts',
+    icon: FileSignature,
+    route: '/admin/contracts',
+    roles: ['super_admin', 'ops_manager', 'sales_partnership', 'finance_manager', 'support_agent', 'community_manager'],
+    subs: [],
   },
   {
     id: 'tenants',

@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import PageHeader from '../../components/layout/PageHeader';
+
 import PartnerFilters from '../../components/b2b/partners/PartnerFilters';
 import PartnersTable from '../../components/b2b/partners/PartnersTable';
 import PartnerDetail from '../../components/b2b/partners/PartnerDetail';
@@ -39,11 +39,11 @@ export default function PartnersPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader 
-        title="All Partners" 
-        breadcrumb="B2B Partners → All Partners"
-        description="Manage partner accounts, onboarding, and assigned managers."
-      />
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <p className="text-[10px] text-[#1a6644] font-bold uppercase tracking-[0.2em] mb-1">B2B OPERATION | ALL PARTNERS</p>
+        </div>
+      </div>
 
       <PartnerFilters 
         onSearch={setSearch} 

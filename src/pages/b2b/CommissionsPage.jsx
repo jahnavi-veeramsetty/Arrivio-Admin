@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import PageHeader from '../../components/layout/PageHeader';
+
 import CommissionMetrics from '../../components/b2b/commissions/CommissionMetrics';
 import CommissionsTable from '../../components/b2b/commissions/CommissionsTable';
 import { mockCommissions } from '../../mockdata/b2bData';
@@ -38,11 +38,11 @@ export default function CommissionsPage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-start">
-        <PageHeader 
-          title="Agency Commissions" 
-          breadcrumb="B2B Partners → Commissions"
-          description="Track and process commission payments for referring agency partners."
-        />
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <p className="text-[10px] text-[#1a6644] font-bold uppercase tracking-[0.2em] mb-1">B2B OPERATION | AGENCY COMMISSIONS</p>
+          </div>
+        </div>
         <button className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-200 text-sm font-black uppercase tracking-widest rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">
           <Download size={16} /> Batch Export
         </button>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import PageHeader from '../../components/layout/PageHeader';
+
 import ThreadList from '../../components/b2b/comms/ThreadList';
 import ChatWindow from '../../components/b2b/comms/ChatWindow';
 import { mockThreads } from '../../mockdata/b2bData';
@@ -39,11 +39,11 @@ export default function CommsPage() {
   return (
     <div className="flex flex-col h-[calc(100vh-140px)]">
       <div className="mb-6 flex-shrink-0">
-        <PageHeader 
-          title="Partner Communications" 
-          breadcrumb="B2B Partners → Communications"
-          description="Direct messaging threads with partner company representatives."
-        />
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <p className="text-[10px] text-[#1a6644] font-bold uppercase tracking-[0.2em] mb-1">B2B OPERATION | PARTNER COMMUNICATIONS</p>
+          </div>
+        </div>
       </div>
 
       <div className="flex-grow flex bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800 overflow-hidden shadow-xl">

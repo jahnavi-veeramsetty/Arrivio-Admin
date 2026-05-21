@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kooperationsvertrag – Arrivio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap');
+
+:root {
+  --ink:   #1A3328;
+  --pine:  #2D6A4F;
+  --gold:  #8B6914;
+  --sand:  #C8A830;
+  --card:  #F6F5F1;
+  --mist:  #EDF2EC;
+  --rule:  #DEDBD5;
+  --txt:   #262626;
+  --mid:   #4A4A46;
+  --dim:   #767670;
+  --wht:   #FFFFFF;
+  --err:   #7A2828;
+  --err-bg:#FDF4F4;
+  --ok-bg: #F1F8F3;
+  --ok-bd: #A8D4B4;
+  --r:     5px;
+  --r-lg:  8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; }
+body {
+  font-family: 'Jost', system-ui, sans-serif;
+  font-weight: 400;
+  color: var(--txt);
+  background: #EFEDE8;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── PAGE ── */
+.doc {
+  max-width: 960px;
+  margin: 0 auto;
+  background: var(--wht);
+  box-shadow: 0 4px 60px rgba(0,0,0,.12);
+}
+
+/* ── HEADER ── */
+.doc-hdr {
+  background: var(--ink);
+  padding: 2.8rem 3.2rem 2.2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.6rem;
+}
+.doc-logo { width: 56px; height: 48px; flex-shrink: 0; margin-top: .1rem; }
+.doc-hdr-text {}
+.doc-brand {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--wht);
+  letter-spacing: .12em;
+  line-height: 1;
+}
+.doc-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.22rem;
+  font-weight: 600;
+  color: var(--sand);
+  margin-top: .3rem;
+  line-height: 1.35;
+}
+.doc-sub {
+  font-size: .78rem;
+  font-weight: 300;
+  color: rgba(255,255,255,.45);
+  margin-top: .35rem;
+  letter-spacing: .02em;
+}
+.gold-stripe { height: 3px; background: linear-gradient(90deg, var(--gold), var(--sand) 40%, var(--gold)); }
+
+/* ── BODY ── */
+.doc-body { padding: 2.8rem 3.2rem; }
+
+/* ── SECTION ── */
+.sec { margin-bottom: 2.8rem; }
+
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: .8rem;
+  padding-bottom: .6rem;
+  border-bottom: 1.5px solid var(--gold);
+  margin-bottom: 1.3rem;
+}
+.sec-num {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold);
+  min-width: 2.8rem;
+  flex-shrink: 0;
+  letter-spacing: .02em;
+}
+.sec-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.42rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+/* ── CLAUSE ── */
+.clause { margin-bottom: 1rem; }
+.clause + .clause { padding-top: .65rem; border-top: 1px solid var(--rule); }
+.clause-hdr {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.06rem;
+  font-weight: 700;
+  color: var(--ink);
+  padding-bottom: .4rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: .75rem;
+}
+.item { display: flex; gap: .6rem; margin-bottom: .55rem; }
+.item-n {
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--pine);
+  min-width: 2.2rem;
+  flex-shrink: 0;
+  padding-top: .1rem;
+}
+.item-lbl { font-weight: 600; color: var(--ink); margin-right: .25rem; }
+.item-txt { font-size: .915rem; color: var(--txt); line-height: 1.73; flex: 1; }
+.bullet {
+  display: flex;
+  gap: .5rem;
+  margin: .3rem 0 .3rem 2.8rem;
+}
+.bullet-dot { color: var(--gold); font-weight: 600; flex-shrink: 0; font-size: .9rem; margin-top: .05rem; }
+.bullet-txt { font-size: .88rem; color: var(--mid); line-height: 1.65; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--card);
+  border-left: 3px solid var(--gold);
+  padding: 1.1rem 1.4rem;
+  border-radius: 0 var(--r) var(--r) 0;
+  margin: 1rem 0;
+}
+.card-green { background: var(--mist); border-left-color: var(--pine); }
+.card-red   { background: var(--err-bg); border-left-color: var(--err); }
+.card-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: .35rem;
+}
+.card-title-green { color: var(--pine); }
+.card-title-red   { color: var(--err); }
+.card p { font-size: .9rem; color: var(--mid); line-height: 1.68; }
+
+/* ── META GRID ── */
+.meta-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  font-size: .9rem;
+}
+.meta-grid-row { display: contents; }
+.meta-grid-row > * { padding: .55rem .95rem; border-bottom: 1px solid var(--rule); }
+.meta-grid-row:last-child > * { border-bottom: none; }
+.meta-k { background: var(--card); font-weight: 500; color: var(--ink); }
+.meta-v { background: var(--wht); color: var(--mid); }
+.meta-v input {
+  border: none; border-bottom: 1px solid var(--rule);
+  background: transparent; width: auto; min-width: 160px;
+  padding: .05rem .2rem; font-size: .9rem; font-family: 'Jost',sans-serif;
+}
+.meta-v input:focus { outline: none; border-bottom-color: var(--pine); }
+
+/* ── PARTIES ── */
+.parties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin: .9rem 0;
+}
+.party {
+  border: 1px solid var(--rule);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.party-lbl {
+  display: block;
+  font-size: .72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  color: var(--wht);
+  background: var(--ink);
+  padding: .4rem .9rem;
+}
+.party-body { padding: 1.1rem 1rem; }
+.party-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: .7rem;
+}
+.party-body .fg { margin-bottom: .55rem; }
+.party-body label { font-size: .69rem; }
+.party-body input { padding: .42rem .65rem; font-size: .86rem; }
+
+/* ── FORMS ── */
+.fg { margin-bottom: .9rem; }
+.fr { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: .9rem; }
+label {
+  display: block;
+  font-size: .73rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: .28rem;
+  text-transform: uppercase;
+  letter-spacing: .055em;
+}
+input[type=text], input[type=email], input[type=number],
+input[type=date], input[type=time], textarea, select {
+  width: 100%;
+  border: 1px solid var(--rule);
+  border-radius: var(--r);
+  padding: .58rem .8rem;
+  font-family: 'Jost', sans-serif;
+  font-size: .9rem;
+  color: var(--txt);
+  background: var(--wht);
+  transition: border-color .18s, box-shadow .18s;
+  line-height: 1.5;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--pine);
+  box-shadow: 0 0 0 3px rgba(45,106,79,.08);
+}
+textarea { resize: vertical; min-height: 80px; }
+select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23767670' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .75rem center; padding-right: 2.2rem; }
+
+.fieldset {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-lg);
+  padding: 1.5rem;
+  margin: 1rem 0;
+}
+.fieldset-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* ── TABLES ── */
+table { width: 100%; border-collapse: collapse; font-size: .9rem; margin: .8rem 0; }
+thead th {
+  background: var(--ink);
+  color: var(--wht);
+  padding: .65rem .95rem;
+  text-align: left;
+  font-weight: 500;
+  font-size: .82rem;
+  letter-spacing: .02em;
+}
+thead th:first-child { border-radius: var(--r) 0 0 0; }
+thead th:last-child  { border-radius: 0 var(--r) 0 0; }
+tbody td { padding: .58rem .95rem; border-bottom: 1px solid var(--rule); vertical-align: top; line-height: 1.62; }
+tbody tr:nth-child(even) td { background: var(--card); }
+tbody tr:last-child td { border-bottom: none; }
+tbody td input[type=text],
+tbody td input[type=number],
+tbody td input[type=date] {
+  border: none;
+  border-bottom: 1px dashed var(--rule);
+  border-radius: 0;
+  background: transparent;
+  padding: .15rem .25rem;
+  width: 100%;
+  font-size: .88rem;
+}
+tbody td input:focus { border-bottom-color: var(--pine); box-shadow: none; }
+tbody td select {
+  border: 1px solid var(--rule);
+  border-radius: var(--r);
+  padding: .2rem .55rem;
+  font-size: .84rem;
+  background: var(--wht);
+  width: auto;
+}
+.tbl-total td { background: var(--mist) !important; font-weight: 600; }
+.tbl-total td:first-child { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1rem; }
+.incl { color: var(--pine); font-weight: 500; font-size: .85rem; }
+.incl::before { content: '✓ '; }
+
+/* ── PAYMENT MODELS ── */
+.models { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin: 1rem 0; }
+.model {
+  border: 1.5px solid var(--rule);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: border-color .2s, box-shadow .2s;
+}
+.model:has(input:checked) { border-color: var(--pine); box-shadow: 0 0 0 3px rgba(45,106,79,.1); }
+.model-head { padding: .8rem 1rem; color: var(--wht); display: flex; align-items: center; gap: .6rem; }
+.model-a .model-head { background: var(--ink); }
+.model-b .model-head { background: var(--pine); }
+.model-c .model-head { background: var(--gold); }
+.model-letter {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.model-name { font-size: .85rem; font-weight: 600; line-height: 1.3; }
+.model-body { padding: .95rem 1rem; background: var(--card); }
+.model-body p { font-size: .84rem; color: var(--mid); line-height: 1.62; margin-bottom: .45rem; }
+.model-body .model-input { font-size: .84rem; margin: .55rem 0; }
+.model-body .model-input input[type=text] {
+  display: inline;
+  width: 110px;
+  border: none;
+  border-bottom: 1px solid var(--rule);
+  border-radius: 0;
+  padding: .12rem .3rem;
+  background: transparent;
+}
+.model-pick {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  margin-top: .65rem;
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--ink);
+  border-top: 1px solid var(--rule);
+  padding-top: .65rem;
+}
+.model-pick input { width: auto; }
+
+/* ── CHECKLIST ── */
+.checklist { list-style: none; display: flex; flex-direction: column; gap: .35rem; margin: .6rem 0; }
+.chk {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  font-size: .9rem;
+  padding: .45rem .8rem;
+  border-radius: var(--r);
+  line-height: 1.62;
+}
+.chk-ok   { background: var(--ok-bg); border: 1px solid var(--ok-bd); }
+.chk-no   { background: var(--err-bg); border: 1px solid #EAB0B0; }
+.chk-warn { background: #FEFBE8; border: 1px solid #D4B84A; }
+.chk-icon { flex-shrink: 0; font-weight: 700; margin-top: .08rem; font-size: .92rem; }
+.chk-ok   .chk-icon { color: var(--pine); }
+.chk-no   .chk-icon { color: var(--err); }
+.chk-warn .chk-icon { color: var(--gold); }
+
+/* ── STATS BAR ── */
+.stats { display: grid; grid-template-columns: repeat(3,1fr); background: var(--ink); border-radius: var(--r-lg); overflow: hidden; margin: 1rem 0; }
+.stat { padding: 1.4rem 1rem; text-align: center; }
+.stat + .stat { border-left: 1px solid rgba(255,255,255,.1); }
+.stat-val {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--sand);
+  line-height: 1;
+  display: block;
+}
+.stat-lbl { font-size: .78rem; font-weight: 300; color: rgba(255,255,255,.6); margin-top: .3rem; letter-spacing: .01em; }
+
+/* ── SERVICE ITEMS ── */
+.svc-list { display: flex; flex-direction: column; gap: .4rem; margin: .8rem 0; }
+.svc {
+  display: flex;
+  align-items: flex-start;
+  gap: .7rem;
+  padding: .72rem 1rem;
+  border-radius: var(--r);
+  background: var(--mist);
+  border-left: 2px solid var(--pine);
+  font-size: .9rem;
+}
+.svc.opt { background: var(--card); border-left-color: var(--gold); }
+.svc-icon { flex-shrink: 0; font-weight: 700; color: var(--pine); margin-top: .05rem; }
+.svc.opt .svc-icon { color: var(--gold); }
+.svc-body {}
+.svc-name { font-weight: 600; color: var(--ink); display: block; }
+.svc-desc { font-size: .83rem; color: var(--dim); line-height: 1.57; }
+.svc-chk { flex-shrink: 0; accent-color: var(--pine); margin-top: .2rem; }
+
+/* ── PROCESS STEPS ── */
+.process { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.1rem; margin: 1rem 0; }
+.step { text-align: center; position: relative; }
+.step::after { content: '→'; position: absolute; right: -.8rem; top: .9rem; color: var(--rule); font-size: 1.1rem; }
+.step:last-child::after { display: none; }
+.step-n {
+  width: 2.5rem; height: 2.5rem;
+  background: var(--ink);
+  color: var(--sand);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.1rem; font-weight: 700;
+  margin: 0 auto .5rem;
+}
+.step-t { font-weight: 600; font-size: .84rem; color: var(--ink); margin-bottom: .2rem; }
+.step-d { font-size: .77rem; color: var(--dim); }
+
+/* ── SIGNATURE ── */
+.sig-section {
+  margin-top: 2.8rem;
+  padding-top: 1.5rem;
+  border-top: 1.5px solid var(--gold);
+  page-break-inside: avoid;
+}
+.sig-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: .3rem;
+}
+.sig-note { font-size: .84rem; color: var(--dim); margin-bottom: 1.6rem; line-height: 1.65; }
+.sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+.sig-box {}
+.sig-party { font-weight: 600; color: var(--ink); margin-bottom: .85rem; font-size: .95rem; }
+.sig-line { height: 3.8rem; border-bottom: 1px solid var(--txt); margin-bottom: .3rem; }
+.sig-caption { font-size: .75rem; color: var(--dim); }
+.sig-fields { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin-top: .85rem; }
+.sig-fields label { font-size: .7rem; }
+.sig-fields input { padding: .42rem .6rem; font-size: .84rem; }
+
+/* ── LEGAL BOX ── */
+.legal-box {
+  background: var(--err-bg);
+  border: 1px solid #EAB0B0;
+  border-left: 3px solid var(--err);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 1.2rem 1.4rem;
+  margin: 1.5rem 0;
+}
+.legal-box-title { font-weight: 600; color: var(--err); font-size: .9rem; margin-bottom: .5rem; }
+.legal-box ul { padding-left: 1.1rem; }
+.legal-box li { font-size: .84rem; color: var(--mid); margin-bottom: .3rem; line-height: 1.62; }
+
+/* ── NOTE ── */
+.note {
+  font-size: .82rem;
+  color: var(--dim);
+  font-style: italic;
+  padding: .5rem .8rem;
+  background: var(--card);
+  border-radius: var(--r);
+  margin: .5rem 0;
+  line-height: 1.6;
+}
+.badge {
+  display: inline-block;
+  padding: .18rem .6rem;
+  border-radius: 20px;
+  font-size: .71rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.badge-green { background: var(--mist); color: var(--pine); }
+.badge-gold  { background: #FEF9E7; color: var(--gold); }
+
+/* ── DIVIDER ── */
+.divider { height: 2px; background: linear-gradient(90deg, var(--gold) 0%, transparent 100%); margin: 3rem 0 2.5rem; opacity: .6; }
+
+/* ── FOOTER ── */
+.doc-footer {
+  background: var(--card);
+  border-top: 1px solid var(--rule);
+  padding: .95rem 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: .77rem;
+  color: var(--dim);
+}
+.doc-footer-brand { color: var(--gold); font-weight: 500; letter-spacing: .02em; }
+
+/* ── PDF BUTTON ── */
+.pdf-bar { padding: 1.5rem 3.2rem; text-align: right; border-top: 1px solid var(--rule); background: var(--wht); }
+.pdf-btn {
+  background: var(--ink);
+  color: var(--wht);
+  border: none;
+  padding: .72rem 2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: .88rem;
+  font-weight: 500;
+  border-radius: var(--r);
+  cursor: pointer;
+  letter-spacing: .04em;
+  transition: background .2s, transform .1s;
+}
+.pdf-btn:hover { background: var(--pine); }
+.pdf-btn:active { transform: translateY(1px); }
+
+/* ── PRINT ── */
+@media print {
+  body { background: white; font-size: 10pt; }
+  .doc { max-width: 100%; box-shadow: none; }
+  .pdf-bar, .pdf-btn { display: none !important; }
+  .doc-body { padding: 1.5rem 2.2rem; }
+  .doc-hdr { padding: 1.5rem 2.2rem 1.2rem; }
+  .sec { page-break-inside: avoid; }
+  .clause { page-break-inside: avoid; }
+  .card { page-break-inside: avoid; }
+  .fieldset { page-break-inside: avoid; }
+  .parties { page-break-inside: avoid; }
+  .sig-section { page-break-inside: avoid; }
+  .models { page-break-inside: avoid; }
+  .legal-box { page-break-inside: avoid; }
+  table { page-break-inside: avoid; }
+  .sec-head { page-break-after: avoid; }
+  .clause-hdr { page-break-after: avoid; }
+  input, textarea, select {
+    border: none !important;
+    border-bottom: 1px solid #999 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .doc-hdr, .gold-stripe, .model-head, .stat, .party-lbl, .card-green, .mist {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .fieldset { background: #f5f5f5 !important; }
+  @page { margin: 15mm 18mm; size: A4; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+  <header class="doc-hdr">
+    <svg class="doc-logo" viewBox="0 0 90 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M45 6L7 31v43h76V31L45 6Z" fill="rgba(255,255,255,.1)"/>
+  <path d="M18 72V41C18 22 45 22 45 22C45 22 72 22 72 41V72Z" fill="rgba(255,255,255,.18)"/>
+  <path d="M27 72V44C27 31 45 31 45 31C45 31 63 31 63 44V72Z" fill="rgba(26,51,40,.9)"/>
+  <path d="M36 72V48C36 40 45 40 45 40C45 40 54 40 54 48V72Z" fill="rgba(255,255,255,.26)"/>
+  <path d="M41 72V67C41 63 45 60 45 60C45 60 49 63 49 67V72Z" fill="rgba(26,51,40,.9)"/>
+  <line x1="7" y1="72" x2="20" y2="72" stroke="rgba(255,255,255,.25)" stroke-width="2.5"/>
+  <line x1="70" y1="72" x2="83" y2="72" stroke="rgba(255,255,255,.25)" stroke-width="2.5"/>
+  <path d="M45 8L83 31M45 8L7 31" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+</svg>
+    <div class="doc-hdr-text">
+      <div class="doc-brand">ARRIVIO</div>
+      <div class="doc-title">B2B-Rahmenvertrag · Wohnraumversorgung</div>
+      <div class="doc-sub">arrivio.global &nbsp;·&nbsp; zaki@arrivio.global</div>
+    </div>
+  </header>
+  <div class="gold-stripe"></div>
+  <main class="doc-body">
+
+
+<div class="stats" style="margin-bottom:1.8rem">
+  <div class="stat"><span class="stat-val">1,7 Mio.</span><span class="stat-lbl">Neuzuzüge nach Deutschland jährlich</span></div>
+  <div class="stat"><span class="stat-val">30 %</span><span class="stat-lbl">verlassen Arbeitgeber in 6 Monaten</span></div>
+  <div class="stat"><span class="stat-val">50+</span><span class="stat-lbl">B2B-Partner bereits an Bord</span></div>
+</div>
+<div class="card" style="margin-bottom:1.8rem">
+  <div class="card-title">Hinweis zur Dokumentenstruktur</div>
+  <p>Dieser Vertrag regelt die B2B-Rahmenbeziehung zwischen Arrivio und dem Kooperationspartner. Wohnnutzungsverhältnisse mit Bewohnern werden durch gesonderte Wohnnutzungsverträge geregelt. Die Anlagen A bis D sind verbindliche Bestandteile.</p>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§</span><span class="sec-title">Vertragsparteien</span></div>
+  
+<div class="parties">
+  <div class="party">
+    <span class="party-lbl">Wohnraumpartner / Untervermieter</span>
+    <div class="party-body">
+      <div class="party-name">Arrivio GmbH</div>
+      <div class="fg"><label>Straße, Hausnummer</label><input type="text" placeholder="[Straße Nr.]"></div>
+      <div class="fr">
+        <div class="fg"><label>PLZ</label><input type="text" placeholder="[PLZ]"></div>
+        <div class="fg"><label>Stadt</label><input type="text" placeholder="[Stadt]"></div>
+      </div>
+      <div class="fg"><label>Vertreten durch</label><input type="text" value="Ayush Nigam (CEO), Zaki Amawi (CBO)"></div>
+      <div class="fg"><label>HRB / Amtsgericht</label><input type="text" placeholder="HRB _____ | AG _____"></div>
+      <p style="font-size:.75rem;color:var(--dim);margin-top:.5rem;font-style:italic">nachstehend: Arrivio</p>
+    </div>
+  </div>
+  <div class="party">
+    <span class="party-lbl">Kooperationspartner</span>
+    <div class="party-body">
+        <div class="fg"><label>Unternehmensname</label><input type="text" placeholder="[Unternehmensname]"></div>
+        <div class="fg"><label>Straße, Hausnummer</label><input type="text" placeholder="[…]"></div>
+        <div class="fr">
+          <div class="fg"><label>PLZ</label><input type="text" placeholder="[PLZ]"></div>
+          <div class="fg"><label>Stadt</label><input type="text" placeholder="[Stadt]"></div>
+        </div>
+        <div class="fr">
+          <div class="fg"><label>Ansprechpartner</label><input type="text" placeholder="[Name, Position]"></div>
+          <div class="fg"><label>E-Mail</label><input type="email" placeholder="[E-Mail]"></div>
+        </div>
+        <div class="fr">
+          <div class="fg"><label>HRB / Amtsgericht</label><input type="text" placeholder="HRB _____ | AG _____"></div>
+          <div class="fg"><label>USt-IdNr. / VAT No.</label><input type="text" placeholder="DE___________"></div>
+        </div>
+      <p style="font-size:.75rem;color:var(--dim);margin-top:.5rem;font-style:italic">nachstehend: Partner</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 1</span><span class="sec-title">Vertragsgegenstand und rechtliche Abgrenzung</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt">Arrivio stellt dem Partner vollständig eingerichtete Wohnräume in Wohngemeinschaften (nachfolgend: Zimmer) auf Basis dieses Vertrags zur Verfügung. Die Bereitstellung erfolgt im Rahmen gewerblicher Wohnraumverwaltung – nicht im Rahmen eines Hotel-, Boardinghouse- oder Beherbergungsverhältnisses.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt"><span class="item-lbl">Arrivio als Hauptmieter</span>Arrivio schließt mit den jeweiligen Eigentümern oder Hauptmietern Miet- oder Zwischenmietverträge ab und tritt als professioneller Wohnraumverwalter auf.</span></div><div class="item"><span class="item-n">(3)</span><span class="item-txt"><span class="item-lbl">Wohnnutzungsvertrag</span>Die Überlassung der Zimmer an Bewohner erfolgt durch gesonderte Wohnnutzungsverträge zwischen Arrivio und dem jeweiligen Bewohner. Der Partner ist nicht Partei dieses Verhältnisses.</span></div><div class="item"><span class="item-n">(4)</span><span class="item-txt"><span class="item-lbl">B2B-Charakter</span>Dieser Vertrag begründet ausschließlich eine B2B-Kooperationsbeziehung für Kontingentreservierung, Wohnraumkoordination und Verwaltungsleistungen. Er ist kein Miet-, Pacht- oder Beherbergungsvertrag.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 2</span><span class="sec-title">Begriffsbestimmungen</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt"><span class="item-lbl">Bewohner</span>Natürliche Person, die ein Zimmer auf Basis eines Wohnnutzungsvertrags mit Arrivio nutzt und vom Partner benannt wurde.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt"><span class="item-lbl">Kontingent</span>Die in Anlage A vereinbarte Mindestanzahl von Zimmern, die Arrivio dem Partner exklusiv reserviert.</span></div><div class="item"><span class="item-n">(3)</span><span class="item-txt"><span class="item-lbl">Basispaket</span>Die in § 6 und Anlage B beschriebenen Standardleistungen, die in der monatlichen Nutzungsgebühr enthalten sind.</span></div><div class="item"><span class="item-n">(4)</span><span class="item-txt"><span class="item-lbl">Nutzungsgebühr</span>Die monatliche Gesamtpauschale für Wohnraumnutzung, Betriebskosten und Basispaket gemäß Anlage A.</span></div><div class="item"><span class="item-n">(5)</span><span class="item-txt"><span class="item-lbl">Servicepauschale</span>Eigenständige B2B-Vergütung für Verwaltung, Koordination und Portalzugang, zahlbar in Modell B und C.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 3</span><span class="sec-title">Laufzeit und Kündigung</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt"><span class="item-lbl">Mindestlaufzeit</span>Dieser Vertrag tritt mit beiderseitiger Unterzeichnung in Kraft und wird für unbestimmte Zeit geschlossen. Die Mindestlaufzeit beträgt 24 Monate; während dieser Zeit ist eine ordentliche Kündigung ausgeschlossen.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt"><span class="item-lbl">Ordentliche Kündigung</span>Nach Ablauf der Mindestlaufzeit verlängert sich der Vertrag automatisch um jeweils 12 Monate, sofern er nicht mit einer Frist von 3 Monaten zum Verlängerungsende in Textform gekündigt wird.</span></div><div class="item"><span class="item-n">(3)</span><span class="item-txt"><span class="item-lbl">Außerordentliche Kündigung</span>Jede Partei kann den Vertrag aus wichtigem Grund fristlos kündigen, wenn wesentliche Vertragspflichten trotz schriftlicher Abmahnung und 14-tägiger Nachfrist nicht erfüllt werden oder Insolvenz beantragt wird.</span></div><div class="item"><span class="item-n">(4)</span><span class="item-txt"><span class="item-lbl">Einzelbuchungen</span>Einzelne Zimmerbuchungen ohne Rahmenkontingent haben eine Mindestlaufzeit von 6 Monaten; danach kündbar mit 6 Wochen Frist zum Monatsende.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 4</span><span class="sec-title">Kontingent und Verfügbarkeit</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt">Der Partner verpflichtet sich, für die gesamte Vertragslaufzeit das in Anlage A vereinbarte Mindestkontingent zu reservieren. Arrivio hält diese Zimmer exklusiv bereit.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt"><span class="item-lbl">Erhöhung</span>Das Kontingent kann jederzeit schriftlich erhöht werden. Arrivio bestätigt nach verfügbarer Kapazität binnen 5 Werktagen. Ein Anspruch auf sofortige Bereitstellung besteht nicht.</span></div><div class="item"><span class="item-n">(3)</span><span class="item-txt"><span class="item-lbl">Reduzierung</span>Eine Reduzierung des Mindestkontingents ist mit 60 Tagen Frist zum Monatsende schriftlich möglich. Kürzere Fristen lösen Ausfallgebühren nach § 8 aus.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 5</span><span class="sec-title">Leistungen von Arrivio</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt"><span class="item-lbl">Wohnraum</span>Vollständig eingerichtete, bezugsfertige Zimmer inklusive Möblierung, Bettwäsche (Erstausstattung), Gemeinschaftsküche, Badezimmer, Betriebskosten und Basispaket nach § 6.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt"><span class="item-lbl">Onboarding</span>Vollständig digitaler Buchungs- und Einzugsprozess. Kein SCHUFA-Nachweis und kein Mietkautionsdepot seitens des Bewohners erforderlich.</span></div><div class="item"><span class="item-n">(3)</span><span class="item-txt"><span class="item-lbl">§ 19 BMG</span>Ausstellung der Wohnungsgeberbestätigung nach § 19 BMG für jeden Bewohner zur Anmeldung beim Einwohnermeldeamt.</span></div><div class="item"><span class="item-n">(4)</span><span class="item-txt"><span class="item-lbl">B2B-Portal</span>Zugang zum Arrivio-Unternehmensportal mit Echtzeit-Belegungsübersicht, Vertragsstatus, Rechnungen und Buchungsverwaltung.</span></div><div class="item"><span class="item-n">(5)</span><span class="item-txt"><span class="item-lbl">Verwaltung</span>Laufende Wohnraumverwaltung, Kommunikation mit Eigentümern, Koordination von Instandhaltungsmaßnahmen, Ansprechpartner für alle Wohnfragen.</span></div><div class="item"><span class="item-n">(6)</span><span class="item-txt"><span class="item-lbl">Community</span>Zugang zur Arrivio Community-Plattform mit Veranstaltungen, Interessengruppen und dem ARIX-Assistenten (24/7, mehrsprachig).</span></div><div class="item"><span class="item-n">(7)</span><span class="item-txt"><span class="item-lbl">HR-Support</span>Fester Ansprechpartner für das HR-Team des Partners an Werktagen, Reaktionszeit maximal 1 Werktag.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 6</span><span class="sec-title">Im Basispaket enthaltene Standardleistungen</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt">Die folgenden Leistungen sind in der monatlichen Nutzungsgebühr gemäß Anlage A enthalten und werden für jeden Bewohner im Kontingent erbracht.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt"><span class="item-lbl">Internet und WLAN</span>Breitband-Internetzugang (mindestens 50 Mbit/s). Arrivio koordiniert die Bereitstellung nach bestem Bemühen, übernimmt jedoch keine Garantie für Unterbrechungsfreiheit bei Anbieterausfällen. Störungen sind vom Bewohner unverzüglich zu melden. Missbräuchliche Nutzung ist untersagt.</span></div><div class="item"><span class="item-n">(3)</span><span class="item-txt"><span class="item-lbl">Hausratversicherung</span>Arrivio veranlasst den Abschluss für jeden Bewohner über ausgewählte Versicherungspartner. Der Versicherungsschutz richtet sich nach den Bedingungen des jeweiligen Versicherers. Arrivio ist nicht Versicherer. Schäden sind unverzüglich Arrivio und dem Versicherer zu melden.</span></div><div class="item"><span class="item-n">(4)</span><span class="item-txt"><span class="item-lbl">Private Haftpflichtversicherung</span>Abschluss über Versicherungspartner. Arrivio tritt nicht als Versicherungsmakler im Sinne des § 34d GewO auf. Die Versicherungsbedingungen des Versicherungspartners sind maßgeblich. Arrivio kann hierfür eine Vergütung erhalten.</span></div><div class="item"><span class="item-n">(5)</span><span class="item-txt">Für Versicherungsabschlüsse benötigt Arrivio Bewohnerdaten (Name, Geburtsdatum, Wohnanschrift, Einzugsdatum). Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 7</span><span class="sec-title">Vergütung, Zahlungsmodelle und Abrechnung</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt">Die Nutzungsgebühr wird in Anlage A vereinbart. Alle Preise netto zuzüglich gesetzlicher Umsatzsteuer. Arrivio berechnet dieselbe Leistung in keinem Modell doppelt.</span></div><div class="bullet"><span class="bullet-dot">▸</span><span class="bullet-txt">Modell A: Partner zahlt die vollständige Nutzungsgebühr direkt. Die steuerliche Behandlung als geldwerter Vorteil (§ 8 EStG) liegt beim Partner. Arrivio erbringt keine steuerliche Beratung.</span></div><div class="bullet"><span class="bullet-dot">▸</span><span class="bullet-txt">Modell B: Bewohner zahlt Nutzungsgebühr direkt. Partner zahlt Servicepauschale für B2B-Portal und Koordination. Die Servicepauschale ist keine Mietkomponente.</span></div><div class="bullet"><span class="bullet-dot">▸</span><span class="bullet-txt">Modell C: Partner zahlt Wohnkostenzuschuss, Bewohner zahlt Restbetrag direkt. Beide Anteile werden getrennt ausgewiesen und abgerechnet.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt"><span class="item-lbl">Rechnungsstellung</span>Monatlich, zahlbar bis zum 10. des Monats per SEPA-Überweisung.</span></div><div class="item"><span class="item-n">(3)</span><span class="item-txt"><span class="item-lbl">Verzugszinsen</span>Bei Zahlungsverzug ab dem 11. Werktag nach Fälligkeit gemäß § 288 Abs. 2 BGB.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 8</span><span class="sec-title">Ausfallzahlung bei Nichtbelegung</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt">Nicht belegte Kontingent-Zimmer unterliegen der folgenden Regelung:</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt"><span class="item-lbl">Regelfall</span>Voranzeige von mindestens 6 Wochen zum Monatsende: keine Ausfallgebühr.</span></div><div class="item"><span class="item-n">(3)</span><span class="item-txt"><span class="item-lbl">Kurzfristig (15–41 Tage)</span>50 % der monatlichen Nutzungsgebühr, anteilig für die Leerstandstage.</span></div><div class="item"><span class="item-n">(4)</span><span class="item-txt"><span class="item-lbl">Unangekündigt (unter 14 Tage)</span>100 % der Nutzungsgebühr, maximal 3 Monate.</span></div><div class="item"><span class="item-n">(5)</span><span class="item-txt">Ausfallgebühren entfallen, soweit Arrivio das Zimmer nachweislich anderweitig belegen konnte. Arrivio ist zur Schadensminderung verpflichtet.</span></div><div class="item"><span class="item-n">(6)</span><span class="item-txt"><span class="item-lbl">Kündigung des Arbeitsverhältnisses</span>Bei Beendigung des Arbeitsverhältnisses eines Bewohners hat der Partner Arrivio unverzüglich, spätestens binnen 3 Werktagen, zu informieren. Verspätete Meldung begründet Haftung für entstandenen Leerstandsschaden.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 9</span><span class="sec-title">Pflichten des Partners</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt">Benennung des Bewohners (Name, Nationalität, Einzugsdatum, geplante Aufenthaltsdauer) mindestens 5 Werktage vor Einzug in Textform.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt">Sicherstellung, dass der Bewohner die Hausordnung (Anlage C) vor Einzug schriftlich bestätigt hat.</span></div><div class="item"><span class="item-n">(3)</span><span class="item-txt">Unverzügliche Meldung bij vorzeitigem Auszug, Kündigung des Arbeitsverhältnisses oder anderen belegungsrelevanten Veränderungen, spätestens binnen 3 Werktagen.</span></div><div class="item"><span class="item-n">(4)</span><span class="item-txt">Keine eigenmächtige Kommunikation mit Eigentümern, Hausverwaltungen oder Handwerkern – dies ist ausschließlich Aufgabe von Arrivio.</span></div><div class="item"><span class="item-n">(5)</span><span class="item-txt">Der Partner stellt sicher, dass benannte Bewohner volljährig sind und kein Einreise- oder Aufenthaltsverbot besteht.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 10</span><span class="sec-title">Wohnnutzungsverhältnis und Pflichten des Bewohners</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt">Der Bewohner schließt einen separaten Wohnnutzungsvertrag mit Arrivio, der Laufzeit, Nutzungsbedingungen, Hausordnung, Kaution und Rückgabe regelt.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt"><span class="item-lbl">Nutzungszweck</span>Ausschließlich private Wohnnutzung. Gewerbliche, politische oder sonstige zweckfremde Nutzung ist untersagt.</span></div><div class="item"><span class="item-n">(3)</span><span class="item-txt"><span class="item-lbl">Schadensmeldung</span>Schäden sind unverzüglich, spätestens innerhalb von 24 Stunden nach Entdecken, an Arrivio zu melden.</span></div><div class="item"><span class="item-n">(4)</span><span class="item-txt"><span class="item-lbl">Verbote</span>Untervermietung, Weitergabe an Dritte und bauliche Veränderungen ohne Zustimmung sind untersagt.</span></div><div class="item"><span class="item-n">(5)</span><span class="item-txt"><span class="item-lbl">Zutritt</span>Arrivio ist nach 24-stündiger Vorankündigung für Instandhaltungsmaßnahmen zutrittsberechtig. Bei Gefahr im Verzug sofortiger Zutritt ohne Vorankündigung.</span></div><div class="item"><span class="item-n">(6)</span><span class="item-txt"><span class="item-lbl">Rückgabe</span>Besenrein, vollständig geräumt, mit allen Schlüsseln. Verspätete Rückgabe: 1,5-facher Tagessatz zuzüglich 50 € je Werktag Verzug.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 11</span><span class="sec-title">Hausordnung</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt">Die vollständige Hausordnung ist Anlage C und verbindlicher Bestandteil dieses Vertrags. Jeder Bewohner verpflichtet sich vor Einzug zur schriftlichen Bestätigung.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt"><span class="item-lbl">Ruhezeiten</span>Nachtruhe täglich 22:00–07:00 Uhr, Mittagsruhe 13:00–15:00 Uhr, ganztägige Ruhe an Sonn- und Feiertagen.</span></div><div class="item"><span class="item-n">(3)</span><span class="item-txt"><span class="item-lbl">Rauchverbot</span>Absolutes Rauchverbot in allen Innenräumen und Gemeinschaftsflächen.</span></div><div class="item"><span class="item-n">(4)</span><span class="item-txt"><span class="item-lbl">Haustiere</span>Haltung von Haustieren nur mit vorheriger schriftlicher Zustimmung von Arrivio.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 12</span><span class="sec-title">Kaution</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt">Arrivio erhebt eine Kaution je Zimmer nach Anlage A, maximal 3 Monatsmieten analog § 551 BGB. Rückzahlung binnen 30 Tagen nach ordnungsgemäßer Rückgabe, abzüglich berechtigter Gegenforderungen.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt">Geplante Abzüge werden dem Bewohner schriftlich mit Belegen mitgeteilt. Widerspruchsfrist 14 Tage.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 13</span><span class="sec-title">Schäden, Inventar und Rückgabe</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt"><span class="item-lbl">Haftungsmaßstab</span>Der Bewohner haftet für schuldhaft verursachte Schäden. Normale Abnutzung bei vertragsgemäßem Gebrauch geht nicht zu Lasten des Bewohners.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt"><span class="item-lbl">Inventar</span>Das Inventar ist vollständig und in ordnungsgemäßem Zustand zurückzugeben. Fehlende oder beschädigte Gegenstände werden auf Belegbasis berechnet.</span></div><div class="item"><span class="item-n">(3)</span><span class="item-txt">Der Partner haftet subsidiär für Bewohnerschäden, soweit er Arrivio nicht unverzüglich über bekannte Pflichtverletzungen informiert hat.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 14</span><span class="sec-title">Haftung</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt">Arrivio haftet unbeschränkt für Schäden durch Vorsatz, grobe Fahrlässigkeit und Schäden aus der Verletzung von Leben, Körper oder Gesundheit.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt">Bei leichter Fahrlässigkeit ist die Haftung auf den typischerweise vorhersehbaren, vertragstypischen Schaden begrenzt.</span></div><div class="item"><span class="item-n">(3)</span><span class="item-txt">Für Leistungen unabhängiger Drittanbieter übernimmt Arrivio keine Haftung. Vertragspartner ist der jeweilige Drittanbieter.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 15</span><span class="sec-title">Partnerangebote, Drittanbieter und Provisionstransparenz</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt">Arrivio bietet Bewohnern Zugang zu freiwilligen Partnerangeboten (Sport, Freizeit, Mobilität, Finanzen, Alltagsservices). Die Nutzung ist freiwillig; ein Anspruch auf Verfügbarkeit besteht nicht.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt">Vertragspartner für Drittanbieterleistungen ist ausschließlich der jeweilige Drittanbieter. Das Wohnverhältnis ist von der Nutzung von Partnerangeboten vollständig unabhängig.</span></div><div class="item"><span class="item-n">(3)</span><span class="item-txt">Arrivio kann bei erfolgreicher Vermittlung eine Provision vom Drittanbieter erhalten. Diese hat keinen Einfluss auf den Preis für den Bewohner. Arrivio legt dies hiermit transparent offen.</span></div><div class="item"><span class="item-n">(4)</span><span class="item-txt"><span class="item-lbl">Regulatorisch</span>Arrivio ist kein Versicherungsmakler (§ 34d GewO), kein Finanzanlagevermittler (§ 34f GewO) und kein Rechts- oder Steuerberater.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 16</span><span class="sec-title">Datenschutz</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt">Verantwortlicher für die im Rahmen dieses Vertrags verarbeiteten Daten ist Arrivio GmbH. Der Partner ist für die Datenerhebung in seinem Bereich selbst verantwortlich.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt">Rechtsgrundlagen: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung), lit. c (gesetzliche Pflicht), lit. f (berechtigtes Interesse für Sicherheit und Forderungsmanagement).</span></div><div class="item"><span class="item-n">(3)</span><span class="item-txt">Ein Auftragsverarbeitungsvertrag (AVV) nach Art. 28 DSGVO ist gemäß Anlage D abzuschließen, soweit Arrivio im Auftrag des Partners Daten verarbeitet. Datenschutzkontakt: datenschutz@arrivio.global</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 17</span><span class="sec-title">Steuerliche Hinweise</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt">Alle Preise netto zuzüglich der zum Zeitpunkt der Rechnungsstellung geltenden gesetzlichen Umsatzsteuer. Arrivio stellt steuerlich konforme Rechnungen mit gesondertem Umsatzsteuerausweis aus.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt">Arrivio erbringt keine steuerliche Beratung. Fragen zur Behandlung von Sachbezügen (§ 8 EStG) oder steuerlichen Konsequenzen sind vom Partner eigenständig mit einem Steuerberater zu klären.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 18</span><span class="sec-title">Geheimhaltung</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt">Beide Parteien verpflichten sich, alle im Rahmen dieses Vertrags erlangten vertraulichen Informationen – insbesondere Preiskonditionen, Kontingente, Kundendaten und technische Details – streng vertraulich zu behandeln und nicht ohne Zustimmung der anderen Partei an Dritte weiterzugeben.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt">Diese Verpflichtung gilt für 3 Jahre über das Vertragsende hinaus.</span></div></div>
+</div>
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">§ 19</span><span class="sec-title">Schlussbestimmungen</span></div>
+  <div class="clause"><div class="item"><span class="item-n">(1)</span><span class="item-txt"><span class="item-lbl">Schriftform</span>Änderungen bedürfen der Schriftform. Mündliche Nebenabreden sind unwirksam.</span></div><div class="item"><span class="item-n">(2)</span><span class="item-txt"><span class="item-lbl">Salvatorische Klausel</span>Unwirksame Bestimmungen werden durch eine rechtlich wirksame Regelung ersetzt, die dem wirtschaftlichen Zweck am nächsten kommt.</span></div><div class="item"><span class="item-n">(3)</span><span class="item-txt"><span class="item-lbl">Anwendbares Recht</span>Deutsches Recht unter Ausschluss des UN-Kaufrechts (CISG).</span></div><div class="item"><span class="item-n">(4)</span><span class="item-txt"><span class="item-lbl">Gerichtsstand</span>Ausschließlicher Gerichtsstand ist der Geschäftssitz von Arrivio, sofern beide Parteien Kaufleute sind.</span></div><div class="item"><span class="item-n">(5)</span><span class="item-txt"><span class="item-lbl">Anlagen</span>A (Kontingent & Preise) · B (Leistungen) · C (Hausordnung) · D (Datenschutz & AVV)</span></div></div>
+</div>
+<div class="legal-box"><div class="legal-box-title">⚠ Empfehlungen zur anwaltlichen Prüfung</div><ul><li>§ 565 BGB: Prüfung des Zwischenmietmodells und Kündigungsschutzrechte der Bewohner</li><li>§ 34d GewO: Erlaubnispflicht für Versicherungsvermittlung klären</li><li>§ 8 EStG: Steuerliche Behandlung des Sachbezugs mit Steuerberater klären</li><li>Mietpreisbremse und lokale Schutzvorschriften standortabhängig prüfen</li><li>Vollständige AVV nach Art. 28 DSGVO durch Datenschutzanwalt ausarbeiten lassen</li><li>DSFA nach Art. 35 DSGVO für bestimmte Verarbeitungsvorgänge prüfen</li></ul></div>
+
+<div class="sig-section">
+  <div class="sig-title">Unterzeichnung</div>
+  <div class="sig-note">Mit Unterzeichnung bestätigen beide Parteien, diesen Vertrag vollständig gelesen, verstanden und als rechtsverbindlich anerkannt zu haben. Der Vertrag wird in zwei Originalausfertigungen errichtet.</div>
+  <div class="sig-grid">
+    <div class="sig-box">
+      <div class="sig-party">Arrivio GmbH</div>
+      <div class="sig-line"></div>
+      <div class="sig-caption">Ayush Nigam (CEO) / Zaki Amawi (CBO)</div>
+      <div class="sig-fields">
+        <div class="fg"><label>Ort</label><input type="text"></div>
+        <div class="fg"><label>Datum</label><input type="date"></div>
+      </div>
+    </div>
+    <div class="sig-box">
+      <div class="sig-party">[Unternehmensname]</div>
+      <div class="sig-line"></div>
+      <div class="sig-caption">[Name, Position]</div>
+      <div class="sig-fields">
+        <div class="fg"><label>Ort</label><input type="text"></div>
+        <div class="fg"><label>Datum</label><input type="date"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  </main>
+  <div class="pdf-bar">
+    <button class="pdf-btn" onclick="window.print()">↓ &nbsp;Als PDF speichern</button>
+  </div>
+  <footer class="doc-footer">
+    <span>Vertraulich – nur für autorisierte Empfänger</span>
+    <span class="doc-footer-brand">© Arrivio GmbH &nbsp;·&nbsp; arrivio.global</span>
+  </footer>
+</div>
+</body>
+</html>

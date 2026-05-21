@@ -1,4 +1,4 @@
-import PageHeader from '../../components/layout/PageHeader';
+
 import MetricCards from '../../components/b2b/dashboard/MetricCards';
 import PartnersByType from '../../components/b2b/dashboard/PartnersByType';
 import EmployeesAwaitingHousing from '../../components/b2b/dashboard/EmployeesAwaitingHousing';
@@ -12,11 +12,11 @@ import { mockPartners, mockEmployees, mockReservations, mockCommissions, recentB
 export default function B2BDashboard() {
   return (
     <div className="space-y-6">
-      <PageHeader 
-        title="B2B Dashboard" 
-        breadcrumb="B2B Partners → Dashboard"
-        description="Overview of partner performance, capacity fill rates, and employee housing status."
-      />
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <p className="text-[10px] text-[#1a6644] font-bold uppercase tracking-[0.2em] mb-1">B2B OPERATION | DASHBOARD</p>
+        </div>
+      </div>
       
       {/* Metrics Row */}
       <MetricCards 

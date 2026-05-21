@@ -79,12 +79,10 @@ export default function ApplicationsPage() {
   return (
     <div className="space-y-5">
       {/* Header */}
-      <div>
-        <p className="text-xs text-gray-400 dark:text-gray-500 mb-0.5">B2C Applications</p>
-        <h1 className="text-xl font-bold text-gray-900 dark:text-white">Active Applications</h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-          {filtered.length} applications · Pending, Rejected or Approved status only.
-        </p>
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <p className="text-[10px] text-[#1a6644] font-bold uppercase tracking-[0.2em] mb-1">B2C OPERATION | APPLICATIONS</p>
+        </div>
       </div>
 
       <ApplicationFilters

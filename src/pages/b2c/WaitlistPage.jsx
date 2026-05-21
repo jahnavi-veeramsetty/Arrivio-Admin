@@ -134,13 +134,13 @@ export default function WaitlistPage() {
   const inputBase = "text-sm border border-gray-100 dark:border-gray-800 rounded-xl px-3 py-2 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 outline-none hover:border-emerald-500 shadow-sm transition-all focus:ring-2 focus:ring-emerald-500/10";
 
   return (
-    <div className="bg-white dark:bg-[var(--bg-main)] min-h-screen">
+    <div>
       <div className="p-8 max-w-[1440px] mx-auto space-y-6">
-        {/* Header Breadcrumb style */}
-        <div>
-          <p className="text-xs text-gray-400 mb-0.5">B2C Applications / Waitlist</p>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Property Waitlist</h1>
-          <p className="text-sm text-gray-500">Manage applicants for occupied inventory across your portfolio.</p>
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <p className="text-[10px] text-[#1a6644] font-bold uppercase tracking-[0.2em] mb-1">B2C OPERATION | WAITLIST</p>
+          </div>
         </div>
 
         {/* Stats Section */}

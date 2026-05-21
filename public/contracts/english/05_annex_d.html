@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Annex D – Arrivio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap');
+
+:root {
+  --ink:   #1A3328;
+  --pine:  #2D6A4F;
+  --gold:  #8B6914;
+  --sand:  #C8A830;
+  --card:  #F6F5F1;
+  --mist:  #EDF2EC;
+  --rule:  #DEDBD5;
+  --txt:   #262626;
+  --mid:   #4A4A46;
+  --dim:   #767670;
+  --wht:   #FFFFFF;
+  --err:   #7A2828;
+  --err-bg:#FDF4F4;
+  --ok-bg: #F1F8F3;
+  --ok-bd: #A8D4B4;
+  --r:     5px;
+  --r-lg:  8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; }
+body {
+  font-family: 'Jost', system-ui, sans-serif;
+  font-weight: 400;
+  color: var(--txt);
+  background: #EFEDE8;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── PAGE ── */
+.doc {
+  max-width: 960px;
+  margin: 0 auto;
+  background: var(--wht);
+  box-shadow: 0 4px 60px rgba(0,0,0,.12);
+}
+
+/* ── HEADER ── */
+.doc-hdr {
+  background: var(--ink);
+  padding: 2.8rem 3.2rem 2.2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.6rem;
+}
+.doc-logo { width: 56px; height: 48px; flex-shrink: 0; margin-top: .1rem; }
+.doc-hdr-text {}
+.doc-brand {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--wht);
+  letter-spacing: .12em;
+  line-height: 1;
+}
+.doc-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.22rem;
+  font-weight: 600;
+  color: var(--sand);
+  margin-top: .3rem;
+  line-height: 1.35;
+}
+.doc-sub {
+  font-size: .78rem;
+  font-weight: 300;
+  color: rgba(255,255,255,.45);
+  margin-top: .35rem;
+  letter-spacing: .02em;
+}
+.gold-stripe { height: 3px; background: linear-gradient(90deg, var(--gold), var(--sand) 40%, var(--gold)); }
+
+/* ── BODY ── */
+.doc-body { padding: 2.8rem 3.2rem; }
+
+/* ── SECTION ── */
+.sec { margin-bottom: 2.8rem; }
+
+.sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: .8rem;
+  padding-bottom: .6rem;
+  border-bottom: 1.5px solid var(--gold);
+  margin-bottom: 1.3rem;
+}
+.sec-num {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold);
+  min-width: 2.8rem;
+  flex-shrink: 0;
+  letter-spacing: .02em;
+}
+.sec-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.42rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+/* ── CLAUSE ── */
+.clause { margin-bottom: 1rem; }
+.clause + .clause { padding-top: .65rem; border-top: 1px solid var(--rule); }
+.clause-hdr {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.06rem;
+  font-weight: 700;
+  color: var(--ink);
+  padding-bottom: .4rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: .75rem;
+}
+.item { display: flex; gap: .6rem; margin-bottom: .55rem; }
+.item-n {
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--pine);
+  min-width: 2.2rem;
+  flex-shrink: 0;
+  padding-top: .1rem;
+}
+.item-lbl { font-weight: 600; color: var(--ink); margin-right: .25rem; }
+.item-txt { font-size: .915rem; color: var(--txt); line-height: 1.73; flex: 1; }
+.bullet {
+  display: flex;
+  gap: .5rem;
+  margin: .3rem 0 .3rem 2.8rem;
+}
+.bullet-dot { color: var(--gold); font-weight: 600; flex-shrink: 0; font-size: .9rem; margin-top: .05rem; }
+.bullet-txt { font-size: .88rem; color: var(--mid); line-height: 1.65; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--card);
+  border-left: 3px solid var(--gold);
+  padding: 1.1rem 1.4rem;
+  border-radius: 0 var(--r) var(--r) 0;
+  margin: 1rem 0;
+}
+.card-green { background: var(--mist); border-left-color: var(--pine); }
+.card-red   { background: var(--err-bg); border-left-color: var(--err); }
+.card-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: .35rem;
+}
+.card-title-green { color: var(--pine); }
+.card-title-red   { color: var(--err); }
+.card p { font-size: .9rem; color: var(--mid); line-height: 1.68; }
+
+/* ── META GRID ── */
+.meta-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  font-size: .9rem;
+}
+.meta-grid-row { display: contents; }
+.meta-grid-row > * { padding: .55rem .95rem; border-bottom: 1px solid var(--rule); }
+.meta-grid-row:last-child > * { border-bottom: none; }
+.meta-k { background: var(--card); font-weight: 500; color: var(--ink); }
+.meta-v { background: var(--wht); color: var(--mid); }
+.meta-v input {
+  border: none; border-bottom: 1px solid var(--rule);
+  background: transparent; width: auto; min-width: 160px;
+  padding: .05rem .2rem; font-size: .9rem; font-family: 'Jost',sans-serif;
+}
+.meta-v input:focus { outline: none; border-bottom-color: var(--pine); }
+
+/* ── PARTIES ── */
+.parties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin: .9rem 0;
+}
+.party {
+  border: 1px solid var(--rule);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.party-lbl {
+  display: block;
+  font-size: .72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  color: var(--wht);
+  background: var(--ink);
+  padding: .4rem .9rem;
+}
+.party-body { padding: 1.1rem 1rem; }
+.party-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: .7rem;
+}
+.party-body .fg { margin-bottom: .55rem; }
+.party-body label { font-size: .69rem; }
+.party-body input { padding: .42rem .65rem; font-size: .86rem; }
+
+/* ── FORMS ── */
+.fg { margin-bottom: .9rem; }
+.fr { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: .9rem; }
+label {
+  display: block;
+  font-size: .73rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: .28rem;
+  text-transform: uppercase;
+  letter-spacing: .055em;
+}
+input[type=text], input[type=email], input[type=number],
+input[type=date], input[type=time], textarea, select {
+  width: 100%;
+  border: 1px solid var(--rule);
+  border-radius: var(--r);
+  padding: .58rem .8rem;
+  font-family: 'Jost', sans-serif;
+  font-size: .9rem;
+  color: var(--txt);
+  background: var(--wht);
+  transition: border-color .18s, box-shadow .18s;
+  line-height: 1.5;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--pine);
+  box-shadow: 0 0 0 3px rgba(45,106,79,.08);
+}
+textarea { resize: vertical; min-height: 80px; }
+select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23767670' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .75rem center; padding-right: 2.2rem; }
+
+.fieldset {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-lg);
+  padding: 1.5rem;
+  margin: 1rem 0;
+}
+.fieldset-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* ── TABLES ── */
+table { width: 100%; border-collapse: collapse; font-size: .9rem; margin: .8rem 0; }
+thead th {
+  background: var(--ink);
+  color: var(--wht);
+  padding: .65rem .95rem;
+  text-align: left;
+  font-weight: 500;
+  font-size: .82rem;
+  letter-spacing: .02em;
+}
+thead th:first-child { border-radius: var(--r) 0 0 0; }
+thead th:last-child  { border-radius: 0 var(--r) 0 0; }
+tbody td { padding: .58rem .95rem; border-bottom: 1px solid var(--rule); vertical-align: top; line-height: 1.62; }
+tbody tr:nth-child(even) td { background: var(--card); }
+tbody tr:last-child td { border-bottom: none; }
+tbody td input[type=text],
+tbody td input[type=number],
+tbody td input[type=date] {
+  border: none;
+  border-bottom: 1px dashed var(--rule);
+  border-radius: 0;
+  background: transparent;
+  padding: .15rem .25rem;
+  width: 100%;
+  font-size: .88rem;
+}
+tbody td input:focus { border-bottom-color: var(--pine); box-shadow: none; }
+tbody td select {
+  border: 1px solid var(--rule);
+  border-radius: var(--r);
+  padding: .2rem .55rem;
+  font-size: .84rem;
+  background: var(--wht);
+  width: auto;
+}
+.tbl-total td { background: var(--mist) !important; font-weight: 600; }
+.tbl-total td:first-child { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1rem; }
+.incl { color: var(--pine); font-weight: 500; font-size: .85rem; }
+.incl::before { content: '✓ '; }
+
+/* ── PAYMENT MODELS ── */
+.models { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin: 1rem 0; }
+.model {
+  border: 1.5px solid var(--rule);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: border-color .2s, box-shadow .2s;
+}
+.model:has(input:checked) { border-color: var(--pine); box-shadow: 0 0 0 3px rgba(45,106,79,.1); }
+.model-head { padding: .8rem 1rem; color: var(--wht); display: flex; align-items: center; gap: .6rem; }
+.model-a .model-head { background: var(--ink); }
+.model-b .model-head { background: var(--pine); }
+.model-c .model-head { background: var(--gold); }
+.model-letter {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.model-name { font-size: .85rem; font-weight: 600; line-height: 1.3; }
+.model-body { padding: .95rem 1rem; background: var(--card); }
+.model-body p { font-size: .84rem; color: var(--mid); line-height: 1.62; margin-bottom: .45rem; }
+.model-body .model-input { font-size: .84rem; margin: .55rem 0; }
+.model-body .model-input input[type=text] {
+  display: inline;
+  width: 110px;
+  border: none;
+  border-bottom: 1px solid var(--rule);
+  border-radius: 0;
+  padding: .12rem .3rem;
+  background: transparent;
+}
+.model-pick {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  margin-top: .65rem;
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--ink);
+  border-top: 1px solid var(--rule);
+  padding-top: .65rem;
+}
+.model-pick input { width: auto; }
+
+/* ── CHECKLIST ── */
+.checklist { list-style: none; display: flex; flex-direction: column; gap: .35rem; margin: .6rem 0; }
+.chk {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  font-size: .9rem;
+  padding: .45rem .8rem;
+  border-radius: var(--r);
+  line-height: 1.62;
+}
+.chk-ok   { background: var(--ok-bg); border: 1px solid var(--ok-bd); }
+.chk-no   { background: var(--err-bg); border: 1px solid #EAB0B0; }
+.chk-warn { background: #FEFBE8; border: 1px solid #D4B84A; }
+.chk-icon { flex-shrink: 0; font-weight: 700; margin-top: .08rem; font-size: .92rem; }
+.chk-ok   .chk-icon { color: var(--pine); }
+.chk-no   .chk-icon { color: var(--err); }
+.chk-warn .chk-icon { color: var(--gold); }
+
+/* ── STATS BAR ── */
+.stats { display: grid; grid-template-columns: repeat(3,1fr); background: var(--ink); border-radius: var(--r-lg); overflow: hidden; margin: 1rem 0; }
+.stat { padding: 1.4rem 1rem; text-align: center; }
+.stat + .stat { border-left: 1px solid rgba(255,255,255,.1); }
+.stat-val {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--sand);
+  line-height: 1;
+  display: block;
+}
+.stat-lbl { font-size: .78rem; font-weight: 300; color: rgba(255,255,255,.6); margin-top: .3rem; letter-spacing: .01em; }
+
+/* ── SERVICE ITEMS ── */
+.svc-list { display: flex; flex-direction: column; gap: .4rem; margin: .8rem 0; }
+.svc {
+  display: flex;
+  align-items: flex-start;
+  gap: .7rem;
+  padding: .72rem 1rem;
+  border-radius: var(--r);
+  background: var(--mist);
+  border-left: 2px solid var(--pine);
+  font-size: .9rem;
+}
+.svc.opt { background: var(--card); border-left-color: var(--gold); }
+.svc-icon { flex-shrink: 0; font-weight: 700; color: var(--pine); margin-top: .05rem; }
+.svc.opt .svc-icon { color: var(--gold); }
+.svc-body {}
+.svc-name { font-weight: 600; color: var(--ink); display: block; }
+.svc-desc { font-size: .83rem; color: var(--dim); line-height: 1.57; }
+.svc-chk { flex-shrink: 0; accent-color: var(--pine); margin-top: .2rem; }
+
+/* ── PROCESS STEPS ── */
+.process { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.1rem; margin: 1rem 0; }
+.step { text-align: center; position: relative; }
+.step::after { content: '→'; position: absolute; right: -.8rem; top: .9rem; color: var(--rule); font-size: 1.1rem; }
+.step:last-child::after { display: none; }
+.step-n {
+  width: 2.5rem; height: 2.5rem;
+  background: var(--ink);
+  color: var(--sand);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.1rem; font-weight: 700;
+  margin: 0 auto .5rem;
+}
+.step-t { font-weight: 600; font-size: .84rem; color: var(--ink); margin-bottom: .2rem; }
+.step-d { font-size: .77rem; color: var(--dim); }
+
+/* ── SIGNATURE ── */
+.sig-section {
+  margin-top: 2.8rem;
+  padding-top: 1.5rem;
+  border-top: 1.5px solid var(--gold);
+  page-break-inside: avoid;
+}
+.sig-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: .3rem;
+}
+.sig-note { font-size: .84rem; color: var(--dim); margin-bottom: 1.6rem; line-height: 1.65; }
+.sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+.sig-box {}
+.sig-party { font-weight: 600; color: var(--ink); margin-bottom: .85rem; font-size: .95rem; }
+.sig-line { height: 3.8rem; border-bottom: 1px solid var(--txt); margin-bottom: .3rem; }
+.sig-caption { font-size: .75rem; color: var(--dim); }
+.sig-fields { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin-top: .85rem; }
+.sig-fields label { font-size: .7rem; }
+.sig-fields input { padding: .42rem .6rem; font-size: .84rem; }
+
+/* ── LEGAL BOX ── */
+.legal-box {
+  background: var(--err-bg);
+  border: 1px solid #EAB0B0;
+  border-left: 3px solid var(--err);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 1.2rem 1.4rem;
+  margin: 1.5rem 0;
+}
+.legal-box-title { font-weight: 600; color: var(--err); font-size: .9rem; margin-bottom: .5rem; }
+.legal-box ul { padding-left: 1.1rem; }
+.legal-box li { font-size: .84rem; color: var(--mid); margin-bottom: .3rem; line-height: 1.62; }
+
+/* ── NOTE ── */
+.note {
+  font-size: .82rem;
+  color: var(--dim);
+  font-style: italic;
+  padding: .5rem .8rem;
+  background: var(--card);
+  border-radius: var(--r);
+  margin: .5rem 0;
+  line-height: 1.6;
+}
+.badge {
+  display: inline-block;
+  padding: .18rem .6rem;
+  border-radius: 20px;
+  font-size: .71rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.badge-green { background: var(--mist); color: var(--pine); }
+.badge-gold  { background: #FEF9E7; color: var(--gold); }
+
+/* ── DIVIDER ── */
+.divider { height: 2px; background: linear-gradient(90deg, var(--gold) 0%, transparent 100%); margin: 3rem 0 2.5rem; opacity: .6; }
+
+/* ── FOOTER ── */
+.doc-footer {
+  background: var(--card);
+  border-top: 1px solid var(--rule);
+  padding: .95rem 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: .77rem;
+  color: var(--dim);
+}
+.doc-footer-brand { color: var(--gold); font-weight: 500; letter-spacing: .02em; }
+
+/* ── PDF BUTTON ── */
+.pdf-bar { padding: 1.5rem 3.2rem; text-align: right; border-top: 1px solid var(--rule); background: var(--wht); }
+.pdf-btn {
+  background: var(--ink);
+  color: var(--wht);
+  border: none;
+  padding: .72rem 2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: .88rem;
+  font-weight: 500;
+  border-radius: var(--r);
+  cursor: pointer;
+  letter-spacing: .04em;
+  transition: background .2s, transform .1s;
+}
+.pdf-btn:hover { background: var(--pine); }
+.pdf-btn:active { transform: translateY(1px); }
+
+/* ── PRINT ── */
+@media print {
+  body { background: white; font-size: 10pt; }
+  .doc { max-width: 100%; box-shadow: none; }
+  .pdf-bar, .pdf-btn { display: none !important; }
+  .doc-body { padding: 1.5rem 2.2rem; }
+  .doc-hdr { padding: 1.5rem 2.2rem 1.2rem; }
+  .sec { page-break-inside: avoid; }
+  .clause { page-break-inside: avoid; }
+  .card { page-break-inside: avoid; }
+  .fieldset { page-break-inside: avoid; }
+  .parties { page-break-inside: avoid; }
+  .sig-section { page-break-inside: avoid; }
+  .models { page-break-inside: avoid; }
+  .legal-box { page-break-inside: avoid; }
+  table { page-break-inside: avoid; }
+  .sec-head { page-break-after: avoid; }
+  .clause-hdr { page-break-after: avoid; }
+  input, textarea, select {
+    border: none !important;
+    border-bottom: 1px solid #999 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .doc-hdr, .gold-stripe, .model-head, .stat, .party-lbl, .card-green, .mist {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .fieldset { background: #f5f5f5 !important; }
+  @page { margin: 15mm 18mm; size: A4; }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+  <header class="doc-hdr">
+    <svg class="doc-logo" viewBox="0 0 90 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M45 6L7 31v43h76V31L45 6Z" fill="rgba(255,255,255,.1)"/>
+  <path d="M18 72V41C18 22 45 22 45 22C45 22 72 22 72 41V72Z" fill="rgba(255,255,255,.18)"/>
+  <path d="M27 72V44C27 31 45 31 45 31C45 31 63 31 63 44V72Z" fill="rgba(26,51,40,.9)"/>
+  <path d="M36 72V48C36 40 45 40 45 40C45 40 54 40 54 48V72Z" fill="rgba(255,255,255,.26)"/>
+  <path d="M41 72V67C41 63 45 60 45 60C45 60 49 63 49 67V72Z" fill="rgba(26,51,40,.9)"/>
+  <line x1="7" y1="72" x2="20" y2="72" stroke="rgba(255,255,255,.25)" stroke-width="2.5"/>
+  <line x1="70" y1="72" x2="83" y2="72" stroke="rgba(255,255,255,.25)" stroke-width="2.5"/>
+  <path d="M45 8L83 31M45 8L7 31" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+</svg>
+    <div class="doc-hdr-text">
+      <div class="doc-brand">ARRIVIO</div>
+      <div class="doc-title">Data Protection · Data Processing · DPA Framework</div>
+      <div class="doc-sub">arrivio.global &nbsp;·&nbsp; zaki@arrivio.global</div>
+    </div>
+  </header>
+  <div class="gold-stripe"></div>
+  <main class="doc-body">
+
+<div class="card" style="margin-bottom:1.8rem">
+  <div class="card-title">Purpose of This Annex</div>
+  <p>Annex D establishes the data protection basis for the cooperation under GDPR and FDPA. It clarifies the roles of the parties, identifies data categories processed and the applicable legal bases, and contains the framework structure of the Data Processing Agreement (DPA) per Art. 28 GDPR.</p>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">D.1</span><span class="sec-title">Roles under GDPR</span></div>
+  
+<table>
+  <thead><tr><th>Role</th><th>Party</th><th>Scope of Responsibility</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Controller</strong></td><td>Arrivio GmbH</td><td>Resident data in the tenancy, billing, management, insurance organisation, portal operation</td></tr>
+    <tr><td><strong>Controller</strong></td><td>Cooperation Partner</td><td>Employee data within its own area of responsibility (HR management, portal use)</td></tr>
+    <tr><td><strong>Data Processor</strong></td><td>Arrivio GmbH</td><td>Where data is processed solely on the Partner's instructions → DPA per Art. 28 GDPR required (Section D.8)</td></tr>
+  </tbody>
+</table>
+<div class="note">The exact role classification must be verified and confirmed by a data protection lawyer in each specific case.</div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">D.2</span><span class="sec-title">Categories of Data Processed</span></div>
+  
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+  <div class="card">
+    <div class="card-title">Resident Data</div>
+    <ul style="padding-left:1.1rem;font-size:.88rem;color:var(--mid);line-height:2">
+      <li>Name, date of birth</li><li>Nationality (where required)</li><li>Contact details (email, phone)</li><li>Residential address</li><li>Move-in and move-out dates</li><li>Payment data (Models B/C)</li><li>ID data (where required by law)</li><li>Insurance and damage data</li><li>Communication data</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">Partner Data</div>
+    <ul style="padding-left:1.1rem;font-size:.88rem;color:var(--mid);line-height:2">
+      <li>Company name</li><li>Contact person and position</li><li>Email and phone</li><li>Billing and contract data</li><li>Portal access and usage data</li><li>Booking and contingent data</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">D.3</span><span class="sec-title">Processing Purposes & Legal Bases</span></div>
+  
+<table>
+  <thead><tr><th>Processing Purpose</th><th>Legal Basis</th></tr></thead>
+  <tbody>
+    <tr><td>Residential Use Agreement and Cooperation Agreement</td><td><span class="badge badge-green">Art. 6(1)(b) GDPR</span></td></tr><tr><td>Legal obligations (§ 19 BMG, § 147 AO, registration law)</td><td><span class="badge badge-green">Art. 6(1)(c) GDPR</span></td></tr><tr><td>Security, damage processing, debt recovery</td><td><span class="badge badge-gold">Art. 6(1)(f) GDPR</span></td></tr><tr><td>Insurance organisation (Base Package)</td><td><span class="badge badge-green">Art. 6(1)(b) GDPR</span></td></tr><tr><td>Voluntary partner offers (only upon active use)</td><td><span class="badge badge-gold">Art. 6(1)(a) GDPR</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">D.4</span><span class="sec-title">Third-Party Disclosure</span></div>
+  <ul class="checklist">
+<li class="chk chk-ok"><span class="chk-icon">✓</span><span>Insurance partner: only data required for conclusion/administration</span></li><li class="chk chk-ok"><span class="chk-icon">✓</span><span>Property owner/management: only property-related and where necessary</span></li><li class="chk chk-ok"><span class="chk-icon">✓</span><span>Authorities: only where required by law</span></li><li class="chk chk-ok"><span class="chk-icon">✓</span><span>IT service providers/hosting: under their own DPAs</span></li>
+<li class="chk chk-no"><span class="chk-icon">✗</span><span>Partner offers: data disclosure only upon active use by the resident</span></li>
+<li class="chk chk-no"><span class="chk-icon">✗</span><span>No blanket disclosure without necessity or a valid legal basis</span></li>
+</ul>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">D.5</span><span class="sec-title">Retention Periods</span></div>
+  
+<table>
+  <thead><tr><th>Data Category</th><th>Retention Period</th></tr></thead>
+  <tbody>
+    <tr><td>Contract data / invoices</td><td>10 years after contract end (§ 147 AO)</td></tr><tr><td>Damage data</td><td>Until full resolution and expiry of potential claims</td></tr><tr><td>WiFi connection data</td><td>Only for as long as required for provision and security</td></tr><tr><td>Applicant / prospect data</td><td>Max. 6 months</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">D.6</span><span class="sec-title">Data Subject Rights</span></div>
+  
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem">
+<div class="card"><div class="card-title">Art. 15</div><p>Access – Which data is being processed?</p></div><div class="card"><div class="card-title">Art. 16</div><p>Rectification – Correct inaccurate data</p></div><div class="card"><div class="card-title">Art. 17</div><p>Erasure – Where no retention obligation applies</p></div><div class="card"><div class="card-title">Art. 18</div><p>Restriction – On objection or disputed accuracy</p></div><div class="card"><div class="card-title">Art. 20</div><p>Portability – Automated processing on consent basis</p></div><div class="card"><div class="card-title">Art. 21</div><p>Objection – Against processing on legitimate interest basis</p></div>
+</div>
+<div class="meta-grid" style="margin-top:.9rem">
+  <div class="meta-grid-row"><div class="meta-k">Data Protection Contact</div><div class="meta-v">datenschutz@arrivio.global</div></div>
+  <div class="meta-grid-row"><div class="meta-k">Right to Complain</div><div class="meta-v">Competent supervisory authority</div></div>
+</div>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">D.7</span><span class="sec-title">Technical & Organisational Measures (TOMs)</span></div>
+  
+<ul class="checklist">
+<li class="chk chk-ok"><span class="chk-icon">✓</span><span>Role-based access and authorisation concept (least privilege)</span></li><li class="chk chk-ok"><span class="chk-icon">✓</span><span>Encryption of data in transit (TLS/HTTPS) and where appropriate in storage</span></li><li class="chk chk-ok"><span class="chk-icon">✓</span><span>Confidentiality obligations for all employees with access to personal data</span></li><li class="chk chk-ok"><span class="chk-icon">✓</span><span>Regular data protection training</span></li><li class="chk chk-ok"><span class="chk-icon">✓</span><span>Careful selection and contractual binding of all data processors</span></li><li class="chk chk-ok"><span class="chk-icon">✓</span><span>Systematic deletion upon expiry of retention periods</span></li><li class="chk chk-ok"><span class="chk-icon">✓</span><span>Documented data breach notification process per Art. 33/34 GDPR</span></li>
+</ul>
+</div>
+
+<div class="sec">
+  <div class="sec-head"><span class="sec-num">D.8</span><span class="sec-title">DPA Framework (Art. 28 GDPR)</span></div>
+  
+<div class="card card-red" style="margin-bottom:1rem">
+  <div class="card-title card-title-red">Important: Framework ≠ Full DPA</div>
+  <p>This framework structure does not replace a fully elaborated DPA. Have it reviewed and drafted by a qualified data protection lawyer before final use.</p>
+</div>
+<table>
+  <thead><tr><th>Clause</th><th>Content</th></tr></thead>
+  <tbody>
+    <tr><td><strong>DPA-1: Subject matter & duration</strong></td><td>Residential letting/management for the term of the Cooperation Agreement</td></tr><tr><td><strong>DPA-2: Arrivio's obligations</strong></td><td>Instruction-bound processing, confidentiality, technical and organisational measures, support with data subject rights and breaches</td></tr><tr><td><strong>DPA-3: Sub-processors</strong></td><td>Only with prior notification to Partner; own DPAs with sub-processors required</td></tr><tr><td><strong>DPA-4: Data breaches</strong></td><td>Partner notification within 48 hours of becoming aware</td></tr><tr><td><strong>DPA-5: Deletion after contract end</strong></td><td>Deletion or return of all data after contract end, unless statutory retention obligations apply</td></tr><tr><td><strong>DPA-6: Audit rights</strong></td><td>Arrivio permits audits with minimum 4 weeks' prior written notice</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="legal-box"><div class="legal-box-title">⚠ Recommendations for Legal Review</div><ul><li>Have full DPA per Art. 28 GDPR drafted by a qualified data protection lawyer</li><li>Confirm role classification (controller vs. processor) for each specific case</li><li>Conduct DPIA per Art. 35 GDPR for relevant processing activities</li><li>Check DPO obligation per Art. 37 GDPR for both parties</li><li>Review third-country transfer requirements (Art. 44 et seq. GDPR) if IT providers are outside the EU/EEA</li></ul></div>
+
+<div class="sig-section">
+  <div class="sig-title">Signatures</div>
+  <div class="sig-note">Both parties confirm having accepted the above data protection provisions as a binding part of the Cooperation Agreement.</div>
+  <div class="sig-grid">
+    <div class="sig-box">
+      <div class="sig-party">Arrivio GmbH</div>
+      <div class="sig-line"></div>
+      <div class="sig-caption">Zaki Amawi – CBO</div>
+      <div class="sig-fields">
+        <div class="fg"><label>Place</label><input type="text"></div>
+        <div class="fg"><label>Date</label><input type="date"></div>
+      </div>
+    </div>
+    <div class="sig-box">
+      <div class="sig-party">[Company Name]</div>
+      <div class="sig-line"></div>
+      <div class="sig-caption">[Name, Position]</div>
+      <div class="sig-fields">
+        <div class="fg"><label>Place</label><input type="text"></div>
+        <div class="fg"><label>Date</label><input type="date"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  </main>
+  <div class="pdf-bar">
+    <button class="pdf-btn" onclick="window.print()">↓ &nbsp;Save as PDF</button>
+  </div>
+  <footer class="doc-footer">
+    <span>Confidential – for authorised recipients only</span>
+    <span class="doc-footer-brand">© Arrivio GmbH &nbsp;·&nbsp; arrivio.global</span>
+  </footer>
+</div>
+</body>
+</html>

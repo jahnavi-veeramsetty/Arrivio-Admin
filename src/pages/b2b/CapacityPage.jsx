@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import PageHeader from '../../components/layout/PageHeader';
+
 import CapacityTable from '../../components/b2b/capacity/CapacityTable';
 import ReservationDetail from '../../components/b2b/capacity/ReservationDetail';
 import { mockPartners, mockReservations } from '../../mockdata/b2bData';
@@ -34,11 +34,11 @@ export default function CapacityPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader 
-        title="Capacity Reservations" 
-        breadcrumb="B2B Partners → Capacity"
-        description="Monitor room reservations and fill rates across all partners."
-      />
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <p className="text-[10px] text-[#1a6644] font-bold uppercase tracking-[0.2em] mb-1">B2B OPERATION | CAPACITY RESERVATIONS</p>
+        </div>
+      </div>
 
       {/* Filters */}
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white dark:bg-gray-800 p-4 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm">
