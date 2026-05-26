@@ -18,28 +18,28 @@ export default function RefundsPage() {
   const handleProcess = (refund) => {
     addToast({
       title: 'Refund Processed',
-      description: `Refund ${refund.id} of £${refund.amount} has been successfully settled via Stripe.`,
-      type: 'success'
+      description: `Refund ${refund.id} of €${refund.amount} has been successfully settled via Stripe.`,
+      type: 'success',
     });
     setIsDetailOpen(false);
   };
 
   return (
     <div className="space-y-6">
-      <PageHeader 
-        title="Refund Management" 
+      <PageHeader
+        title="Refund Management"
         description="Process and monitor rejected deposits, overpayments, and security deposit returns."
         breadcrumbs={['Finance', 'Refunds']}
       />
 
       <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <RefundsTable 
-          refunds={mockRefunds} 
-          onViewDetail={handleViewDetail} 
+        <RefundsTable
+          refunds={mockRefunds}
+          onViewDetail={handleViewDetail}
         />
       </div>
 
-      <RefundDetail 
+      <RefundDetail
         refund={selectedRefund}
         isOpen={isDetailOpen}
         onClose={() => setIsDetailOpen(false)}

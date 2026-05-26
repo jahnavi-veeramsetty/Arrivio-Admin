@@ -1,7 +1,7 @@
 import { mockApplications, mockMoveEvents } from '../../../mockdata/b2cData';
 
 const total        = mockApplications.length;
-const thisMonth    = mockApplications.filter(a => a.submitted >= '2025-03-01').length;
+const thisMonth    = mockApplications.filter(a => a.status !== 'Rejected').length;
 const pending      = mockApplications.filter(a => a.status === 'Pending').length;
 const avgDays      = Math.round(mockApplications.filter(a=>a.status==='Approved').reduce((s,a)=>s+a.days,0)/3);
 const unsigned     = mockApplications.filter(a => a.status === 'Approved').length;
@@ -9,7 +9,7 @@ const actionReq    = mockApplications.filter(a => a.status === 'Action Required'
 const moveInsWeek  = mockMoveEvents.filter(e => e.type === 'Move-in' && e.status !== 'Completed').length;
 
 const cards = [
-  { label:'Total Applications', value:`${total}`, sub:`${thisMonth} this month`,   flag: null     },
+  { label:'Total Applications', value:`${total}`, sub:`${thisMonth} active`,        flag: null     },
   { label:'Pending Review',     value:`${pending}`, sub:'awaiting decision',        flag: pending > 10 ? 'amber' : null },
   { label:'Unsigned Agreements', value:`${unsigned}`, sub:'approved, awaiting countersign', flag: unsigned > 0 ? 'red' : null },
   { label:'Action Required',     value:`${actionReq}`, sub:'awaiting resubmission', flag: actionReq > 0 ? 'amber' : null },

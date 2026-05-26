@@ -13,12 +13,10 @@ export default function WaitlistPage() {
   const [search, setSearch] = useState('');
 
   const cities = ['All', 'Aachen', 'Berlin', 'Bonn'];
-  const unitTypes = ['All', 'Studio', '1 Bedroom', '2 Bedroom'];
+  const unitTypes = ['All', 'Single Room', 'Shared Room', 'Studio'];
 
   const matchesType = (type, filter) => {
     if (filter === 'All') return true;
-    if (filter === '1 Bedroom') return type === '1BR';
-    if (filter === '2 Bedroom') return type === '2BR';
     return type === filter;
   };
 

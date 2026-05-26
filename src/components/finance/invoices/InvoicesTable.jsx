@@ -1,16 +1,15 @@
-import { Search, Plus, Send, MoreVertical, FileText, CheckCircle, Clock } from 'lucide-react';
+import { Search, Plus, Send, MoreVertical, CheckCircle } from 'lucide-react';
 
 export default function InvoicesTable({ invoices, onViewDetail, onAction }) {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden flex flex-col">
-      {/* Table Header / Filters */}
       <div className="p-6 border-b border-gray-50 dark:border-gray-700 flex flex-wrap items-center justify-between gap-4 bg-gray-50/30">
         <div className="flex items-center gap-4 flex-grow max-w-2xl">
           <div className="relative flex-grow">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
-            <input 
-              type="text" 
-              placeholder="Search invoice or partner..." 
+            <input
+              type="text"
+              placeholder="Search invoice or partner..."
               className="w-full pl-10 pr-4 py-2 bg-white dark:bg-gray-900 border-none rounded-2xl text-sm font-bold shadow-sm focus:ring-2 focus:ring-[#1a6644] transition-all"
             />
           </div>
@@ -22,8 +21,8 @@ export default function InvoicesTable({ invoices, onViewDetail, onAction }) {
             <option>Draft</option>
           </select>
         </div>
-        
-        <button 
+
+        <button
           onClick={() => onAction('generate')}
           className="flex items-center gap-2 px-4 py-2 bg-[#1a6644] text-white rounded-[1.5rem] text-xs font-black uppercase tracking-widest hover:bg-[#155236] transition-all shadow-lg shadow-[#1a6644]/20 active:scale-95"
         >
@@ -45,47 +44,47 @@ export default function InvoicesTable({ invoices, onViewDetail, onAction }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50 dark:divide-gray-700">
-            {invoices.map((inv, i) => (
-              <tr 
-                key={i} 
+            {invoices.map((invoice, index) => (
+              <tr
+                key={index}
                 className="hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition-colors group cursor-pointer"
-                onClick={() => onViewDetail(inv)}
+                onClick={() => onViewDetail(invoice)}
               >
                 <td className="px-6 py-4">
-                  <span className="text-[11px] font-mono font-bold text-gray-400 group-hover:text-[#1a6644] transition-colors">{inv.id}</span>
+                  <span className="text-[11px] font-mono font-bold text-gray-400 group-hover:text-[#1a6644] transition-colors">{invoice.id}</span>
                 </td>
                 <td className="px-6 py-4">
-                  <p className="text-sm font-bold text-gray-800 dark:text-gray-100">{inv.partner}</p>
+                  <p className="text-sm font-bold text-gray-800 dark:text-gray-100">{invoice.partner}</p>
                 </td>
-                <td className="px-6 py-4 text-[11px] font-bold text-gray-500 uppercase">{inv.period}</td>
+                <td className="px-6 py-4 text-[11px] font-bold text-gray-500 uppercase">{invoice.period}</td>
                 <td className="px-6 py-4 text-right">
-                  <span className="text-sm font-black text-gray-900 dark:text-gray-100">£{inv.amount.toLocaleString()}</span>
+                  <span className="text-sm font-black text-gray-900 dark:text-gray-100">€{invoice.amount.toLocaleString()}</span>
                 </td>
-                <td className="px-6 py-4 text-[11px] font-bold text-gray-500">{new Date(inv.dueDate).toLocaleDateString()}</td>
+                <td className="px-6 py-4 text-[11px] font-bold text-gray-500">{new Date(invoice.dueDate).toLocaleDateString()}</td>
                 <td className="px-6 py-4 text-center">
                   <span className={`px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest border ${
-                    inv.status === 'Paid' ? 'bg-green-50 text-green-700 border-green-100' :
-                    inv.status === 'Overdue' ? 'bg-red-50 text-red-700 border-red-100' :
-                    inv.status === 'Sent' ? 'bg-blue-50 text-blue-700 border-blue-100' :
-                    'bg-gray-100 text-gray-500 border-gray-200'
+                    invoice.status === 'Paid'
+                      ? 'bg-green-50 text-green-700 border-green-100'
+                      : invoice.status === 'Overdue'
+                        ? 'bg-red-50 text-red-700 border-red-100'
+                        : invoice.status === 'Sent'
+                          ? 'bg-blue-50 text-blue-700 border-blue-100'
+                          : 'bg-gray-100 text-gray-500 border-gray-200'
                   }`}>
-                    {inv.status}
+                    {invoice.status}
                   </span>
                 </td>
                 <td className="px-6 py-4 text-right">
                   <div className="flex items-center justify-end gap-2">
-                    {inv.status === 'Draft' ? (
-                      <button 
-                        onClick={(e) => { e.stopPropagation(); onAction('send', inv); }}
+                    {invoice.status === 'Draft' ? (
+                      <button
+                        onClick={(event) => { event.stopPropagation(); onAction('send', invoice); }}
                         className="p-2 bg-gray-50 dark:bg-gray-700 rounded-xl text-blue-600 hover:bg-blue-50 transition-all border border-transparent hover:border-blue-100"
                       >
                         <Send size={14} />
                       </button>
                     ) : (
-                      <button 
-                        className="p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-xl text-gray-400 opacity-50 cursor-not-allowed"
-                        disabled
-                      >
+                      <button className="p-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-xl text-gray-400 opacity-50 cursor-not-allowed" disabled>
                         <CheckCircle size={14} />
                       </button>
                     )}

@@ -1,294 +1,81 @@
+const buildingRevenue = (occupancyRate) => Math.round(150 * (occupancyRate / 100) * 765);
+const apartmentRevenue = (apartments) => Math.round(apartments * 3 * 720 * 0.96);
+
+const sampleUnits = (prefix, city) => [
+  { id: `${prefix}-01`, type: 'Essential', floor: 1, status: 'Occupied', rent: 600, amenities: ['Furnished', 'Shared Kitchen'], tenant: { name: 'Sample Resident', company: city, email: 'resident@arrivio.com', phone: '+49 30 000000', moveIn: '2028-06-01', leaseEnd: '2029-05-31' } },
+  { id: `${prefix}-02`, type: 'Comfort', floor: 2, status: 'Occupied', rent: 850, amenities: ['Private Desk', 'Storage'], tenant: { name: 'Sample Resident', company: city, email: 'resident@arrivio.com', phone: '+49 30 000000', moveIn: '2028-06-01', leaseEnd: '2029-05-31' } },
+  { id: `${prefix}-03`, type: 'Studio', floor: 3, status: 'Available', rent: 1300, amenities: ['Private Kitchenette', 'Ensuite'], tenant: null },
+];
+
 export const mockProperties = [
-  {
-    id: 'prop-001',
-    name: 'The Grand Résidence',
-    city: 'Berlin',
-    address: 'Kurfürstendamm 21, 10719 Berlin',
-    manager: 'Sarah Ahmed',
-    status: 'active',
-    occupancyRate: 92,
-    image: '/src/assets/properties/1.jpg',
-    units: [
-      {
-        id: '101',
-        type: 'Studio',
-        floor: 1,
-        status: 'Occupied',
-        rent: 4500,
-        amenities: ['Balcony', 'City View', 'High Speed Wifi'],
-        tenant: {
-          name: 'John Doe',
-          company: 'Tech Solutions LLC',
-          email: 'john.doe@techsolutions.com',
-          phone: '+971 50 123 4567',
-          moveIn: '2023-11-15',
-          leaseEnd: '2024-11-14'
-        }
-      },
-      {
-        id: '202',
-        type: '1BR',
-        floor: 2,
-        status: 'Occupied',
-        rent: 6200,
-        amenities: ['Private Pool', 'Gym Access', 'Smart Home'],
-        tenant: {
-          name: 'Emma Wilson',
-          company: 'Global Marketing',
-          email: 'emma.wilson@globalmkt.com',
-          phone: '+971 55 987 6543',
-          moveIn: '2024-01-10',
-          leaseEnd: '2025-01-09'
-        }
-      },
-      {
-        id: '305',
-        type: '2BR',
-        floor: 3,
-        status: 'Available',
-        rent: 8500,
-        amenities: ['Sea View', 'Fully Furnished', 'Parking'],
-        tenant: null
-      },
-      {
-        id: '401',
-        type: 'Ensuite',
-        floor: 4,
-        status: 'Reserved',
-        rent: 3800,
-        amenities: ['Private Bathroom', 'Shared Kitchen'],
-        tenant: null
-      },
-      {
-        id: '502',
-        type: 'Studio',
-        floor: 5,
-        status: 'Maintenance',
-        rent: 4400,
-        amenities: ['Renovated', 'New Appliances'],
-        tenant: null
-      },
-      {
-        id: '603',
-        type: '3BR',
-        floor: 6,
-        status: 'Occupied',
-        rent: 6500,
-        amenities: ['Balcony', 'Gym Access'],
-        tenant: {
-          name: 'Ahmed Hassan',
-          company: 'Emirates Group',
-          email: 'ahmed.h@emirates.com',
-          phone: '+971 52 444 5566',
-          moveIn: '2023-08-20',
-          leaseEnd: '2024-08-19'
-        }
-      }
-    ]
-  },
-  {
-    id: 'prop-002',
-    name: 'Skyline Lofts',
-    city: 'Munich',
-    address: 'Maximilianstraße 15, 80539 München',
-    manager: 'James Smith',
-    status: 'partial',
-    occupancyRate: 85,
-    image: '/src/assets/properties/2.jpg',
-    units: [
-      {
-        id: '10A',
-        type: 'Studio',
-        floor: 10,
-        status: 'Occupied',
-        rent: 1800,
-        amenities: ['River View', 'Underfloor Heating'],
-        tenant: {
-          name: 'Lucy Chen',
-          company: 'Barclays',
-          email: 'lucy.chen@barclays.com',
-          phone: '+44 7712 345678',
-          moveIn: '2024-02-01',
-          leaseEnd: '2025-01-31'
-        }
-      },
-      {
-        id: '01B',
-        type: 'Shared',
-        floor: 0,
-        status: 'Available',
-        rent: 950,
-        amenities: ['High Speed Internet', 'Utility Bills Included'],
-        tenant: null
-      },
-      {
-        id: '15C',
-        type: '1BR',
-        floor: 15,
-        status: 'Occupied',
-        rent: 2400,
-        amenities: ['Dishwasher', 'Concierge Service'],
-        tenant: {
-          name: 'Robert Brown',
-          company: 'JP Morgan',
-          email: 'robert.brown@jpmorgan.com',
-          phone: '+44 7823 456789',
-          moveIn: '2023-09-15',
-          leaseEnd: '2024-09-14'
-        }
-      },
-      {
-        id: '02G',
-        type: '2BR',
-        floor: 0,
-        status: 'Occupied',
-        rent: 3200,
-        amenities: ['Garden Access', 'Pet Friendly'],
-        tenant: {
-          name: 'Alice Cooper',
-          company: 'Self-Employed',
-          email: 'alice.c@gmail.com',
-          phone: '+44 7934 567890',
-          moveIn: '2023-12-05',
-          leaseEnd: '2024-12-04'
-        }
-      },
-      {
-        id: '12D',
-        type: '3BR',
-        floor: 12,
-        status: 'Reserved',
-        rent: 1900,
-        amenities: ['Balcony', 'Modern Kitchen'],
-        tenant: null
-      }
-    ]
-  },
-  {
-    id: 'prop-003',
-    name: 'River View Suites',
-    city: 'Hamburg',
-    address: 'HafenCity, 20457 Hamburg',
-    manager: 'Li Wei',
-    status: 'active',
-    occupancyRate: 95,
-    image: '/src/assets/properties/3.jpg',
-    units: [
-      {
-        id: 'B1-05',
-        type: 'Shared',
-        floor: 1,
-        status: 'Occupied',
-        rent: 1200,
-        amenities: ['Fully Furnished', 'Central AC'],
-        tenant: {
-          name: 'Tan Mei Ling',
-          company: 'DBS Bank',
-          email: 'meiling.tan@dbs.com',
-          phone: '+65 9123 4567',
-          moveIn: '2024-03-01',
-          leaseEnd: '2025-02-28'
-        }
-      },
-      {
-        id: 'B5-12',
-        type: 'Ensuite',
-        floor: 5,
-        status: 'Occupied',
-        rent: 2100,
-        amenities: ['Private Balcony', 'Weekly Cleaning'],
-        tenant: {
-          name: 'Kevin Lam',
-          company: 'Grab Holdings',
-          email: 'kevin.lam@grab.com',
-          phone: '+65 8234 5678',
-          moveIn: '2023-12-20',
-          leaseEnd: '2024-12-19'
-        }
-      },
-      {
-        id: 'B2-02',
-        type: 'Studio',
-        floor: 2,
-        status: 'Occupied',
-        rent: 3500,
-        amenities: ['Infinity Pool Access', 'Gym Membership'],
-        tenant: {
-          name: 'Jessica Ong',
-          company: 'TikTok Technology',
-          email: 'jessica.o@tiktok.com',
-          phone: '+65 9345 6789',
-          moveIn: '2024-01-15',
-          leaseEnd: '2025-01-14'
-        }
-      },
-      {
-        id: 'B8-01',
-        type: '2BR',
-        floor: 8,
-        status: 'Occupied',
-        rent: 5800,
-        amenities: ['High Floor', 'Premium Appliances', 'Walk-in Wardrobe'],
-        tenant: {
-          name: 'David Lee',
-          company: 'GIC Private Limited',
-          email: 'david.lee@gic.com.sg',
-          phone: '+65 8456 7890',
-          moveIn: '2023-10-01',
-          leaseEnd: '2024-09-30'
-        }
-      },
-      {
-        id: 'B3-04',
-        type: '3BR',
-        floor: 3,
-        status: 'Available',
-        rent: 4200,
-        amenities: ['City View', 'Balcony'],
-        tenant: null
-      }
-    ]
-  }
+  { id: 'prop-001', category: 'Community Building', name: 'Arrivio Düsseldorf Flingern', city: 'Düsseldorf', address: 'Flingern-Nord, Düsseldorf', manager: 'Lea Hoffmann', status: 'Live', occupancyRate: 97, rooms: 150, monthlyRevenue: buildingRevenue(97), image: '/src/assets/properties/1.jpg', units: sampleUnits('FLG', 'Klinikum Düsseldorf GmbH') },
+  { id: 'prop-002', category: 'Community Building', name: 'Arrivio Düsseldorf Oberbilk', city: 'Düsseldorf', address: 'Oberbilk, Düsseldorf', manager: 'Lea Hoffmann', status: 'Live', occupancyRate: 96, rooms: 150, monthlyRevenue: buildingRevenue(96), image: '/src/assets/properties/2.jpg', units: sampleUnits('OBK', 'Alloheim Senioren-Residenzen') },
+  { id: 'prop-003', category: 'Community Building', name: 'Arrivio Düsseldorf Pempelfort', city: 'Düsseldorf', address: 'Pempelfort, Düsseldorf', manager: 'Lea Hoffmann', status: 'Live', occupancyRate: 97, rooms: 150, monthlyRevenue: buildingRevenue(97), image: '/src/assets/properties/3.jpg', units: sampleUnits('PEM', 'Henkel AG & Co. KGaA') },
+  { id: 'prop-004', category: 'Community Building', name: 'Arrivio Düsseldorf Bilk', city: 'Düsseldorf', address: 'Bilk, Düsseldorf', manager: 'Lea Hoffmann', status: 'Live', occupancyRate: 96, rooms: 150, monthlyRevenue: buildingRevenue(96), image: '/src/assets/properties/4.jpg', units: sampleUnits('BLK', 'Rheinmetall AG') },
+  { id: 'prop-005', category: 'Community Building', name: 'Arrivio Köln Ehrenfeld', city: 'Cologne', address: 'Ehrenfeld, Cologne', manager: 'Jonas Reuter', status: 'Live', occupancyRate: 97, rooms: 150, monthlyRevenue: buildingRevenue(97), image: '/src/assets/properties/5.jpg', units: sampleUnits('EHF', 'AHO Germany (International Healthcare)') },
+  { id: 'prop-006', category: 'Community Building', name: 'Arrivio Köln Deutz', city: 'Cologne', address: 'Deutz, Cologne', manager: 'Jonas Reuter', status: 'Live', occupancyRate: 96, rooms: 150, monthlyRevenue: buildingRevenue(96), image: '/src/assets/properties/6.jpg', units: sampleUnits('DTZ', 'Universitätsklinikum Köln') },
+  { id: 'prop-007', category: 'Community Building', name: 'Arrivio Köln Nippes', city: 'Cologne', address: 'Nippes, Cologne', manager: 'Jonas Reuter', status: 'Live', occupancyRate: 97, rooms: 150, monthlyRevenue: buildingRevenue(97), image: '/src/assets/properties/7.jpg', units: sampleUnits('NIP', 'Universität zu Köln') },
+  { id: 'prop-008', category: 'Community Building', name: 'Arrivio Bonn Beuel', city: 'Bonn', address: 'Beuel, Bonn', manager: 'Mina Farouk', status: 'Live', occupancyRate: 97, rooms: 150, monthlyRevenue: buildingRevenue(97), image: '/src/assets/properties/8.jpg', units: sampleUnits('BEU', 'Universität Bonn') },
+  { id: 'prop-009', category: 'Community Building', name: 'Arrivio Bonn Endenich', city: 'Bonn', address: 'Endenich, Bonn', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, rooms: 150, monthlyRevenue: buildingRevenue(96), image: '/src/assets/properties/9.jpg', units: sampleUnits('END', 'Uniklinik RWTH Aachen') },
+  { id: 'prop-010', category: 'Community Building', name: 'Arrivio Berlin Neukölln', city: 'Berlin', address: 'Neukölln, Berlin', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, rooms: 150, monthlyRevenue: buildingRevenue(96), image: '/src/assets/properties/10.jpg', units: sampleUnits('NEU', 'Vonovia SE (tech staff)') },
+  { id: 'prop-011', category: 'Community Building', name: 'Arrivio Berlin Moabit', city: 'Berlin', address: 'Moabit, Berlin', manager: 'Mina Farouk', status: 'Live', occupancyRate: 95, rooms: 150, monthlyRevenue: buildingRevenue(95), image: '/src/assets/properties/11.jpg', units: sampleUnits('MOA', 'Grouped Employer Portfolio') },
+  { id: 'prop-012', category: 'Community Building', name: 'Arrivio Berlin Friedrichshain', city: 'Berlin', address: 'Friedrichshain, Berlin', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, rooms: 150, monthlyRevenue: buildingRevenue(96), image: '/src/assets/properties/12.jpg', units: sampleUnits('FRH', 'Grouped Employer Portfolio') },
+  { id: 'prop-013', category: 'Community Building', name: 'Arrivio München Schwabing', city: 'Munich', address: 'Schwabing, Munich', manager: 'Mina Farouk', status: 'Live', occupancyRate: 95, rooms: 150, monthlyRevenue: buildingRevenue(95), image: '/src/assets/properties/13.jpg', units: sampleUnits('SCW', 'Siemens Healthineers AG') },
+  { id: 'prop-014', category: 'Community Building', name: 'Arrivio München Giesing', city: 'Munich', address: 'Giesing, Munich', manager: 'Mina Farouk', status: 'Live', occupancyRate: 95, rooms: 150, monthlyRevenue: buildingRevenue(95), image: '/src/assets/properties/14.jpg', units: sampleUnits('GSG', 'Grouped Employer Portfolio') },
+  { id: 'prop-015', category: 'Community Building', name: 'Arrivio Hamburg Altona', city: 'Hamburg', address: 'Altona, Hamburg', manager: 'Mina Farouk', status: 'Live', occupancyRate: 94, rooms: 150, monthlyRevenue: buildingRevenue(94), image: '/src/assets/properties/15.jpg', units: sampleUnits('ALT', 'Grouped Employer Portfolio') },
+  { id: 'prop-016', category: 'Community Building', name: 'Arrivio Frankfurt Sachsenhausen', city: 'Frankfurt', address: 'Sachsenhausen, Frankfurt', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, rooms: 150, monthlyRevenue: buildingRevenue(96), image: '/src/assets/properties/16.jpg', units: sampleUnits('SAC', 'Deutsche Bahn Engineering') },
+  { id: 'apt-001', category: 'Apartment Portfolio', name: 'Düsseldorf apartment portfolio', city: 'Düsseldorf', address: '80 leased apartments across Düsseldorf', manager: 'Lea Hoffmann', status: 'Live', occupancyRate: 96, apartments: 80, rooms: 240, monthlyRevenue: apartmentRevenue(80), image: '/src/assets/properties/17.jpg', units: sampleUnits('ADU', 'Direct B2C') },
+  { id: 'apt-002', category: 'Apartment Portfolio', name: 'Cologne apartment portfolio', city: 'Cologne', address: '60 leased apartments across Cologne', manager: 'Jonas Reuter', status: 'Live', occupancyRate: 96, apartments: 60, rooms: 180, monthlyRevenue: apartmentRevenue(60), image: '/src/assets/properties/18.jpg', units: sampleUnits('ACG', 'Direct B2C') },
+  { id: 'apt-003', category: 'Apartment Portfolio', name: 'Bonn apartment portfolio', city: 'Bonn', address: '40 leased apartments across Bonn', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, apartments: 40, rooms: 120, monthlyRevenue: apartmentRevenue(40), image: '/src/assets/properties/19.jpg', units: sampleUnits('ABO', 'Direct B2C') },
+  { id: 'apt-004', category: 'Apartment Portfolio', name: 'Aachen apartment portfolio', city: 'Aachen', address: '30 leased apartments across Aachen', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, apartments: 30, rooms: 90, monthlyRevenue: apartmentRevenue(30), image: '/src/assets/properties/20.jpg', units: sampleUnits('AAC', 'Direct B2C') },
+  { id: 'apt-005', category: 'Apartment Portfolio', name: 'Berlin apartment portfolio', city: 'Berlin', address: '20 leased apartments across Berlin', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, apartments: 20, rooms: 60, monthlyRevenue: apartmentRevenue(20), image: '/src/assets/properties/21.jpg', units: sampleUnits('ABE', 'Direct B2C') },
+  { id: 'apt-006', category: 'Apartment Portfolio', name: 'Munich apartment portfolio', city: 'Munich', address: '10 leased apartments across Munich', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, apartments: 10, rooms: 30, monthlyRevenue: apartmentRevenue(10), image: '/src/assets/properties/22.jpg', units: sampleUnits('AMU', 'Direct B2C') },
 ];
 
 export const mockCities = [
-  { name: 'Aachen', properties: 12, occupancy: 94, revenue: 125000 },
-  { name: 'Berlin', properties: 45, occupancy: 92, revenue: 450000 },
-  { name: 'Bonn', properties: 8, occupancy: 88, revenue: 95000 },
-  { name: 'Cologne', properties: 22, occupancy: 90, revenue: 210000 },
-  { name: 'Dusseldorf', properties: 18, occupancy: 92, revenue: 185000 },
-  { name: 'Frankfurt', properties: 30, occupancy: 94, revenue: 320000 },
-  { name: 'Hamburg', properties: 28, occupancy: 95, revenue: 290000 },
-  { name: 'Munich', properties: 35, occupancy: 85, revenue: 380000 }
+  { id: 'city-001', name: 'Düsseldorf', country: 'Germany', properties: 5, units: 840, manager: 'Lea Hoffmann', status: 'Active', occupancy: 96.5, revenue: 596534 },
+  { id: 'city-002', name: 'Cologne', country: 'Germany', properties: 4, units: 630, manager: 'Jonas Reuter', status: 'Active', occupancy: 96.5, revenue: 447974 },
+  { id: 'city-003', name: 'Bonn', country: 'Germany', properties: 3, units: 420, manager: 'Mina Farouk', status: 'Active', occupancy: 96.5, revenue: 298267 },
+  { id: 'city-004', name: 'Aachen', country: 'Germany', properties: 1, units: 90, manager: 'Mina Farouk', status: 'Active', occupancy: 96, revenue: 61042 },
+  { id: 'city-005', name: 'Berlin', country: 'Germany', properties: 4, units: 510, manager: 'Mina Farouk', status: 'Active', occupancy: 95.8, revenue: 353962 },
+  { id: 'city-006', name: 'Frankfurt', country: 'Germany', properties: 1, units: 150, manager: 'Mina Farouk', status: 'Active', occupancy: 96, revenue: 103275 },
+  { id: 'city-007', name: 'Hamburg', country: 'Germany', properties: 1, units: 150, manager: 'Mina Farouk', status: 'Active', occupancy: 94, revenue: 100980 },
+  { id: 'city-008', name: 'Munich', country: 'Germany', properties: 3, units: 330, manager: 'Mina Farouk', status: 'Active', occupancy: 95, revenue: 225750 },
 ];
 
 export const mockMaintenance = [
-  { id: 'MT-101', propertyId: 'prop-001', unitId: '502', issue: 'AC Leak', priority: 'high', status: 'pending', date: '2024-03-20' },
-  { id: 'MT-102', propertyId: 'prop-002', unitId: '10A', issue: 'Loose Tile', priority: 'low', status: 'in-progress', date: '2024-03-21' },
+  { id: 'MT-101', propertyId: 'prop-015', unitId: 'ALT-03', issue: 'Ventilation service in shared kitchen', priority: 'medium', status: 'scheduled', date: '2028-06-24' },
+  { id: 'MT-102', propertyId: 'apt-002', unitId: 'ACG-02', issue: 'Turnover repaint between tenant cycles', priority: 'low', status: 'planned', date: '2028-06-27' },
 ];
 
 export const mockUpdates = [
-  { id: 'UP-001', property: 'The Grand Résidence', type: 'Move-in', message: 'New tenant in Unit 202', time: '2h ago' },
-  { id: 'UP-002', property: 'London Skyline Lofts', type: 'Payment', message: 'Rent received for Unit 15C', time: '5h ago' },
+  { id: 'UP-001', property: 'Arrivio Berlin Neukölln', type: 'Occupancy', message: 'Reached 96% occupancy after June move-ins.', time: '1h ago' },
+  { id: 'UP-002', property: 'Düsseldorf apartment portfolio', type: 'Revenue', message: 'Closed the month at 96% occupancy and €165,888 run-rate revenue.', time: '3h ago' },
 ];
 
-// Add alias for backward compatibility with my previous implementation
+export const mockHouseOps = {
+  liveHouses: 16,
+  housesOnboarding: 2,
+  housesUnderRenovation: 1,
+  averageHouseAgeMonths: 11,
+  openOperationalTickets: 7,
+  servicePartnersConnected: 9,
+};
+
 export const properties = mockProperties;
 
 export const mockUnitTypes = [
-  { id: 'ut-stud', name: 'Studio Loft', count: 12, avgRent: 1500, size: '350-450 sqft', amenities: ['Kitchenette', 'Open Plan'] },
-  { id: 'ut-1br', name: '1BR Standard', count: 24, avgRent: 2200, size: '600-750 sqft', amenities: ['Full Kitchen', 'Separate Bedroom'] },
-  { id: 'ut-2br', name: '2BR Premium', count: 8, avgRent: 3500, size: '950-1100 sqft', amenities: ['Balcony', 'Ensuite Master'] },
-  { id: 'ut-ens', name: 'Ensuite Room', count: 40, avgRent: 950, size: '180-220 sqft', amenities: ['Private Bath', 'Shared Kitchen'] }
+  { id: 'ut-essential', name: 'Essential Room', count: 1680, avgRent: 600, size: '14-18 sqm', amenities: ['Furnished', 'Shared Kitchen'] },
+  { id: 'ut-comfort', name: 'Comfort Room', count: 240, avgRent: 850, size: '18-22 sqm', amenities: ['Desk', 'Storage'] },
+  { id: 'ut-studio', name: 'Studio', count: 480, avgRent: 1300, size: '22-28 sqm', amenities: ['Kitchenette', 'Ensuite'] },
+  { id: 'ut-apartment-room', name: 'Apartment Room', count: 720, avgRent: 720, size: '12-18 sqm', amenities: ['Shared Flat', 'Warm Rent'] },
 ];
 
 export const mockAmenities = [
   { id: 'am-wifi', name: 'High Speed Wifi', icon: 'Wifi', category: 'Connectivity' },
-  { id: 'am-gym', name: '24/7 Gym', icon: 'Dumbbell', category: 'Wellness' },
-  { id: 'am-pool', name: 'Infinity Pool', icon: 'Waves', category: 'Wellness' },
-  { id: 'am-park', name: 'Secure Parking', icon: 'Car', category: 'Utility' },
-  { id: 'am-cln', name: 'Weekly Cleaning', icon: 'Sparkles', category: 'Service' },
-  { id: 'am-sec', name: 'CCTV Security', icon: 'Shield', category: 'Safety' },
-  { id: 'am-ac', name: 'Central AC', icon: 'Wind', category: 'Comfort' },
-  { id: 'am-kit', name: 'Fully Equipped Kitchen', icon: 'CookingPot', category: 'Comfort' }
+  { id: 'am-reg', name: 'Registration Support', icon: 'FileBadge', category: 'Settlement' },
+  { id: 'am-ins', name: 'Insurance Setup', icon: 'Shield', category: 'Settlement' },
+  { id: 'am-clean', name: 'Turnover Cleaning', icon: 'Sparkles', category: 'Operations' },
+  { id: 'am-furn', name: 'Fully Furnished', icon: 'Sofa', category: 'Comfort' },
+  { id: 'am-key', name: 'Move-in Coordination', icon: 'KeyRound', category: 'Operations' },
 ];

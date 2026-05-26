@@ -1,15 +1,17 @@
-import { X, User, Building2, MapPin, Calendar, Home, CheckCircle2, Mail, ExternalLink, Briefcase } from 'lucide-react';
-import { useRole } from '../../../utils/rbac';
+import { X, User, Building2, MapPin, Calendar, Home, CheckCircle2, Briefcase, Clock, Receipt } from 'lucide-react';
 
-export default function EmployeeDetail({ employee, onClose, onAction }) {
-  const canAssign = useRole(['super_admin', 'ops_manager']);
-  
+export default function EmployeeDetail({ employee, onClose }) {
   if (!employee) return null;
+
+  const statusClass = employee.status === 'Lease Active'
+    ? 'bg-green-50/50 border-green-100 dark:bg-green-900/10 dark:border-green-900/30'
+    : employee.status === 'Awaiting Visa Clearance'
+      ? 'bg-red-50/50 border-red-100 dark:bg-red-900/10 dark:border-red-900/30'
+      : 'bg-amber-50/50 border-amber-100 dark:bg-amber-900/10 dark:border-amber-900/30';
 
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-black/20 backdrop-blur-sm">
       <div className="w-full max-w-md bg-white dark:bg-gray-900 h-full shadow-2xl animate-in slide-in-from-right duration-300 flex flex-col">
-        {/* Header */}
         <div className="flex items-center justify-between px-6 py-6 border-b border-gray-100 dark:border-gray-800">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-2xl bg-gray-50 dark:bg-gray-800 flex items-center justify-center text-gray-400 border border-gray-100 dark:border-gray-700 shadow-sm">
@@ -25,21 +27,10 @@ export default function EmployeeDetail({ employee, onClose, onAction }) {
           </button>
         </div>
 
-        {/* Content */}
         <div className="flex-grow overflow-y-auto px-6 py-8 space-y-8">
-          
-          {/* Status Banner */}
-          <div className={`p-4 rounded-2xl flex items-center gap-4 border ${
-            employee.status === 'Housed' ? 'bg-green-50/50 border-green-100 dark:bg-green-900/10 dark:border-green-900/30' : 
-            employee.status === 'Departed' ? 'bg-gray-50 border-gray-100 dark:bg-gray-800 dark:border-gray-700' :
-            'bg-amber-50/50 border-amber-100 dark:bg-amber-900/10 dark:border-amber-900/30'
-          }`}>
-            <div className={`p-2 rounded-xl ${
-              employee.status === 'Housed' ? 'bg-green-500 text-white' : 
-              employee.status === 'Departed' ? 'bg-gray-500 text-white' :
-              'bg-amber-500 text-white shadow-lg shadow-amber-500/20 animate-pulse'
-            }`}>
-              {employee.status === 'Housed' ? <CheckCircle2 size={18} /> : <Home size={18} />}
+          <div className={`p-4 rounded-2xl flex items-center gap-4 border ${statusClass}`}>
+            <div className="p-2 rounded-xl bg-[#1a6644] text-white">
+              <CheckCircle2 size={18} />
             </div>
             <div>
               <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Current Status</p>
@@ -47,7 +38,6 @@ export default function EmployeeDetail({ employee, onClose, onAction }) {
             </div>
           </div>
 
-          {/* Logistics */}
           <section className="space-y-4">
             <div className="flex items-center gap-2 text-gray-400 border-b border-gray-50 dark:border-gray-800 pb-2">
               <Briefcase size={16} />
@@ -57,17 +47,18 @@ export default function EmployeeDetail({ employee, onClose, onAction }) {
               {[
                 { label: 'Company', value: employee.company, icon: Building2 },
                 { label: 'Destination City', value: employee.city, icon: MapPin },
-                { label: 'Employment Start', value: new Date(employee.startDate).toLocaleDateString(), icon: Calendar },
-                { label: 'Housing Unit', value: employee.unit, icon: Home, highlight: employee.unit === 'Unassigned' },
-              ].map((item, i) => (
-                <div key={i} className="flex items-center justify-between group">
+                { label: 'Move-in Date', value: employee.moveInDate, icon: Calendar },
+                { label: 'Room / Building', value: employee.roomBuilding, icon: Home },
+                { label: 'Lease Duration', value: employee.leaseDuration, icon: Clock },
+              ].map((item) => (
+                <div key={item.label} className="flex items-center justify-between group">
                   <div className="flex items-center gap-3">
                     <div className="p-2 rounded-lg bg-gray-50 dark:bg-gray-800 text-gray-400 group-hover:text-[#1a6644] transition-colors">
                       <item.icon size={14} />
                     </div>
                     <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">{item.label}</span>
                   </div>
-                  <span className={`text-sm font-bold ${item.highlight ? 'text-red-500' : 'text-gray-800 dark:text-gray-200'}`}>
+                  <span className="text-sm font-bold text-gray-800 dark:text-gray-200 text-right max-w-[180px]">
                     {item.value}
                   </span>
                 </div>
@@ -75,7 +66,6 @@ export default function EmployeeDetail({ employee, onClose, onAction }) {
             </div>
           </section>
 
-          {/* Lease Info */}
           <section className="space-y-4">
             <div className="flex items-center gap-2 text-gray-400 border-b border-gray-50 dark:border-gray-800 pb-2">
               <Calendar size={16} />
@@ -84,39 +74,56 @@ export default function EmployeeDetail({ employee, onClose, onAction }) {
             <div className="p-5 rounded-2xl bg-blue-50/30 dark:bg-blue-900/10 border border-blue-100/50 dark:border-blue-900/20 space-y-3">
               <div className="flex justify-between items-center text-xs">
                 <span className="font-bold text-blue-800 dark:text-blue-300">Contract End Date</span>
-                <span className="font-black text-blue-900 dark:text-blue-200">{new Date(employee.leaseEnd).toLocaleDateString()}</span>
+                <span className="font-black text-blue-900 dark:text-blue-200">{employee.leaseEnd}</span>
               </div>
-              <button className="w-full flex items-center justify-center gap-2 py-2 bg-white dark:bg-gray-800 hover:bg-white/50 border border-blue-200 dark:border-blue-800 rounded-xl text-[10px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest transition-all">
-                <ExternalLink size={12} /> View DocuSign Record
-              </button>
+              {employee.daysUntilStart && (
+                <div className="flex justify-between items-center text-xs">
+                  <span className="font-bold text-blue-800 dark:text-blue-300">Days Until Start</span>
+                  <span className="font-black text-blue-900 dark:text-blue-200">{employee.daysUntilStart}</span>
+                </div>
+              )}
             </div>
           </section>
 
+          {employee.paymentHistory && employee.paymentHistory.length > 0 && (
+            <section className="space-y-4">
+              <div className="flex items-center gap-2 text-gray-400 border-b border-gray-50 dark:border-gray-800 pb-2">
+                <Receipt size={16} />
+                <h3 className="text-[11px] font-black uppercase tracking-widest">Payment History</h3>
+              </div>
+              <div className="rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden">
+                <table className="w-full text-left">
+                  <thead className="bg-gray-50 dark:bg-gray-800/50">
+                    <tr>
+                      <th className="px-3 py-2 text-[9px] font-black text-gray-400 uppercase tracking-widest">Period</th>
+                      <th className="px-3 py-2 text-[9px] font-black text-gray-400 uppercase tracking-widest">Paid</th>
+                      <th className="px-3 py-2 text-[9px] font-black text-gray-400 uppercase tracking-widest text-right">Amount</th>
+                      <th className="px-3 py-2 text-[9px] font-black text-gray-400 uppercase tracking-widest text-right">Payer</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-50 dark:divide-gray-800/50">
+                    {employee.paymentHistory.map((entry, index) => (
+                      <tr key={index} className="bg-white dark:bg-gray-900">
+                        <td className="px-3 py-2 text-xs font-bold text-gray-800 dark:text-gray-200">{entry.period}</td>
+                        <td className="px-3 py-2 text-[11px] text-gray-500 dark:text-gray-400 tabular-nums">{entry.paidDate}</td>
+                        <td className="px-3 py-2 text-xs font-bold text-gray-800 dark:text-gray-200 text-right tabular-nums">€{entry.amount.toLocaleString()}</td>
+                        <td className="px-3 py-2 text-right">
+                          <span className={`text-[9px] font-bold uppercase tracking-tight px-2 py-0.5 rounded-full ${
+                            entry.payer === 'Employer'
+                              ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400'
+                              : 'bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400'
+                          }`}>
+                            {entry.payer}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          )}
         </div>
-
-        {/* Footer Actions */}
-        {canAssign && (
-          <div className="p-6 border-t border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50 flex flex-col gap-3">
-            {employee.status === 'Awaiting Housing' ? (
-              <button 
-                onClick={() => onAction('Assign Unit')} 
-                className="w-full flex items-center justify-center gap-2 py-3.5 bg-[#1a6644] text-white text-sm font-black uppercase tracking-widest rounded-xl hover:bg-[#155236] transition-all shadow-xl shadow-[#1a6644]/20"
-              >
-                <Home size={16} /> Assign Specific Unit
-              </button>
-            ) : (
-              <button 
-                onClick={() => onAction('Update Status')} 
-                className="w-full flex items-center justify-center gap-2 py-3.5 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 text-sm font-black uppercase tracking-widest rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all font-mono"
-              >
-                Update Occupancy Status
-              </button>
-            )}
-            <button className="w-full py-2 text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-gray-600 transition-colors text-center">
-              Internal Move History →
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );

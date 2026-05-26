@@ -12,11 +12,11 @@ export default function BlockedApplications() {
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider flex items-center gap-2">
           <AlertCircle size={14} className="text-red-500" />
-          Blocked Applications
+          Incomplete Applications
         </h2>
         {count > 0 && (
           <span className="px-2 py-0.5 rounded-full bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-[10px] font-bold uppercase tracking-tight">
-            {count} blocked
+            {count} incomplete
           </span>
         )}
       </div>
@@ -25,7 +25,7 @@ export default function BlockedApplications() {
         {count === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">
             <CheckCircle2 size={32} className="text-green-500 mb-2 opacity-20" />
-            <p className="text-sm text-gray-400">No blocked applications</p>
+            <p className="text-sm text-gray-400">No incomplete applications</p>
           </div>
         ) : (
           blockedApplications.map((app, idx) => (

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PoundSterling, AlertCircle, Calendar, Send, Download, Search, ChevronRight, FileCheck } from 'lucide-react';
+import { Euro, AlertCircle, Calendar, Send, Download, Search, ChevronRight, FileCheck } from 'lucide-react';
 import { rentLedger, tenantStats } from '../../mockdata/tenantsData';
 
 const StatCard = ({ title, value, icon: Icon, colorClass, subtext }) => (
@@ -17,10 +17,10 @@ const StatCard = ({ title, value, icon: Icon, colorClass, subtext }) => (
 
 export default function RentLedger() {
   const [filters, setFilters] = useState({ search: '', status: 'All' });
+  const overdueCount = rentLedger.filter((record) => record.status === 'Overdue').length;
 
   return (
     <div className="space-y-6">
-      {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-[11px] text-gray-400 uppercase tracking-widest">
         <span>Tenants</span>
         <ChevronRight size={10} />
@@ -29,15 +29,13 @@ export default function RentLedger() {
 
       <h1 className="text-xl font-bold text-gray-900">Rent Ledger</h1>
 
-      {/* Stats Row */}
       <div className="grid grid-cols-4 gap-4">
-        <StatCard title="Collected this month" value={`£${(tenantStats.collectedThisMonth / 1000).toFixed(0)}k`} icon={PoundSterling} colorClass="text-[#1a6b3a]" />
-        <StatCard title="Outstanding" value={`£${tenantStats.outstandingRent}`} icon={AlertCircle} colorClass="text-[#b91c1c]" subtext={`across ${tenantStats.overdueRent} tenants`} />
+        <StatCard title="Collected this month" value={`€${tenantStats.collectedThisMonth.toLocaleString()}`} icon={Euro} colorClass="text-[#1a6b3a]" />
+        <StatCard title="Outstanding" value={`€${tenantStats.outstandingRent.toLocaleString()}`} icon={AlertCircle} colorClass="text-[#b91c1c]" subtext={`across ${overdueCount} ledger items`} />
         <StatCard title="Avg days to pay" value={`${tenantStats.avgDaysToPay}d`} icon={Calendar} />
         <StatCard title="Reminders sent" value={tenantStats.remindersSent} icon={Send} colorClass="text-[#92600a]" subtext="this month" />
       </div>
 
-      {/* Filters */}
       <div className="bg-white p-4 rounded-xl border border-[#e8e8e4] flex items-center justify-between">
         <div className="flex items-center gap-4 flex-grow">
           <div className="relative flex-grow max-w-xs">
@@ -47,13 +45,13 @@ export default function RentLedger() {
               placeholder="Search tenant or unit..."
               className="w-full pl-9 pr-4 py-2 bg-[#f5f5f0] border-transparent rounded-lg text-xs outline-none focus:ring-1 focus:ring-[#1a6b3a]/20"
               value={filters.search}
-              onChange={e => setFilters({...filters, search: e.target.value})}
+              onChange={(e) => setFilters({ ...filters, search: e.target.value })}
             />
           </div>
-          <select 
+          <select
             className="bg-[#f5f5f0] border-transparent rounded-lg text-xs px-3 py-2 outline-none focus:ring-1 focus:ring-[#1a6b3a]/20"
             value={filters.status}
-            onChange={e => setFilters({...filters, status: e.target.value})}
+            onChange={(e) => setFilters({ ...filters, status: e.target.value })}
           >
             <option value="All">All Status</option>
             <option value="Paid">Paid</option>
@@ -65,7 +63,6 @@ export default function RentLedger() {
         </button>
       </div>
 
-      {/* Table */}
       <div className="bg-white rounded-xl border border-[#e8e8e4] overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
@@ -83,20 +80,20 @@ export default function RentLedger() {
               </tr>
             </thead>
             <tbody className="divide-y divide-[#f0f0ec]">
-              {rentLedger.map(record => (
+              {rentLedger.map((record) => (
                 <tr key={record.id} className="hover:bg-[#fafaf8] transition-colors">
                   <td className="px-5 py-4 font-bold text-gray-900">{record.name}</td>
                   <td className="px-3 py-4 text-gray-700 font-medium">{record.unit}</td>
                   <td className="px-3 py-4 text-gray-500">{record.property}</td>
                   <td className="px-3 py-4 text-gray-500">{record.dueDate}</td>
-                  <td className="px-3 py-4 font-bold text-gray-900">£{record.amount}</td>
+                  <td className="px-3 py-4 font-bold text-gray-900">€{record.amount}</td>
                   <td className="px-3 py-4 text-gray-500">{record.paidDate}</td>
                   <td className="px-3 py-4 text-gray-400 uppercase font-bold text-[10px] tracking-tight">{record.method}</td>
                   <td className="px-3 py-4">
                     <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${
-                      record.status === 'Paid' 
-                      ? 'bg-[#f0f7f3] text-[#1a6b3a] border-[#a8d5b8]' 
-                      : 'bg-[#fef2f2] text-[#b91c1c] border-[#fca5a5]'
+                      record.status === 'Paid'
+                        ? 'bg-[#f0f7f3] text-[#1a6b3a] border-[#a8d5b8]'
+                        : 'bg-[#fef2f2] text-[#b91c1c] border-[#fca5a5]'
                     }`}>
                       {record.status}
                     </span>

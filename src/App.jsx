@@ -36,7 +36,7 @@ import PartnersPage from './pages/b2b/PartnersPage';
 import CapacityPage from './pages/b2b/CapacityPage';
 import EmployeesPage from './pages/b2b/EmployeesPage';
 import CommsPage from './pages/b2b/CommsPage';
-import CommissionsPage from './pages/b2b/CommissionsPage';
+import ServiceFeesPage from './pages/b2b/ServiceFeesPage';
 
 // Finance pages
 import FinanceDashboard from './pages/finance/FinanceDashboard';
@@ -44,7 +44,6 @@ import PaymentsPage from './pages/finance/PaymentsPage';
 import InvoicesPage from './pages/finance/InvoicesPage';
 import RefundsPage from './pages/finance/RefundsPage';
 import DepositsPage from './pages/finance/DepositsPage';
-import InvestorsPage from './pages/finance/InvestorsPage';
 import PricingPage from './pages/finance/PricingPage';
 
 // Properties pages
@@ -94,13 +93,12 @@ export default function App() {
                 <Route path="/admin/b2b/capacity" element={<CapacityPage />} />
                 <Route path="/admin/b2b/employees" element={<EmployeesPage />} />
                 <Route path="/admin/b2b/comms" element={<CommsPage />} />
-                <Route path="/admin/b2b/commissions" element={<CommissionsPage />} />
+                <Route path="/admin/b2b/service-fees" element={<ServiceFeesPage />} />
                 <Route path="/admin/finance" element={<FinanceDashboard />} />
                 <Route path="/admin/finance/payments" element={<PaymentsPage />} />
                 <Route path="/admin/finance/invoices" element={<InvoicesPage />} />
                 <Route path="/admin/finance/refunds" element={<RefundsPage />} />
                 <Route path="/admin/finance/deposits" element={<DepositsPage />} />
-                <Route path="/admin/finance/investors" element={<InvestorsPage />} />
                 <Route path="/admin/finance/pricing" element={<PricingPage />} />
                 <Route path="/admin/properties" element={<PropertiesDashboard />} />
                 <Route path="/admin/properties/list" element={<AllPropertiesPage />} />

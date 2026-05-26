@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
-import { Download, ChevronRight, Search, FileText } from 'lucide-react';
+import { Download, ChevronRight, FileText } from 'lucide-react';
 import { leaseRecords } from '../../mockdata/tenantsData';
 
 export default function LeasesPage() {
   const [filters, setFilters] = useState({ city: 'All', type: 'All', status: 'All' });
 
-  const filtered = leaseRecords.filter(l => {
-    if (filters.type !== 'All' && l.type !== filters.type) return false;
-    if (filters.status !== 'All' && l.status !== filters.status) return false;
-    // Note: City filtering would require adding city to leaseRecords or joining with allTenants
+  const filtered = leaseRecords.filter((lease) => {
+    if (filters.type !== 'All' && lease.type !== filters.type) return false;
+    if (filters.status !== 'All' && lease.status !== filters.status) return false;
     return true;
   });
 
   return (
     <div className="space-y-6">
-      {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-[11px] text-gray-400 uppercase tracking-widest">
         <span>Tenants</span>
         <ChevronRight size={10} />
@@ -28,22 +26,21 @@ export default function LeasesPage() {
         </button>
       </div>
 
-      {/* Filters */}
       <div className="bg-white p-4 rounded-xl border border-[#e8e8e4] flex items-center gap-4 shadow-sm">
-        <select 
+        <select
           className="bg-[#f5f5f0] border-transparent rounded-lg text-xs px-3 py-2 outline-none focus:ring-1 focus:ring-[#1a6b3a]/20"
           value={filters.status}
-          onChange={e => setFilters({...filters, status: e.target.value})}
+          onChange={(e) => setFilters({ ...filters, status: e.target.value })}
         >
           <option value="All">All Status</option>
           <option value="Active">Active</option>
-          <option value="Expiring soon">Expiring soon</option>
+          <option value="Move-in Scheduled">Move-in Scheduled</option>
         </select>
 
-        <select 
+        <select
           className="bg-[#f5f5f0] border-transparent rounded-lg text-xs px-3 py-2 outline-none focus:ring-1 focus:ring-[#1a6b3a]/20"
           value={filters.type}
-          onChange={e => setFilters({...filters, type: e.target.value})}
+          onChange={(e) => setFilters({ ...filters, type: e.target.value })}
         >
           <option value="All">All Types</option>
           <option value="B2C">B2C</option>
@@ -51,7 +48,6 @@ export default function LeasesPage() {
         </select>
       </div>
 
-      {/* Table */}
       <div className="bg-white rounded-xl border border-[#e8e8e4] shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
@@ -70,36 +66,36 @@ export default function LeasesPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-[#f0f0ec]">
-              {filtered.map(l => (
-                <tr key={l.id} className="hover:bg-[#fafaf8] transition-colors">
-                  <td className="px-5 py-4 font-bold text-gray-900">{l.name}</td>
+              {filtered.map((lease) => (
+                <tr key={lease.id} className="hover:bg-[#fafaf8] transition-colors">
+                  <td className="px-5 py-4 font-bold text-gray-900">{lease.name}</td>
                   <td className="px-3 py-4">
                     <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
-                      l.type === 'B2C' 
-                      ? 'text-[#6d28d9] bg-[#f5f3ff] border-[#ddd6fe]' 
-                      : 'text-[#1d4ed8] bg-[#eff6ff] border-[#bfdbfe]'
+                      lease.type === 'B2C'
+                        ? 'text-[#6d28d9] bg-[#f5f3ff] border-[#ddd6fe]'
+                        : 'text-[#1d4ed8] bg-[#eff6ff] border-[#bfdbfe]'
                     }`}>
-                      {l.type}
+                      {lease.type}
                     </span>
                   </td>
-                  <td className="px-3 py-4 text-gray-700 font-medium">{l.unit}</td>
-                  <td className="px-3 py-4 text-gray-500">{l.property}</td>
-                  <td className="px-3 py-4 text-gray-500">{l.start}</td>
-                  <td className="px-3 py-4 text-gray-900 font-medium">{l.end}</td>
-                  <td className="px-3 py-4 text-gray-500">{l.duration}</td>
-                  <td className="px-3 py-4 font-bold text-gray-900">£{l.rent}</td>
+                  <td className="px-3 py-4 text-gray-700 font-medium">{lease.unit}</td>
+                  <td className="px-3 py-4 text-gray-500">{lease.property}</td>
+                  <td className="px-3 py-4 text-gray-500">{lease.start}</td>
+                  <td className="px-3 py-4 text-gray-900 font-medium">{lease.end}</td>
+                  <td className="px-3 py-4 text-gray-500">{lease.duration}</td>
+                  <td className="px-3 py-4 font-bold text-gray-900">€{lease.rent}</td>
                   <td className="px-3 py-4">
                     <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${
-                      l.status === 'Active' 
-                      ? 'bg-[#f0f7f3] text-[#1a6b3a] border-[#a8d5b8]' 
-                      : 'bg-[#fffbeb] text-[#92600a] border-[#fcd34d]'
+                      lease.status === 'Active'
+                        ? 'bg-[#f0f7f3] text-[#1a6b3a] border-[#a8d5b8]'
+                        : 'bg-[#eff6ff] text-[#1d4ed8] border-[#bfdbfe]'
                     }`}>
-                      {l.status}
+                      {lease.status}
                     </span>
                   </td>
                   <td className="px-5 py-4 text-right">
                     <button className="inline-flex items-center gap-1 px-3 py-1 border border-[#e8e8e4] text-gray-500 text-[10px] font-bold rounded hover:bg-[#fafaf8] transition-all">
-                      <FileText size={12} /> View 
+                      <FileText size={12} /> View
                     </button>
                   </td>
                 </tr>

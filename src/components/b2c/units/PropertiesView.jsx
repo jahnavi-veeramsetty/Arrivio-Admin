@@ -6,18 +6,8 @@ import PropertyCard from './PropertyCard';
 export default function PropertiesView({ properties, allProperties, onSelectProperty, onSearch, searchValue, selectedCity, onCityChange }) {
   const [viewMode, setViewMode] = useState('grid');
 
-  const getRoomCount = (property, type) => {
-    if (type === 'Studio') {
-      return property.units.filter(u => ['studio', '1br', 'ensuite', 'shared'].includes(u.type.toLowerCase())).length;
-    }
-    if (type === '2BHK') {
-      return property.units.filter(u => u.type.toLowerCase() === '2br').length;
-    }
-    if (type === '3BHK') {
-      return property.units.filter(u => u.type.toLowerCase() === '3br').length;
-    }
-    return 0;
-  };
+  const getRoomCount = (property, type) =>
+    property.units.filter(u => u.type === type).length;
 
   const thCls = "text-left text-[10px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 px-6 py-4 border-b border-gray-100 dark:border-gray-800 focus:outline-none";
   const tdCls = "px-6 py-4 text-sm font-semibold text-gray-700 dark:text-gray-300 border-b border-gray-50 dark:border-gray-800/50";
@@ -143,8 +133,8 @@ export default function PropertiesView({ properties, allProperties, onSelectProp
                     </td>
                     <td className={tdCls}>
                       <div className="flex gap-2">
-                        {['Studio', '2BHK', '3BHK'].map(type => (
-                          <div key={type} className="flex flex-col items-center bg-gray-50/50 dark:bg-gray-900/30 px-2 py-1 rounded-lg border border-gray-100 dark:border-gray-800/50 min-w-[50px]">
+                        {['Single Room', 'Shared Room', 'Studio'].map(type => (
+                          <div key={type} className="flex flex-col items-center bg-gray-50/50 dark:bg-gray-900/30 px-2 py-1 rounded-lg border border-gray-100 dark:border-gray-800/50 min-w-[60px]">
                             <span className="text-[9px] uppercase font-bold text-gray-400 tracking-tight">{type}</span>
                             <span className="text-xs font-bold text-gray-700 dark:text-gray-200">{getRoomCount(prop, type)}</span>
                           </div>

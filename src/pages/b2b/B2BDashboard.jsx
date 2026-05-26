@@ -1,13 +1,11 @@
-
 import MetricCards from '../../components/b2b/dashboard/MetricCards';
 import PartnersByType from '../../components/b2b/dashboard/PartnersByType';
 import EmployeesAwaitingHousing from '../../components/b2b/dashboard/EmployeesAwaitingHousing';
-import ExpiringReservations from '../../components/b2b/dashboard/ExpiringReservations';
 import RecentActivity from '../../components/b2b/dashboard/RecentActivity';
-import CommissionSummary from '../../components/b2b/dashboard/CommissionSummary';
+import ServiceFeeSummary from '../../components/b2b/dashboard/ServiceFeeSummary';
 
-// Mock data
-import { mockPartners, mockEmployees, mockReservations, mockCommissions, recentB2BActivity } from '../../mockdata/b2bData';
+import { mockPartners, mockReservations, mockServiceFees, recentB2BActivity } from '../../mockdata/b2bData';
+import { b2bRoutedEmployees } from '../../mockdata/tenantsData';
 
 export default function B2BDashboard() {
   return (
@@ -17,29 +15,19 @@ export default function B2BDashboard() {
           <p className="text-[10px] text-[#1a6644] font-bold uppercase tracking-[0.2em] mb-1">B2B OPERATION | DASHBOARD</p>
         </div>
       </div>
-      
-      {/* Metrics Row */}
-      <MetricCards 
-        partners={mockPartners} 
-        employees={mockEmployees} 
-        reservations={mockReservations} 
-      />
 
-      {/* Main Content Grid */}
+      <MetricCards partners={mockPartners} employees={b2bRoutedEmployees} reservations={mockReservations} />
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column (Stats & Finance) */}
         <div className="lg:col-span-1 space-y-6">
           <PartnersByType partners={mockPartners} />
-          <CommissionSummary commissions={mockCommissions} />
+          <ServiceFeeSummary serviceFees={mockServiceFees} />
         </div>
 
-        {/* Center Column (Operations) */}
         <div className="lg:col-span-1 space-y-6">
-          <EmployeesAwaitingHousing employees={mockEmployees} />
-          <ExpiringReservations partners={mockPartners} reservations={mockReservations} />
+          <EmployeesAwaitingHousing employees={b2bRoutedEmployees} />
         </div>
 
-        {/* Right Column (Activity) */}
         <div className="lg:col-span-1">
           <RecentActivity activity={recentB2BActivity} />
         </div>

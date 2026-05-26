@@ -6,8 +6,8 @@ export default function WaitlistCard({ property, unitTypeFilter, canAction, show
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Filter units based on unitTypeFilter
-  const filteredUnits = property.units.filter(u => 
-    unitTypeFilter === 'All' || u.type === unitTypeFilter || (unitTypeFilter === '1 Bedroom' && u.type === '1BR') || (unitTypeFilter === '2 Bedroom' && u.type === '2BR')
+  const filteredUnits = property.units.filter(u =>
+    unitTypeFilter === 'All' || u.type === unitTypeFilter
   );
 
   const waitingCount = filteredUnits.reduce((acc, u) => acc + (u.waitlist?.length || 0), 0);

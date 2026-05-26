@@ -1,6 +1,20 @@
 import { useState } from 'react';
 import { mockMoveEvents } from '../../../mockdata/b2cData';
+import { DEMO_TODAY } from '../../../mockdata/demoClock';
 import { CalendarDays, List, Calendar, ArrowDown, ArrowUp } from 'lucide-react';
+
+const pad = (n) => String(n).padStart(2, '0');
+const isoDate = (date) => `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())}`;
+
+const weekDatesFromToday = () => {
+  const days = [];
+  for (let i = 0; i < 7; i++) {
+    const next = new Date(DEMO_TODAY);
+    next.setUTCDate(next.getUTCDate() + i);
+    days.push(isoDate(next));
+  }
+  return days;
+};
 
 export default function WeekSchedule() {
   const [view, setView] = useState('calendar'); // 'list' | 'calendar'
@@ -12,8 +26,8 @@ export default function WeekSchedule() {
     return acc;
   }, {});
 
-  // Group by date (for calendar view) - next 7 days from Mar 22
-  const dates = ['2025-03-22', '2025-03-23', '2025-03-24', '2025-03-25', '2025-03-26', '2025-03-27', '2025-03-28'];
+  // Group by date (for calendar view) - 7 days starting at DEMO_TODAY (2028-06-26)
+  const dates = weekDatesFromToday();
   const byDate = dates.reduce((acc, d) => {
     acc[d] = mockMoveEvents.filter(e => e.date === d);
     return acc;
