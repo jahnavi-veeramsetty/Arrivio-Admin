@@ -2,15 +2,17 @@ import React from 'react';
 
 export default function PropertiesMetrics({ properties }) {
   const totalProperties = properties.length;
-  const totalUnits = properties.reduce((acc, p) => acc + p.units.length, 0);
-  const occupiedUnits = properties.reduce((acc, p) =>
-    acc + p.units.filter(u => u.status === 'Occupied').length, 0
-  );
+  const totalUnits = properties.reduce((acc, p) => acc + (p.rooms || p.units.length), 0);
+  const occupiedUnits = properties.reduce((acc, p) => {
+    const rooms = p.rooms || p.units.length;
+    const rate = (p.occupancyRate || 0) / 100;
+    return acc + Math.round(rooms * rate);
+  }, 0);
 
   const metrics = [
     { label: 'Total Properties', value: totalProperties, color: 'text-blue-600' },
-    { label: 'Total Units', value: totalUnits, color: 'text-purple-600' },
-    { label: 'Occupied Units', value: occupiedUnits, color: 'text-green-600' },
+    { label: 'Total Units', value: totalUnits.toLocaleString(), color: 'text-purple-600' },
+    { label: 'Occupied Units', value: occupiedUnits.toLocaleString(), color: 'text-green-600' },
   ];
 
   return (

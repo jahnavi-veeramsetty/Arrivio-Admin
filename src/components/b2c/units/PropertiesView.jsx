@@ -7,7 +7,7 @@ export default function PropertiesView({ properties, allProperties, onSelectProp
   const [viewMode, setViewMode] = useState('grid');
 
   const getRoomCount = (property, type) =>
-    property.units.filter(u => u.type === type).length;
+    (property.unitBreakdown && property.unitBreakdown[type]) || 0;
 
   const thCls = "text-left text-[10px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 px-6 py-4 border-b border-gray-100 dark:border-gray-800 focus:outline-none";
   const tdCls = "px-6 py-4 text-sm font-semibold text-gray-700 dark:text-gray-300 border-b border-gray-50 dark:border-gray-800/50";
@@ -143,8 +143,8 @@ export default function PropertiesView({ properties, allProperties, onSelectProp
                     </td>
                     <td className={tdCls}>
                       <div className="flex items-center gap-2">
-                        <span className="w-7 h-7 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-400">
-                          {prop.units.length}
+                        <span className="w-9 h-7 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-400 px-1">
+                          {prop.rooms || prop.units.length}
                         </span>
                         <span className="text-[10px] text-gray-400 font-bold uppercase tracking-tight">Units</span>
                       </div>

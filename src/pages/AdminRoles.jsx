@@ -1,6 +1,5 @@
 import { roles as rolesMetadata } from '../mockdata/roles';
 import { UserCircle, Briefcase, Building2, Users, Receipt, Headset, ShieldAlert, ArrowRight, LogOut } from 'lucide-react';
-import WalkingAnimation from '../components/WalkingAnimation';
 import greenLogo from '../assets/greenlogo.png';
 
 import { useAuth } from '../context/AuthContext';
@@ -60,21 +59,20 @@ export default function AdminRoles() {
            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay"></div>
         </div>
 
-        {/* Intro Text Sequence */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none anim-intro-text z-10">
-          <h2 className="text-center text-3xl lg:text-4xl xl:text-5xl font-semibold tracking-[-0.02em] leading-[1.1] text-white drop-shadow-xl px-4 filter">
-            Welcome Back,<br/>
-            <span className="text-white/80 text-2xl lg:text-3xl font-medium block mt-2">{user.name}</span>
-            <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-100 to-emerald-300 drop-shadow-none">
-              Portal Selection
-            </span>
-          </h2>
-        </div>
-
-        {/* Center Character Animation - Walks in */}
-        <div className="relative z-40 w-full flex flex-col items-center justify-center anim-character-in pointer-events-auto">
-          <WalkingAnimation />
+        {/* Welcome hero */}
+        <div className="relative z-10 flex items-center justify-center px-4">
+          <div className="text-center text-white drop-shadow-xl max-w-md">
+            <h2 className="text-3xl lg:text-4xl xl:text-5xl font-semibold tracking-[-0.02em] leading-[1.1]">
+              Hey there,<br />
+              welcome back{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-100 to-emerald-300">
+                {user.name}
+              </span>
+            </h2>
+            <p className="mt-6 text-base lg:text-lg text-emerald-100/80">
+              Select the workspace you'd like to step into.
+            </p>
+          </div>
         </div>
       </div>
 
