@@ -22,7 +22,7 @@ export default function WaitlistUnitRow({ unit, canAction, showToast }) {
             <div className="flex items-center gap-2 mt-0.5">
               <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
                 unit.type === 'Studio' ? 'bg-blue-100 text-blue-700' :
-                unit.type === '1BR' ? 'bg-purple-100 text-purple-700' :
+                unit.type === 'Single Room' ? 'bg-purple-100 text-purple-700' :
                 'bg-orange-100 text-orange-700'
               }`}>
                 {unit.type}

@@ -19,14 +19,14 @@ export default function InvoicesPage() {
     if (type === 'generate') {
       addToast({
         title: 'Batch Generation Started',
-        description: 'System is generating invoices for March 2026. This process may take a minute.',
-        type: 'info'
+        description: 'System is generating June 2028 partner invoices. This process may take a minute.',
+        type: 'info',
       });
     } else if (type === 'send') {
       addToast({
         title: 'Invoice Sent',
         description: `Invoice ${invoice.id} has been dispatched to ${invoice.partner}.`,
-        type: 'success'
+        type: 'success',
       });
       setIsDetailOpen(false);
     }
@@ -34,21 +34,21 @@ export default function InvoicesPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader 
-        title="B2B Invoices" 
-        description="Invoice management for corporate and agency partners."
+      <PageHeader
+        title="B2B Invoices"
+        description="Invoice management for employers, recruitment agencies, and university partners."
         breadcrumbs={['Finance', 'B2B Invoices']}
       />
 
       <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <InvoicesTable 
-          invoices={mockInvoices} 
-          onViewDetail={handleViewDetail} 
+        <InvoicesTable
+          invoices={mockInvoices}
+          onViewDetail={handleViewDetail}
           onAction={handleAction}
         />
       </div>
 
-      <InvoiceDetail 
+      <InvoiceDetail
         invoice={selectedInvoice}
         isOpen={isDetailOpen}
         onClose={() => setIsDetailOpen(false)}

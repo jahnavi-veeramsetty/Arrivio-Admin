@@ -20,13 +20,13 @@ export default function DepositsPage() {
       addToast({
         title: 'Entering Adjustment Mode',
         description: `Please specify the reason and amount for the deduction on ${deposit.id}.`,
-        type: 'info'
+        type: 'info',
       });
     } else if (type === 'return') {
       addToast({
         title: 'Return Processed',
-        description: `Deposit return of £${deposit.amount - deposit.deductions} for ${deposit.tenant} initiated on Stripe.`,
-        type: 'success'
+        description: `Deposit return of €${deposit.amount - deposit.deductions} for ${deposit.tenant} initiated on Stripe.`,
+        type: 'success',
       });
       setIsDetailOpen(false);
     }
@@ -34,20 +34,20 @@ export default function DepositsPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader 
-        title="Security Deposits" 
+      <PageHeader
+        title="Security Deposits"
         description="Escrow management and return processing for tenant security deposits."
         breadcrumbs={['Finance', 'Security Deposits']}
       />
 
       <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <DepositsLedger 
-          deposits={mockDeposits} 
-          onViewDetail={handleViewDetail} 
+        <DepositsLedger
+          deposits={mockDeposits}
+          onViewDetail={handleViewDetail}
         />
       </div>
 
-      <DepositDetail 
+      <DepositDetail
         deposit={selectedDeposit}
         isOpen={isDetailOpen}
         onClose={() => setIsDetailOpen(false)}

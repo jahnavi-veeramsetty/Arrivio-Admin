@@ -3,23 +3,30 @@ import PropertiesMetricCards from '../../components/properties/dashboard/Propert
 import PropertiesByCity from '../../components/properties/dashboard/PropertiesByCity';
 import MaintenanceAlerts from '../../components/properties/dashboard/MaintenanceAlerts';
 import RecentPropertyUpdates from '../../components/properties/dashboard/RecentPropertyUpdates';
-import { mockProperties, mockCities, mockMaintenance, mockUpdates } from '../../mockdata/propertiesData';
+import ArrivioHousesTracking from '../../components/properties/dashboard/ArrivioHousesTracking';
+import { mockProperties, mockCities, mockMaintenance, mockUpdates, mockHouseOps } from '../../mockdata/propertiesData';
 
 export default function PropertiesDashboard() {
+  const communityBuildings = mockProperties.filter((property) => property.category === 'Community Building');
+
   return (
     <div className="space-y-8 pb-12">
-      <PageHeader 
-        title="Portfolio Overview" 
+      <PageHeader
+        title="Portfolio Overview"
         description="Comprehensive view of property performance, occupancy, and operational alerts across all territories."
         breadcrumbs={['Properties', 'Dashboard']}
       />
 
       <div className="animate-in fade-in slide-in-from-top-4 duration-700">
-         <PropertiesMetricCards 
-            properties={mockProperties} 
-            cities={mockCities} 
-            maintenance={mockMaintenance} 
+         <PropertiesMetricCards
+            properties={mockProperties}
+            cities={mockCities}
+            maintenance={mockMaintenance}
          />
+      </div>
+
+      <div className="animate-in fade-in slide-in-from-top-4 duration-700">
+        <ArrivioHousesTracking stats={mockHouseOps} properties={communityBuildings} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">

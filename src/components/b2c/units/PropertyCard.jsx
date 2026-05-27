@@ -1,26 +1,15 @@
 import React from 'react';
 
 export default function PropertyCard({ property, onClick }) {
-  const getRoomCount = (type) => {
-    if (type === 'Studio') {
-      return property.units.filter(u => ['studio', '1br', 'ensuite', 'shared'].includes(u.type.toLowerCase())).length;
-    }
-    if (type === '2BHK') {
-      return property.units.filter(u => u.type.toLowerCase() === '2br').length;
-    }
-    if (type === '3BHK') {
-      return property.units.filter(u => u.type.toLowerCase() === '3br').length;
-    }
-    return 0;
-  };
+  const breakdown = property.unitBreakdown || {};
 
   const roomTypes = [
-    { label: 'Studio', count: getRoomCount('Studio') },
-    { label: '2BHK', count: getRoomCount('2BHK') },
-    { label: '3BHK', count: getRoomCount('3BHK') }
+    { label: 'Single Room', count: breakdown['Single Room'] || 0 },
+    { label: 'Shared Room', count: breakdown['Shared Room'] || 0 },
+    { label: 'Studio', count: breakdown['Studio'] || 0 },
   ];
 
-  const totalDisplayedUnits = roomTypes.reduce((sum, rt) => sum + rt.count, 0);
+  const totalDisplayedUnits = property.rooms || roomTypes.reduce((sum, rt) => sum + rt.count, 0);
 
   return (
     <div 

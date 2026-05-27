@@ -1,8 +1,9 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Search, Building2, MapPin, ArrowDownToLine, ArrowUpFromLine, X } from 'lucide-react';
+import { DEMO_TODAY } from '../../../mockdata/demoClock';
 
 export default function MoveCalendar({ events }) {
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(new Date(DEMO_TODAY));
   const [search, setSearch] = useState('');
   const [cityFilter, setCityFilter] = useState('All');
   const [typeFilter, setTypeFilter] = useState('All');
@@ -111,7 +112,7 @@ export default function MoveCalendar({ events }) {
             <button onClick={prevMonth} className="p-3 hover:bg-gray-50 dark:hover:bg-gray-900 rounded-2xl transition-all active:scale-95 border border-transparent hover:border-gray-100 dark:hover:border-gray-700">
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <button onClick={() => setCurrentDate(new Date())} className="px-5 py-2.5 bg-gray-50 dark:bg-gray-900 text-[10px] font-black uppercase tracking-widest text-gray-600 dark:text-gray-400 rounded-2xl border border-gray-100 dark:border-gray-700 hover:bg-white dark:hover:bg-gray-800 transition-all">
+            <button onClick={() => setCurrentDate(new Date(DEMO_TODAY))} className="px-5 py-2.5 bg-gray-50 dark:bg-gray-900 text-[10px] font-black uppercase tracking-widest text-gray-600 dark:text-gray-400 rounded-2xl border border-gray-100 dark:border-gray-700 hover:bg-white dark:hover:bg-gray-800 transition-all">
               Today
             </button>
             <button onClick={nextMonth} className="p-3 hover:bg-gray-50 dark:hover:bg-gray-900 rounded-2xl transition-all active:scale-95 border border-transparent hover:border-gray-100 dark:hover:border-gray-700">
@@ -134,7 +135,7 @@ export default function MoveCalendar({ events }) {
           {calendarDays.map((day, idx) => {
             const dateStr = formatDate(day);
             const dayEvents = dateStr ? filteredEvents.filter(e => e.date === dateStr) : [];
-            const isToday = day && formatDate(day) === formatDate(new Date());
+            const isToday = day && formatDate(day) === formatDate(DEMO_TODAY);
 
             return (
               <div 

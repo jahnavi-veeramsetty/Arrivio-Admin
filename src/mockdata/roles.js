@@ -30,7 +30,7 @@ export const roles = [
       "b2b_onboarding",
       "capacity_reservations",
       "employee_lists",
-      "commissions_view"
+      "service_fees_view"
     ],
     restrictedFrom: ["b2c_applications", "finance_data", "payments_view"]
   },

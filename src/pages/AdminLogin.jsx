@@ -1,5 +1,4 @@
 import { UserCircle, Mail, Lock, ShieldCheck, ArrowRight, Eye, EyeOff } from 'lucide-react';
-import WalkingAnimation from '../components/WalkingAnimation';
 import greenLogo from '../assets/greenlogo.png';
 import { useState } from 'react';
 
@@ -57,19 +56,21 @@ export default function AdminLogin() {
            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay"></div>
         </div>
 
-        {/* Intro Text Sequence */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none anim-intro-text z-10">
-          <h2 className="text-center text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-[-0.02em] leading-[1.1] text-white drop-shadow-xl px-4 filter">
-            Welcome Back To<br/><br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-100 to-emerald-300 drop-shadow-none">
-              Arrivio Administration
-            </span>
-          </h2>
-        </div>
-
-        {/* Center Character Animation - Walks in */}
-        <div className="relative z-40 w-full flex flex-col items-center justify-center anim-character-in pointer-events-auto">
-          <WalkingAnimation />
+        {/* Welcome hero */}
+        <div className="relative z-10 flex items-center justify-center px-4">
+          <div className="text-center text-white drop-shadow-xl max-w-md">
+            <h2 className="text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-[-0.02em] leading-[1.1]">
+              Hey there,<br />
+              welcome to{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-100 to-emerald-300">
+                Arrivio
+              </span>
+            </h2>
+            <p className="mt-6 text-base lg:text-lg text-emerald-100/80">
+              The operating layer for settlement, services, and community
+              for global talent moving to Germany.
+            </p>
+          </div>
         </div>
       </div>
 

@@ -45,7 +45,7 @@ export const navConfig = [
       { id: 'b2b_capacity', label: 'Capacity Reservations', route: '/admin/b2b/capacity', roles: ['super_admin', 'ops_manager', 'sales_partnership'] },
       { id: 'b2b_employees', label: 'Employee Tracker', route: '/admin/b2b/employees', roles: ['super_admin', 'ops_manager', 'sales_partnership'] },
       { id: 'b2b_comms', label: 'Communications', route: '/admin/b2b/comms', roles: ['super_admin', 'sales_partnership', 'support_agent'] },
-      { id: 'b2b_commissions', label: 'Commissions', route: '/admin/b2b/commissions', roles: ['super_admin', 'sales_partnership', 'finance_manager'] },
+      { id: 'b2b_service_fees', label: 'Service Fees', route: '/admin/b2b/service-fees', roles: ['super_admin', 'sales_partnership', 'finance_manager'] },
     ],
   },
   {
@@ -80,7 +80,6 @@ export const navConfig = [
       { id: 'finance_invoices', label: 'B2B Invoices', route: '/admin/finance/invoices', roles: ['super_admin', 'finance_manager'] },
       { id: 'finance_refunds', label: 'Refunds', route: '/admin/finance/refunds', roles: ['super_admin', 'finance_manager'] },
       { id: 'finance_deposits', label: 'Security Deposits', route: '/admin/finance/deposits', roles: ['super_admin', 'finance_manager'] },
-      { id: 'finance_investors', label: 'Investor Payouts', route: '/admin/finance/investors', roles: ['super_admin', 'finance_manager', 'sales_partnership'] },
       { id: 'finance_pricing', label: 'Pricing Rules', route: '/admin/finance/pricing', roles: ['super_admin', 'finance_manager'] },
     ],
   },

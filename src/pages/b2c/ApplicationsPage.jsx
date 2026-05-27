@@ -14,7 +14,7 @@ export default function ApplicationsPage() {
   const { refreshCounts } = useNotification();
 
   const [apps, setApps] = useState(() => {
-    const saved = localStorage.getItem('arrivio_b2c_apps');
+    const saved = localStorage.getItem('arrivio_b2c_apps_v3');
     let baseApps = saved ? JSON.parse(saved) : [...mockApplications];
     
     // Merge applicantDocData into baseApps if not already present
@@ -32,7 +32,7 @@ export default function ApplicationsPage() {
   });
 
   useEffect(() => {
-    localStorage.setItem('arrivio_b2c_apps', JSON.stringify(apps));
+    localStorage.setItem('arrivio_b2c_apps_v3', JSON.stringify(apps));
     refreshCounts();
   }, [apps, refreshCounts]);
 
@@ -45,7 +45,7 @@ export default function ApplicationsPage() {
   const reviewers = ['All', ...new Set(apps.map(a => a.reviewer))].sort();
 
   const handleReset = () => {
-    localStorage.removeItem('arrivio_b2c_apps');
+    localStorage.removeItem('arrivio_b2c_apps_v3');
     const resetData = mockApplications.map(app => {
       const docEntry = applicantDocData.find(d => d.appId === app.id);
       if (docEntry) {

@@ -23,7 +23,7 @@ export default function ApplicationFunnel({ data }) {
                 <div className="flex items-baseline gap-2">
                   <span className="text-sm text-gray-800 dark:text-gray-100 tabular-nums">{item.count}</span>
                   <span className="text-[9px] text-gray-400 dark:text-gray-500 uppercase tracking-tighter">
-                    {idx === 0 ? 'Total' : `${pctOfTotal}% of total`}
+                    {idx === 0 ? 'Total' : `${pctOfTotal}%`}
                   </span>
                 </div>
               </div>
