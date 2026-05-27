@@ -2,14 +2,19 @@ import React from 'react';
 
 export default function PropertyCard({ property, onClick }) {
   const breakdown = property.unitBreakdown || {};
+  const rate = (property.occupancyRate || 0) / 100;
+
+  // Counts shown below the occupancy bar are OCCUPIED units per type so the
+  // numbers tie directly to the `Occupancy XX%` bar above (sum ≈ rooms × rate).
+  const occupiedOf = (type) => Math.round((breakdown[type] || 0) * rate);
 
   const roomTypes = [
-    { label: 'Single Room', count: breakdown['Single Room'] || 0 },
-    { label: 'Shared Room', count: breakdown['Shared Room'] || 0 },
-    { label: 'Studio', count: breakdown['Studio'] || 0 },
+    { label: 'Single Room', total: breakdown['Single Room'] || 0, occupied: occupiedOf('Single Room') },
+    { label: 'Shared Room', total: breakdown['Shared Room'] || 0, occupied: occupiedOf('Shared Room') },
+    { label: 'Studio',      total: breakdown['Studio']      || 0, occupied: occupiedOf('Studio') },
   ];
 
-  const totalDisplayedUnits = property.rooms || roomTypes.reduce((sum, rt) => sum + rt.count, 0);
+  const totalDisplayedUnits = property.rooms || roomTypes.reduce((sum, rt) => sum + rt.total, 0);
 
   return (
     <div 
@@ -55,11 +60,15 @@ export default function PropertyCard({ property, onClick }) {
           </div>
         </div>
 
+        <p className="text-[9px] text-gray-400 uppercase font-bold tracking-[0.18em] mt-3 mb-1.5">Occupied units · by type</p>
         <div className="flex gap-2 mb-4">
           {roomTypes.map((rt, idx) => (
             <div key={idx} className="flex-1 bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800 rounded-lg p-2 text-center">
               <p className="text-[10px] text-gray-400 uppercase font-bold tracking-tight mb-0.5">{rt.label}</p>
-              <p className="text-sm font-bold text-gray-900 dark:text-white">{rt.count}</p>
+              <p className="text-sm font-bold text-gray-900 dark:text-white tabular-nums">
+                {rt.occupied}
+                <span className="text-[10px] font-medium text-gray-400"> / {rt.total}</span>
+              </p>
             </div>
           ))}
         </div>

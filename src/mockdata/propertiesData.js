@@ -24,36 +24,101 @@ const apartmentBreakdown = (rooms) => {
   };
 };
 
-const sampleUnits = (prefix, city) => [
-  { id: `${prefix}-01`, type: 'Single Room', floor: 1, status: 'Occupied', rent: 600, amenities: ['Furnished', 'Shared Kitchen'], tenant: { name: 'Sample Resident', company: city, email: 'resident@arrivio.com', phone: '+49 30 000000', moveIn: '2028-06-01', leaseEnd: '2029-05-31' } },
-  { id: `${prefix}-02`, type: 'Shared Room', floor: 2, status: 'Occupied', rent: 850, amenities: ['Private Desk', 'Storage'], tenant: { name: 'Sample Resident', company: city, email: 'resident@arrivio.com', phone: '+49 30 000000', moveIn: '2028-06-01', leaseEnd: '2029-05-31' } },
-  { id: `${prefix}-03`, type: 'Studio', floor: 3, status: 'Occupied', rent: 1300, amenities: ['Private Kitchenette', 'Ensuite'], tenant: { name: 'Sample Resident', company: city, email: 'resident@arrivio.com', phone: '+49 30 000000', moveIn: '2028-06-01', leaseEnd: '2029-05-31' } },
+// Rent + amenity profile per room type.
+const ROOM_PROFILE = {
+  'Single Room': { rent: 600, amenities: ['Furnished', 'Shared Kitchen'] },
+  'Shared Room': { rent: 850, amenities: ['Furnished', 'Private Desk', 'Storage'] },
+  'Studio':       { rent: 1300, amenities: ['Private Kitchenette', 'Ensuite'] },
+};
+
+// Generate the full unit list for a property. The number of units equals
+// `rooms`. Statuses are distributed deterministically so the metric counts
+// reconcile with occupancyRate.
+const generateUnits = (prefix, breakdown, rooms, occupancyRate, partnerName) => {
+  const occupied = Math.round((rooms * occupancyRate) / 100);
+  const nonOccupied = rooms - occupied;
+  const reserved = Math.round(nonOccupied * 0.5);
+  const maintenance = Math.max(0, Math.floor(nonOccupied * 0.25));
+  const available = Math.max(0, nonOccupied - reserved - maintenance);
+
+  const statusPool = [
+    ...Array(occupied).fill('Occupied'),
+    ...Array(reserved).fill('Reserved'),
+    ...Array(maintenance).fill('Maintenance'),
+    ...Array(available).fill('Available'),
+  ];
+  while (statusPool.length < rooms) statusPool.push('Available');
+  statusPool.length = rooms;
+
+  const units = [];
+  let idx = 0;
+  Object.entries(breakdown).forEach(([type, count]) => {
+    const { rent, amenities } = ROOM_PROFILE[type];
+    for (let i = 0; i < count; i++) {
+      idx += 1;
+      const status = statusPool[idx - 1];
+      units.push({
+        id: `${prefix}-${String(idx).padStart(3, '0')}`,
+        type,
+        floor: Math.max(1, Math.ceil(idx / 12)),
+        status,
+        rent,
+        amenities,
+        tenant:
+          status === 'Occupied'
+            ? {
+                name: 'Sample Resident',
+                company: partnerName,
+                email: `resident.${idx}@arrivio.com`,
+                phone: '+49 30 000000',
+                moveIn: '2028-06-01',
+                leaseEnd: '2029-05-31',
+              }
+            : null,
+      });
+    }
+  });
+  return units;
+};
+
+const mockPropertiesRaw = [
+  { id: 'prop-001', category: 'Community Building', name: 'Arrivio Düsseldorf Flingern', city: 'Düsseldorf', address: 'Flingern-Nord, Düsseldorf', manager: 'Lea Hoffmann', status: 'Live', occupancyRate: 97, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(97), image: '/properties/1.jpg', prefix: 'FLG' },
+  { id: 'prop-002', category: 'Community Building', name: 'Arrivio Düsseldorf Oberbilk', city: 'Düsseldorf', address: 'Oberbilk, Düsseldorf', manager: 'Lea Hoffmann', status: 'Live', occupancyRate: 96, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(96), image: '/properties/2.jpg', prefix: 'OBK' },
+  { id: 'prop-003', category: 'Community Building', name: 'Arrivio Düsseldorf Pempelfort', city: 'Düsseldorf', address: 'Pempelfort, Düsseldorf', manager: 'Lea Hoffmann', status: 'Live', occupancyRate: 97, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(97), image: '/properties/3.jpg', prefix: 'PEM' },
+  { id: 'prop-004', category: 'Community Building', name: 'Arrivio Düsseldorf Bilk', city: 'Düsseldorf', address: 'Bilk, Düsseldorf', manager: 'Lea Hoffmann', status: 'Live', occupancyRate: 96, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(96), image: '/properties/4.jpg', prefix: 'BLK' },
+  { id: 'prop-005', category: 'Community Building', name: 'Arrivio Köln Ehrenfeld', city: 'Cologne', address: 'Ehrenfeld, Cologne', manager: 'Jonas Reuter', status: 'Live', occupancyRate: 97, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(97), image: '/properties/5.jpg', prefix: 'EHF' },
+  { id: 'prop-006', category: 'Community Building', name: 'Arrivio Köln Deutz', city: 'Cologne', address: 'Deutz, Cologne', manager: 'Jonas Reuter', status: 'Live', occupancyRate: 96, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(96), image: '/properties/6.jpg', prefix: 'DTZ' },
+  { id: 'prop-007', category: 'Community Building', name: 'Arrivio Köln Nippes', city: 'Cologne', address: 'Nippes, Cologne', manager: 'Jonas Reuter', status: 'Live', occupancyRate: 97, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(97), image: '/properties/7.jpg', prefix: 'NIP' },
+  { id: 'prop-008', category: 'Community Building', name: 'Arrivio Bonn Beuel', city: 'Bonn', address: 'Beuel, Bonn', manager: 'Mina Farouk', status: 'Live', occupancyRate: 97, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(97), image: '/properties/8.jpg', prefix: 'BEU' },
+  { id: 'prop-009', category: 'Community Building', name: 'Arrivio Bonn Endenich', city: 'Bonn', address: 'Endenich, Bonn', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(96), image: '/properties/9.jpg', prefix: 'END' },
+  { id: 'prop-010', category: 'Community Building', name: 'Arrivio Berlin Neukölln', city: 'Berlin', address: 'Neukölln, Berlin', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(96), image: '/properties/10.jpg', prefix: 'NEU' },
+  { id: 'prop-011', category: 'Community Building', name: 'Arrivio Berlin Moabit', city: 'Berlin', address: 'Moabit, Berlin', manager: 'Mina Farouk', status: 'Live', occupancyRate: 95, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(95), image: '/properties/11.jpg', prefix: 'MOA' },
+  { id: 'prop-012', category: 'Community Building', name: 'Arrivio Berlin Friedrichshain', city: 'Berlin', address: 'Friedrichshain, Berlin', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(96), image: '/properties/12.jpg', prefix: 'FRH' },
+  { id: 'prop-013', category: 'Community Building', name: 'Arrivio München Schwabing', city: 'Munich', address: 'Schwabing, Munich', manager: 'Mina Farouk', status: 'Live', occupancyRate: 95, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(95), image: '/properties/13.jpg', prefix: 'SCW' },
+  { id: 'prop-014', category: 'Community Building', name: 'Arrivio München Giesing', city: 'Munich', address: 'Giesing, Munich', manager: 'Mina Farouk', status: 'Live', occupancyRate: 95, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(95), image: '/properties/14.jpg', prefix: 'GSG' },
+  { id: 'prop-015', category: 'Community Building', name: 'Arrivio Hamburg Altona', city: 'Hamburg', address: 'Altona, Hamburg', manager: 'Mina Farouk', status: 'Live', occupancyRate: 94, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(94), image: '/properties/15.jpg', prefix: 'ALT' },
+  { id: 'prop-016', category: 'Community Building', name: 'Arrivio Frankfurt Sachsenhausen', city: 'Frankfurt', address: 'Sachsenhausen, Frankfurt', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(96), image: '/properties/16.jpg', prefix: 'SAC' },
+  { id: 'apt-001', category: 'Apartment Portfolio', name: 'Düsseldorf apartment portfolio', city: 'Düsseldorf', address: '80 leased apartments across Düsseldorf', manager: 'Lea Hoffmann', status: 'Live', occupancyRate: 96, apartments: 80, rooms: 240, unitBreakdown: apartmentBreakdown(240), monthlyRevenue: apartmentRevenue(80), image: '/properties/17.jpg', prefix: 'ADU' },
+  { id: 'apt-002', category: 'Apartment Portfolio', name: 'Cologne apartment portfolio', city: 'Cologne', address: '60 leased apartments across Cologne', manager: 'Jonas Reuter', status: 'Live', occupancyRate: 96, apartments: 60, rooms: 180, unitBreakdown: apartmentBreakdown(180), monthlyRevenue: apartmentRevenue(60), image: '/properties/18.jpg', prefix: 'ACG' },
+  { id: 'apt-003', category: 'Apartment Portfolio', name: 'Bonn apartment portfolio', city: 'Bonn', address: '40 leased apartments across Bonn', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, apartments: 40, rooms: 120, unitBreakdown: apartmentBreakdown(120), monthlyRevenue: apartmentRevenue(40), image: '/properties/19.jpg', prefix: 'ABO' },
+  { id: 'apt-004', category: 'Apartment Portfolio', name: 'Aachen apartment portfolio', city: 'Aachen', address: '30 leased apartments across Aachen', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, apartments: 30, rooms: 90, unitBreakdown: apartmentBreakdown(90), monthlyRevenue: apartmentRevenue(30), image: '/properties/20.jpg', prefix: 'AAC' },
+  { id: 'apt-005', category: 'Apartment Portfolio', name: 'Berlin apartment portfolio', city: 'Berlin', address: '20 leased apartments across Berlin', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, apartments: 20, rooms: 60, unitBreakdown: apartmentBreakdown(60), monthlyRevenue: apartmentRevenue(20), image: '/properties/21.jpg', prefix: 'ABE' },
+  { id: 'apt-006', category: 'Apartment Portfolio', name: 'Munich apartment portfolio', city: 'Munich', address: '10 leased apartments across Munich', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, apartments: 10, rooms: 30, unitBreakdown: apartmentBreakdown(30), monthlyRevenue: apartmentRevenue(10), image: '/properties/22.jpg', prefix: 'AMU' },
 ];
 
-export const mockProperties = [
-  { id: 'prop-001', category: 'Community Building', name: 'Arrivio Düsseldorf Flingern', city: 'Düsseldorf', address: 'Flingern-Nord, Düsseldorf', manager: 'Lea Hoffmann', status: 'Live', occupancyRate: 97, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(97), image: '/src/assets/properties/1.jpg', units: sampleUnits('FLG', 'Klinikum Düsseldorf GmbH') },
-  { id: 'prop-002', category: 'Community Building', name: 'Arrivio Düsseldorf Oberbilk', city: 'Düsseldorf', address: 'Oberbilk, Düsseldorf', manager: 'Lea Hoffmann', status: 'Live', occupancyRate: 96, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(96), image: '/src/assets/properties/2.jpg', units: sampleUnits('OBK', 'Alloheim Senioren-Residenzen') },
-  { id: 'prop-003', category: 'Community Building', name: 'Arrivio Düsseldorf Pempelfort', city: 'Düsseldorf', address: 'Pempelfort, Düsseldorf', manager: 'Lea Hoffmann', status: 'Live', occupancyRate: 97, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(97), image: '/src/assets/properties/3.jpg', units: sampleUnits('PEM', 'Henkel AG & Co. KGaA') },
-  { id: 'prop-004', category: 'Community Building', name: 'Arrivio Düsseldorf Bilk', city: 'Düsseldorf', address: 'Bilk, Düsseldorf', manager: 'Lea Hoffmann', status: 'Live', occupancyRate: 96, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(96), image: '/src/assets/properties/4.jpg', units: sampleUnits('BLK', 'Rheinmetall AG') },
-  { id: 'prop-005', category: 'Community Building', name: 'Arrivio Köln Ehrenfeld', city: 'Cologne', address: 'Ehrenfeld, Cologne', manager: 'Jonas Reuter', status: 'Live', occupancyRate: 97, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(97), image: '/src/assets/properties/5.jpg', units: sampleUnits('EHF', 'AHO Germany (International Healthcare)') },
-  { id: 'prop-006', category: 'Community Building', name: 'Arrivio Köln Deutz', city: 'Cologne', address: 'Deutz, Cologne', manager: 'Jonas Reuter', status: 'Live', occupancyRate: 96, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(96), image: '/src/assets/properties/6.jpg', units: sampleUnits('DTZ', 'Universitätsklinikum Köln') },
-  { id: 'prop-007', category: 'Community Building', name: 'Arrivio Köln Nippes', city: 'Cologne', address: 'Nippes, Cologne', manager: 'Jonas Reuter', status: 'Live', occupancyRate: 97, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(97), image: '/src/assets/properties/7.jpg', units: sampleUnits('NIP', 'Universität zu Köln') },
-  { id: 'prop-008', category: 'Community Building', name: 'Arrivio Bonn Beuel', city: 'Bonn', address: 'Beuel, Bonn', manager: 'Mina Farouk', status: 'Live', occupancyRate: 97, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(97), image: '/src/assets/properties/8.jpg', units: sampleUnits('BEU', 'Universität Bonn') },
-  { id: 'prop-009', category: 'Community Building', name: 'Arrivio Bonn Endenich', city: 'Bonn', address: 'Endenich, Bonn', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(96), image: '/src/assets/properties/9.jpg', units: sampleUnits('END', 'Uniklinik RWTH Aachen') },
-  { id: 'prop-010', category: 'Community Building', name: 'Arrivio Berlin Neukölln', city: 'Berlin', address: 'Neukölln, Berlin', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(96), image: '/src/assets/properties/10.jpg', units: sampleUnits('NEU', 'Vonovia SE (tech staff)') },
-  { id: 'prop-011', category: 'Community Building', name: 'Arrivio Berlin Moabit', city: 'Berlin', address: 'Moabit, Berlin', manager: 'Mina Farouk', status: 'Live', occupancyRate: 95, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(95), image: '/src/assets/properties/11.jpg', units: sampleUnits('MOA', 'Grouped Employer Portfolio') },
-  { id: 'prop-012', category: 'Community Building', name: 'Arrivio Berlin Friedrichshain', city: 'Berlin', address: 'Friedrichshain, Berlin', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(96), image: '/src/assets/properties/12.jpg', units: sampleUnits('FRH', 'Grouped Employer Portfolio') },
-  { id: 'prop-013', category: 'Community Building', name: 'Arrivio München Schwabing', city: 'Munich', address: 'Schwabing, Munich', manager: 'Mina Farouk', status: 'Live', occupancyRate: 95, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(95), image: '/src/assets/properties/13.jpg', units: sampleUnits('SCW', 'Siemens Healthineers AG') },
-  { id: 'prop-014', category: 'Community Building', name: 'Arrivio München Giesing', city: 'Munich', address: 'Giesing, Munich', manager: 'Mina Farouk', status: 'Live', occupancyRate: 95, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(95), image: '/src/assets/properties/14.jpg', units: sampleUnits('GSG', 'Grouped Employer Portfolio') },
-  { id: 'prop-015', category: 'Community Building', name: 'Arrivio Hamburg Altona', city: 'Hamburg', address: 'Altona, Hamburg', manager: 'Mina Farouk', status: 'Live', occupancyRate: 94, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(94), image: '/src/assets/properties/15.jpg', units: sampleUnits('ALT', 'Grouped Employer Portfolio') },
-  { id: 'prop-016', category: 'Community Building', name: 'Arrivio Frankfurt Sachsenhausen', city: 'Frankfurt', address: 'Sachsenhausen, Frankfurt', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, rooms: 150, unitBreakdown: buildingBreakdown(150), monthlyRevenue: buildingRevenue(96), image: '/src/assets/properties/16.jpg', units: sampleUnits('SAC', 'Deutsche Bahn Engineering') },
-  { id: 'apt-001', category: 'Apartment Portfolio', name: 'Düsseldorf apartment portfolio', city: 'Düsseldorf', address: '80 leased apartments across Düsseldorf', manager: 'Lea Hoffmann', status: 'Live', occupancyRate: 96, apartments: 80, rooms: 240, unitBreakdown: apartmentBreakdown(240), monthlyRevenue: apartmentRevenue(80), image: '/src/assets/properties/17.jpg', units: sampleUnits('ADU', 'Direct B2C') },
-  { id: 'apt-002', category: 'Apartment Portfolio', name: 'Cologne apartment portfolio', city: 'Cologne', address: '60 leased apartments across Cologne', manager: 'Jonas Reuter', status: 'Live', occupancyRate: 96, apartments: 60, rooms: 180, unitBreakdown: apartmentBreakdown(180), monthlyRevenue: apartmentRevenue(60), image: '/src/assets/properties/18.jpg', units: sampleUnits('ACG', 'Direct B2C') },
-  { id: 'apt-003', category: 'Apartment Portfolio', name: 'Bonn apartment portfolio', city: 'Bonn', address: '40 leased apartments across Bonn', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, apartments: 40, rooms: 120, unitBreakdown: apartmentBreakdown(120), monthlyRevenue: apartmentRevenue(40), image: '/src/assets/properties/19.jpg', units: sampleUnits('ABO', 'Direct B2C') },
-  { id: 'apt-004', category: 'Apartment Portfolio', name: 'Aachen apartment portfolio', city: 'Aachen', address: '30 leased apartments across Aachen', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, apartments: 30, rooms: 90, unitBreakdown: apartmentBreakdown(90), monthlyRevenue: apartmentRevenue(30), image: '/src/assets/properties/20.jpg', units: sampleUnits('AAC', 'Direct B2C') },
-  { id: 'apt-005', category: 'Apartment Portfolio', name: 'Berlin apartment portfolio', city: 'Berlin', address: '20 leased apartments across Berlin', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, apartments: 20, rooms: 60, unitBreakdown: apartmentBreakdown(60), monthlyRevenue: apartmentRevenue(20), image: '/src/assets/properties/21.jpg', units: sampleUnits('ABE', 'Direct B2C') },
-  { id: 'apt-006', category: 'Apartment Portfolio', name: 'Munich apartment portfolio', city: 'Munich', address: '10 leased apartments across Munich', manager: 'Mina Farouk', status: 'Live', occupancyRate: 96, apartments: 10, rooms: 30, unitBreakdown: apartmentBreakdown(30), monthlyRevenue: apartmentRevenue(10), image: '/src/assets/properties/22.jpg', units: sampleUnits('AMU', 'Direct B2C') },
-];
+// Attach a fully-populated `units` array to each property. The unit count
+// equals `rooms`, statuses are distributed to reconcile with occupancyRate,
+// and tenant info is populated only on Occupied rooms.
+export const mockProperties = mockPropertiesRaw.map((property) => ({
+  ...property,
+  units: generateUnits(
+    property.prefix,
+    property.unitBreakdown,
+    property.rooms,
+    property.occupancyRate,
+    property.manager,
+  ),
+}));
 
 export const mockCities = [
   { id: 'city-001', name: 'Düsseldorf', country: 'Germany', properties: 5, units: 840, manager: 'Lea Hoffmann', status: 'Active', occupancy: 96.5, revenue: 596534 },
