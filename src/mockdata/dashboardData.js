@@ -66,10 +66,10 @@ export const dashboardData = {
   activity: [
     { type: 'success', text: 'Klinikum Düsseldorf committed 12 additional rooms in Flingern.', time: '12m ago' },
     { type: 'info', text: 'Arrivio Berlin Neukölln reached 96% stabilized occupancy.', time: '38m ago' },
-    { type: 'success', text: 'Seed conversion status updated to Converted to Equity.', time: '1h ago' },
+    { type: 'success', text: 'Heinrich-Heine-Universität autumn intake housing list locked.', time: '1h ago' },
     { type: 'warning', text: 'University semester invoice batch pending approval for €21,400.', time: '2h ago' },
     { type: 'info', text: 'Düsseldorf apartment portfolio held 96% occupancy this month.', time: '3h ago' },
-    { type: 'success', text: 'Series A closing documents archived in investor records.', time: '5h ago' },
+    { type: 'success', text: 'Maintenance buffer rebalanced to 33 rooms across live buildings.', time: '5h ago' },
   ],
   health: [
     { service: 'Stripe', status: 'Connected', color: 'bg-green-50 text-green-800' },
