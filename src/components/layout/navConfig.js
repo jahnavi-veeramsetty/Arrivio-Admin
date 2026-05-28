@@ -65,7 +65,6 @@ export const navConfig = [
     subs: [
       { id: 'tenants_all',     label: 'All Tenants',   route: '/admin/tenants/all',   roles: ['super_admin', 'ops_manager', 'support_agent'] },
       { id: 'tenants_b2b',     label: 'B2B Companies', route: '/admin/tenants/b2b',   roles: ['super_admin', 'ops_manager'] },
-      { id: 'tenants_leases',  label: 'Leases',        route: '/admin/tenants/leases',roles: ['super_admin', 'ops_manager'] },
       { id: 'tenants_ledger',  label: 'Rent Ledger',   route: '/admin/tenants/ledger',roles: ['super_admin', 'finance_manager'] },
     ],
   },

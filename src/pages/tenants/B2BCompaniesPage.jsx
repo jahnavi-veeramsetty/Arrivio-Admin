@@ -112,7 +112,6 @@ export default function B2BCompaniesPage() {
                                   { label: 'Rent', value: company.paymentBreakdown.rent },
                                   { label: 'Services', value: company.paymentBreakdown.services },
                                   { label: 'Platform Fee', value: company.paymentBreakdown.platformFee },
-                                  { label: 'Brokerage', value: company.paymentBreakdown.brokerage },
                                 ].map((line) => (
                                   <div key={line.label} className="flex items-center justify-between text-xs">
                                     <span className="text-gray-500">{line.label}</span>

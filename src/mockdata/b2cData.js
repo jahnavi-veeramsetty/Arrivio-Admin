@@ -1,24 +1,22 @@
 // ── Applications ─────────────────────────────────────────────
-// Submission dates clustered in November 2027 to sit inside the Y2 fiscal
-// year (FY27-28). The `days` field is kept as a small "waiting since last
-// status update" stat so the OldestPending widget and waiting badges stay
-// readable.
+// Anchored to DEMO_TODAY = 2026-05-26. `submitted` and `days` are
+// internally consistent: submitted = DEMO_TODAY − days.
 export const mockApplications = [
-  { id:'APP-1001', name:'James Hartley',    email:'james.h@email.com',   city:'Aachen',    unit:'Studio 4B',           property:'Arrivio Köln Ehrenfeld',          submitted:'2027-11-25', status:'Pending',         reviewer:'Sarah K.',  days:1.0, paymentStatus:'Holding deposit paid', docStatus:'incomplete' },
-  { id:'APP-1002', name:'Priya Nair',       email:'priya.n@email.com',   city:'Berlin',    unit:'Single Room 12A',     property:'Arrivio Berlin Neukölln',         submitted:'2027-11-08', status:'In Review',       reviewer:'Tom B.',    days:33,  paymentStatus:'Holding deposit paid', docStatus:'complete'   },
-  { id:'APP-1003', name:'Chen Wei',         email:'chen.w@email.com',    city:'Bonn',      unit:'Shared Room 7C',      property:'Arrivio Bonn Beuel',              submitted:'2027-11-12', status:'Approved',        reviewer:'Sarah K.',  days:30,  paymentStatus:'Full payment sent',    docStatus:'verified'   },
-  { id:'APP-1004', name:'Fatima Al-Rashid', email:'fatima.a@email.com',  city:'Cologne',   unit:'Studio 2A',           property:'Arrivio Köln Deutz',              submitted:'2027-11-15', status:'Approved',        reviewer:'Tom B.',    days:28,  paymentStatus:'Full payment sent',    docStatus:'verified'   },
-  { id:'APP-1005', name:'Oliver Bennett',   email:'oliver.b@email.com',  city:'Düsseldorf',unit:'Single Room 8F',      property:'Arrivio Düsseldorf Flingern',     submitted:'2027-11-04', status:'Action Required', reviewer:'Sarah K.',  days:26,  paymentStatus:'Holding deposit paid', docStatus:'incomplete' },
-  { id:'APP-1006', name:'Aisha Malik',      email:'aisha.m@email.com',   city:'Frankfurt', unit:'Studio 1A',           property:'Arrivio Frankfurt Sachsenhausen', submitted:'2027-11-02', status:'Rejected',        reviewer:'Tom B.',    days:23,  paymentStatus:'Refund issued',        docStatus:'rejected'   },
-  { id:'APP-1007', name:'Raj Patel',        email:'raj.p@email.com',     city:'Hamburg',   unit:'Single Room 3D',      property:'Arrivio Hamburg Altona',          submitted:'2027-11-28', status:'Pending',         reviewer:'Unassigned',days:1.4, paymentStatus:'Pending',              docStatus:'incomplete' },
-  { id:'APP-1008', name:'Sophie Laurent',   email:'sophie.l@email.com',  city:'Munich',    unit:'Shared Room 5E',      property:'Arrivio München Schwabing',       submitted:'2027-11-18', status:'In Review',       reviewer:'Tom B.',    days:17,  paymentStatus:'Holding deposit paid', docStatus:'complete'   },
-  { id:'APP-1009', name:'Marcus Silva',     email:'marcus.s@email.com',  city:'Aachen',    unit:'Single Room 9B',      property:'Arrivio Köln Ehrenfeld',          submitted:'2027-11-30', status:'Pending',         reviewer:'Unassigned',days:0.9, paymentStatus:'Pending',              docStatus:'incomplete' },
-  { id:'APP-1010', name:'Yuki Tanaka',      email:'yuki.t@email.com',    city:'Berlin',    unit:'Studio 6A',           property:'Arrivio Berlin Friedrichshain',   submitted:'2027-11-10', status:'Approved',        reviewer:'Sarah K.',  days:12,  paymentStatus:'Full payment sent',    docStatus:'verified'   },
-  { id:'APP-1011', name:'Elena Vasquez',    email:'elena.v@email.com',   city:'Bonn',      unit:'Single Room 11C',     property:'Arrivio Bonn Endenich',           submitted:'2027-11-22', status:'In Review',       reviewer:'Sarah K.',  days:10,  paymentStatus:'Holding deposit paid', docStatus:'complete'   },
-  { id:'APP-1012', name:'Ahmed Hassan',     email:'ahmed.h@email.com',   city:'Cologne',   unit:'Shared Room 4A',      property:'Arrivio Köln Nippes',             submitted:'2027-11-26', status:'Pending',         reviewer:'Unassigned',days:0.6, paymentStatus:'Pending',              docStatus:'incomplete' },
-  { id:'APP-1013', name:'Nina Okafor',      email:'nina.o@email.com',    city:'Düsseldorf',unit:'Single Room 2B',      property:'Arrivio Düsseldorf Oberbilk',     submitted:'2027-11-14', status:'Action Required', reviewer:'Tom B.',    days:6,   paymentStatus:'Holding deposit paid', docStatus:'incomplete' },
-  { id:'APP-1014', name:'Daniel Müller',    email:'daniel.m@email.com',  city:'Frankfurt', unit:'Studio 3C',           property:'Arrivio Frankfurt Sachsenhausen', submitted:'2027-11-29', status:'Pending',         reviewer:'Unassigned',days:0.2, paymentStatus:'Pending',              docStatus:'incomplete' },
-  { id:'APP-1015', name:'Ling Zhao',        email:'ling.z@email.com',    city:'Hamburg',   unit:'Shared Room 8D',      property:'Arrivio Hamburg Altona',          submitted:'2027-11-19', status:'In Review',       reviewer:'Tom B.',    days:2,   paymentStatus:'Holding deposit paid', docStatus:'complete'   },
+  { id:'APP-1001', name:'James Hartley',    email:'james.h@email.com',   city:'Aachen',    unit:'Studio 4B',           property:'Arrivio Köln Ehrenfeld',          submitted:'2026-05-25', status:'Pending',         reviewer:'Sarah K.',  days:1.0, paymentStatus:'Holding deposit paid', docStatus:'incomplete' },
+  { id:'APP-1002', name:'Priya Nair',       email:'priya.n@email.com',   city:'Berlin',    unit:'Single Room 12A',     property:'Arrivio Berlin Neukölln',         submitted:'2026-04-23', status:'In Review',       reviewer:'Tom B.',    days:33,  paymentStatus:'Holding deposit paid', docStatus:'complete'   },
+  { id:'APP-1003', name:'Chen Wei',         email:'chen.w@email.com',    city:'Bonn',      unit:'Shared Room 7C',      property:'Arrivio Bonn Beuel',              submitted:'2026-04-26', status:'Approved',        reviewer:'Sarah K.',  days:30,  paymentStatus:'Full payment sent',    docStatus:'verified'   },
+  { id:'APP-1004', name:'Fatima Al-Rashid', email:'fatima.a@email.com',  city:'Cologne',   unit:'Studio 2A',           property:'Arrivio Köln Deutz',              submitted:'2026-04-28', status:'Approved',        reviewer:'Tom B.',    days:28,  paymentStatus:'Full payment sent',    docStatus:'verified'   },
+  { id:'APP-1005', name:'Oliver Bennett',   email:'oliver.b@email.com',  city:'Düsseldorf',unit:'Single Room 8F',      property:'Arrivio Düsseldorf Flingern',     submitted:'2026-04-30', status:'Action Required', reviewer:'Sarah K.',  days:26,  paymentStatus:'Holding deposit paid', docStatus:'incomplete' },
+  { id:'APP-1006', name:'Aisha Malik',      email:'aisha.m@email.com',   city:'Frankfurt', unit:'Studio 1A',           property:'Arrivio Frankfurt Sachsenhausen', submitted:'2026-05-03', status:'Rejected',        reviewer:'Tom B.',    days:23,  paymentStatus:'Refund issued',        docStatus:'rejected'   },
+  { id:'APP-1007', name:'Raj Patel',        email:'raj.p@email.com',     city:'Hamburg',   unit:'Single Room 3D',      property:'Arrivio Hamburg Altona',          submitted:'2026-05-25', status:'Pending',         reviewer:'Unassigned',days:1.4, paymentStatus:'Pending',              docStatus:'incomplete' },
+  { id:'APP-1008', name:'Sophie Laurent',   email:'sophie.l@email.com',  city:'Munich',    unit:'Shared Room 5E',      property:'Arrivio München Schwabing',       submitted:'2026-05-09', status:'In Review',       reviewer:'Tom B.',    days:17,  paymentStatus:'Holding deposit paid', docStatus:'complete'   },
+  { id:'APP-1009', name:'Marcus Silva',     email:'marcus.s@email.com',  city:'Aachen',    unit:'Single Room 9B',      property:'Arrivio Köln Ehrenfeld',          submitted:'2026-05-25', status:'Pending',         reviewer:'Unassigned',days:0.9, paymentStatus:'Pending',              docStatus:'incomplete' },
+  { id:'APP-1010', name:'Yuki Tanaka',      email:'yuki.t@email.com',    city:'Berlin',    unit:'Studio 6A',           property:'Arrivio Berlin Friedrichshain',   submitted:'2026-05-14', status:'Approved',        reviewer:'Sarah K.',  days:12,  paymentStatus:'Full payment sent',    docStatus:'verified'   },
+  { id:'APP-1011', name:'Elena Vasquez',    email:'elena.v@email.com',   city:'Bonn',      unit:'Single Room 11C',     property:'Arrivio Bonn Endenich',           submitted:'2026-05-16', status:'In Review',       reviewer:'Sarah K.',  days:10,  paymentStatus:'Holding deposit paid', docStatus:'complete'   },
+  { id:'APP-1012', name:'Ahmed Hassan',     email:'ahmed.h@email.com',   city:'Cologne',   unit:'Shared Room 4A',      property:'Arrivio Köln Nippes',             submitted:'2026-05-25', status:'Pending',         reviewer:'Unassigned',days:0.6, paymentStatus:'Pending',              docStatus:'incomplete' },
+  { id:'APP-1013', name:'Nina Okafor',      email:'nina.o@email.com',    city:'Düsseldorf',unit:'Single Room 2B',      property:'Arrivio Düsseldorf Oberbilk',     submitted:'2026-05-20', status:'Action Required', reviewer:'Tom B.',    days:6,   paymentStatus:'Holding deposit paid', docStatus:'incomplete' },
+  { id:'APP-1014', name:'Daniel Müller',    email:'daniel.m@email.com',  city:'Frankfurt', unit:'Studio 3C',           property:'Arrivio Frankfurt Sachsenhausen', submitted:'2026-05-26', status:'Pending',         reviewer:'Unassigned',days:0.2, paymentStatus:'Pending',              docStatus:'incomplete' },
+  { id:'APP-1015', name:'Ling Zhao',        email:'ling.z@email.com',    city:'Hamburg',   unit:'Shared Room 8D',      property:'Arrivio Hamburg Altona',          submitted:'2026-05-24', status:'In Review',       reviewer:'Tom B.',    days:2,   paymentStatus:'Holding deposit paid', docStatus:'complete'   },
 ];
 
 // Applications with unsigned agreements (Approved but not countersigned)
@@ -71,109 +69,109 @@ export const applicantDocData = [
   {
     appId:'APP-1001', name:'James Hartley',  email:'james.h@email.com',  city:'Aachen',    applicantType:'employee',
     docs: {
-      passport: { uploaded:'2027-11-11', status:'Uploaded' },
-      contract: { uploaded:'2027-11-11', status:'Uploaded' },
-      payslips: { uploaded:'2027-11-13', status:'Uploaded' },
-      visa:     { uploaded:'2027-11-12', status:'Uploaded' },
+      passport: { uploaded:'2026-04-11', status:'Uploaded' },
+      contract: { uploaded:'2026-04-11', status:'Uploaded' },
+      payslips: { uploaded:'2026-04-13', status:'Uploaded' },
+      visa:     { uploaded:'2026-04-12', status:'Uploaded' },
     },
   },
   {
     appId:'APP-1002', name:'Priya Nair',      email:'priya.n@email.com',  city:'Berlin',     applicantType:'employee',
     docs: {
-      passport: { uploaded:'2027-11-16', status:'Verified' },
-      contract: { uploaded:'2027-11-16', status:'Verified' },
-      payslips: { uploaded:'2027-11-17', status:'Uploaded' },
-      visa:     { uploaded:'2027-11-16', status:'Verified' },
+      passport: { uploaded:'2026-04-16', status:'Verified' },
+      contract: { uploaded:'2026-04-16', status:'Verified' },
+      payslips: { uploaded:'2026-04-17', status:'Uploaded' },
+      visa:     { uploaded:'2026-04-16', status:'Verified' },
     },
   },
   {
     appId:'APP-1003', name:'Chen Wei',        email:'chen.w@email.com',   city:'Bonn', applicantType:'self_employed',
     docs: {
-      passport: { uploaded:'2027-11-19', status:'Verified' },
-      business: { uploaded:'2027-11-19', status:'Verified' },
-      bank:     { uploaded:'2027-11-20', status:'Verified' },
-      visa:     { uploaded:'2027-11-19', status:'Verified' },
+      passport: { uploaded:'2026-04-19', status:'Verified' },
+      business: { uploaded:'2026-04-19', status:'Verified' },
+      bank:     { uploaded:'2026-04-20', status:'Verified' },
+      visa:     { uploaded:'2026-04-19', status:'Verified' },
     },
   },
   {
     appId:'APP-1004', name:'Fatima Al-Rashid',email:'fatima.a@email.com', city:'Cologne',     applicantType:'employee',
     docs: {
-      passport: { uploaded:'2027-11-21', status:'Verified' },
-      contract: { uploaded:'2027-11-21', status:'Verified' },
-      payslips: { uploaded:'2027-11-21', status:'Verified' },
-      visa:     { uploaded:'2027-11-21', status:'Verified' },
+      passport: { uploaded:'2026-04-21', status:'Verified' },
+      contract: { uploaded:'2026-04-21', status:'Verified' },
+      payslips: { uploaded:'2026-04-21', status:'Verified' },
+      visa:     { uploaded:'2026-04-21', status:'Verified' },
     },
   },
   {
     appId:'APP-1005', name:'Oliver Bennett',  email:'oliver.b@email.com', city:'Dusseldorf',    applicantType:'student',
     docs: {
-      passport:   { uploaded:'2027-11-23', status:'Uploaded' },
-      enrollment: { uploaded:'2027-11-23', status:'Rejected' },
-      financial:  { uploaded:'2027-11-24', status:'Uploaded' },
-      visa:       { uploaded:'2027-11-23', status:'Uploaded' },
+      passport:   { uploaded:'2026-04-23', status:'Uploaded' },
+      enrollment: { uploaded:'2026-04-23', status:'Rejected' },
+      financial:  { uploaded:'2026-04-24', status:'Uploaded' },
+      visa:       { uploaded:'2026-04-23', status:'Uploaded' },
     },
   },
   {
     appId:'APP-1007', name:'Raj Patel',       email:'raj.p@email.com',    city:'Hamburg', applicantType:'self_employed',
     docs: {
-      passport: { uploaded:'2027-12-01', status:'Uploaded' },
-      business: { uploaded:'2027-12-02', status:'Uploaded' },
-      bank:     { uploaded:'2027-12-02', status:'Uploaded' },
-      visa:     { uploaded:'2027-12-01', status:'Uploaded' },
+      passport: { uploaded:'2026-05-01', status:'Uploaded' },
+      business: { uploaded:'2026-05-02', status:'Uploaded' },
+      bank:     { uploaded:'2026-05-02', status:'Uploaded' },
+      visa:     { uploaded:'2026-05-01', status:'Uploaded' },
     },
   },
   {
     appId:'APP-1008', name:'Sophie Laurent',  email:'sophie.l@email.com', city:'Munich',    applicantType:'employee',
     docs: {
-      passport: { uploaded:'2027-12-04', status:'Verified' },
-      contract: { uploaded:'2027-12-04', status:'Uploaded' },
-      payslips: { uploaded:'2027-12-04', status:'Uploaded' },
-      visa:     { uploaded:'2027-12-05', status:'Uploaded' },
+      passport: { uploaded:'2026-05-04', status:'Verified' },
+      contract: { uploaded:'2026-05-04', status:'Uploaded' },
+      payslips: { uploaded:'2026-05-04', status:'Uploaded' },
+      visa:     { uploaded:'2026-05-05', status:'Uploaded' },
     },
   },
   {
     appId:'APP-1009', name:'Marcus Silva',    email:'marcus.s@email.com', city:'Aachen',     applicantType:'student',
     docs: {
-      passport:   { uploaded:'2027-12-05', status:'Uploaded' },
-      enrollment: { uploaded:'2027-12-05', status:'Uploaded' },
-      financial:  { uploaded:'2027-12-06', status:'Uploaded' },
-      visa:       { uploaded:'2027-12-06', status:'Uploaded' },
+      passport:   { uploaded:'2026-05-05', status:'Uploaded' },
+      enrollment: { uploaded:'2026-05-05', status:'Uploaded' },
+      financial:  { uploaded:'2026-05-06', status:'Uploaded' },
+      visa:       { uploaded:'2026-05-06', status:'Uploaded' },
     },
   },
   {
     appId:'APP-1010', name:'Yuki Tanaka',     email:'yuki.t@email.com',   city:'Berlin', applicantType:'self_employed',
     docs: {
-      passport: { uploaded:'2027-12-08', status:'Verified' },
-      business: { uploaded:'2027-12-08', status:'Verified' },
-      bank:     { uploaded:'2027-12-08', status:'Verified' },
-      visa:     { uploaded:'2027-12-09', status:'Verified' },
+      passport: { uploaded:'2026-05-08', status:'Verified' },
+      business: { uploaded:'2026-05-08', status:'Verified' },
+      bank:     { uploaded:'2026-05-08', status:'Verified' },
+      visa:     { uploaded:'2026-05-09', status:'Verified' },
     },
   },
   {
     appId:'APP-1011', name:'Elena Vasquez',   email:'elena.v@email.com',  city:'Bonn',    applicantType:'employee',
     docs: {
-      passport: { uploaded:'2027-12-10', status:'Verified' },
-      contract: { uploaded:'2027-12-10', status:'Uploaded' },
-      payslips: { uploaded:'2027-12-11', status:'Uploaded' },
-      visa:     { uploaded:'2027-12-10', status:'Uploaded' },
+      passport: { uploaded:'2026-05-10', status:'Verified' },
+      contract: { uploaded:'2026-05-10', status:'Uploaded' },
+      payslips: { uploaded:'2026-05-11', status:'Uploaded' },
+      visa:     { uploaded:'2026-05-10', status:'Uploaded' },
     },
   },
   {
     appId:'APP-1013', name:'Nina Okafor',     email:'nina.o@email.com',   city:'Dusseldorf', applicantType:'student',
     docs: {
-      passport:   { uploaded:'2027-12-14', status:'Uploaded' },
-      enrollment: { uploaded:'2027-12-14', status:'Uploaded' },
-      financial:  { uploaded:'2027-12-14', status:'Uploaded' },
-      visa:       { uploaded:'2027-12-15', status:'Uploaded' },
+      passport:   { uploaded:'2026-05-14', status:'Uploaded' },
+      enrollment: { uploaded:'2026-05-14', status:'Uploaded' },
+      financial:  { uploaded:'2026-05-14', status:'Uploaded' },
+      visa:       { uploaded:'2026-05-15', status:'Uploaded' },
     },
   },
   {
     appId:'APP-1015', name:'Ling Zhao',       email:'ling.z@email.com',   city:'Hamburg', applicantType:'self_employed',
     docs: {
-      passport: { uploaded:'2027-12-18', status:'Uploaded' },
-      business: { uploaded:'2027-12-18', status:'Uploaded' },
-      bank:     { uploaded:'2027-12-18', status:'Uploaded' },
-      visa:     { uploaded:'2027-12-18', status:'Uploaded' },
+      passport: { uploaded:'2026-05-18', status:'Uploaded' },
+      business: { uploaded:'2026-05-18', status:'Uploaded' },
+      bank:     { uploaded:'2026-05-18', status:'Uploaded' },
+      visa:     { uploaded:'2026-05-18', status:'Uploaded' },
     },
   },
 ];
@@ -198,25 +196,26 @@ export const mockUnits = [
 ];
 
 // ── Move Events ────────────────────────────────────────────────
-// Anchored to DEMO_TODAY = 2028-06-26. Events spread across June and July 2028
-// using tenants and properties consistent with allTenants / propertiesData.
+// Anchored to DEMO_TODAY = 2026-05-26. Spread across May and June 2026 with
+// a mix of past (Completed), today/this week (Scheduled/Confirmed), and
+// upcoming next-month entries so the calendar feels live.
 export const mockMoveEvents = [
-  { id:'MOV-001', tenant:'Aarav Mehta',         unit:'D-3-214',    property:'Arrivio Düsseldorf Flingern', city:'Düsseldorf', propertyType: 'Single Room', type:'Move-in',  date:'2028-06-03', status:'Completed', email: 'aarav.m@klinikum-duesseldorf.de', phone: '+49 151 1000 2001', checklist: { done: 3, total: 3, items: ['Agreement signed', 'Deposit paid', 'ID verified'] } },
-  { id:'MOV-002', tenant:'Maria Santos',        unit:'O-2-118',    property:'Arrivio Düsseldorf Oberbilk', city:'Düsseldorf', propertyType: 'Single Room', type:'Move-in',  date:'2028-06-18', status:'Completed', email: 'maria.s@alloheim.de', phone: '+49 151 1000 2002', checklist: { done: 3, total: 3, items: ['Agreement signed', 'Deposit paid', 'ID verified'] } },
-  { id:'MOV-003', tenant:'Krzysztof Nowak',     unit:'E-4-206',    property:'Arrivio Köln Ehrenfeld',      city:'Cologne',    propertyType: 'Single Room', type:'Move-in',  date:'2028-06-22', status:'Completed', email: 'krzysztof.n@aho-germany.de', phone: '+49 151 1000 2003', checklist: { done: 3, total: 3, items: ['Agreement signed', 'Deposit paid', 'ID verified'] } },
-  { id:'MOV-004', tenant:'Rohan Kulkarni',      unit:'F-2-018',    property:'Arrivio Düsseldorf Flingern', city:'Düsseldorf', propertyType: 'Single Room', type:'Move-out', date:'2028-06-26', status:'Scheduled', email: 'rohan.k@klinikum-duesseldorf.de', phone: '+49 151 1000 2150', checklist: { done: 2, total: 4, items: ['Inspection scheduled ✓', 'Final invoice issued ✓', 'Cleaning pending', 'Deposit refund pending'] } },
-  { id:'MOV-005', tenant:'Isabel Romero',       unit:'APT-BER-04', property:'Berlin apartment portfolio',  city:'Berlin',     propertyType: 'Studio',      type:'Move-out', date:'2028-06-28', status:'Scheduled', email: 'isabel.r@arrivio-direct.com', phone: '+49 151 1000 2160', checklist: { done: 1, total: 4, items: ['Notice received ✓', 'Inspection pending', 'Cleaning pending', 'Refund pending'] } },
-  { id:'MOV-006', tenant:'Luzviminda Reyes',    unit:'D-5-112',    property:'Arrivio Köln Deutz',          city:'Cologne',    propertyType: 'Single Room', type:'Move-in',  date:'2028-06-30', status:'Confirmed', email: 'luzviminda.r@uk-koeln.de', phone: '+49 151 1000 2004', checklist: { done: 3, total: 3, items: ['Agreement signed', 'Deposit paid', 'ID verified'] } },
-  { id:'MOV-007', tenant:'Marek Kowalski',      unit:'S-1-045',    property:'Arrivio Frankfurt Sachsenhausen', city:'Frankfurt', propertyType: 'Single Room', type:'Move-out', date:'2028-07-02', status:'Scheduled', email: 'marek.k@db-engineering.de', phone: '+49 151 1000 2170', checklist: { done: 0, total: 4, items: ['Inspection pending', 'Cleaning pending', 'Key return pending', 'Refund pending'] } },
-  { id:'MOV-008', tenant:'Elif Demir',          unit:'APT-AA-14',  property:'Aachen apartment portfolio',  city:'Aachen',     propertyType: 'Shared Room', type:'Move-in',  date:'2028-07-05', status:'Confirmed', email: 'elif.d@rwth-aachen.de', phone: '+49 151 1000 2006', checklist: { done: 2, total: 3, items: ['Agreement signed', 'Deposit paid', 'ID pending'] } },
-  { id:'MOV-009', tenant:'Roxana Popescu',      unit:'APT-DUS-08', property:'Düsseldorf apartment portfolio', city:'Düsseldorf', propertyType: 'Studio',      type:'Move-in',  date:'2028-07-08', status:'Confirmed', email: 'roxana.p@hhu-duesseldorf.de', phone: '+49 151 1000 2007', checklist: { done: 2, total: 3, items: ['Agreement signed', 'Deposit paid', 'ID pending'] } },
-  { id:'MOV-010', tenant:'Chinonso Okafor',     unit:'S-3-104',    property:'Arrivio Frankfurt Sachsenhausen', city:'Frankfurt', propertyType: 'Single Room', type:'Move-in',  date:'2028-07-12', status:'Scheduled', email: 'chinonso.o@db-engineering.de', phone: '+49 151 1000 2005', checklist: { done: 1, total: 3, items: ['Agreement signed', 'Deposit pending', 'ID pending'] } },
-  { id:'MOV-011', tenant:'Ayse Karaca',         unit:'APT-DUS-19', property:'Düsseldorf apartment portfolio', city:'Düsseldorf', propertyType: 'Studio',      type:'Move-out', date:'2028-07-15', status:'Scheduled', email: 'ayse.k@arrivio-direct.com', phone: '+49 151 1000 2180', checklist: { done: 0, total: 4, items: ['Notice received ✓', 'Inspection pending', 'Cleaning pending', 'Refund pending'] } },
-  { id:'MOV-012', tenant:'Ana Ionescu',         unit:'M-2-077',    property:'Arrivio München Schwabing',   city:'Munich',     propertyType: 'Single Room', type:'Move-in',  date:'2028-07-18', status:'Scheduled', email: 'ana.i@siemens-healthineers.com', phone: '+49 151 1000 2012', checklist: { done: 1, total: 3, items: ['Agreement signed', 'Deposit pending', 'ID pending'] } },
+  { id:'MOV-001', tenant:'Aarav Mehta',         unit:'D-3-214',    property:'Arrivio Düsseldorf Flingern', city:'Düsseldorf', propertyType: 'Single Room', type:'Move-in',  date:'2026-04-15', status:'Completed', email: 'aarav.m@klinikum-duesseldorf.de', phone: '+49 151 1000 2001', checklist: { done: 3, total: 3, items: ['Agreement signed', 'Deposit paid', 'ID verified'] } },
+  { id:'MOV-002', tenant:'Maria Santos',        unit:'O-2-118',    property:'Arrivio Düsseldorf Oberbilk', city:'Düsseldorf', propertyType: 'Single Room', type:'Move-in',  date:'2026-05-05', status:'Completed', email: 'maria.s@alloheim.de', phone: '+49 151 1000 2002', checklist: { done: 3, total: 3, items: ['Agreement signed', 'Deposit paid', 'ID verified'] } },
+  { id:'MOV-003', tenant:'Krzysztof Nowak',     unit:'E-4-206',    property:'Arrivio Köln Ehrenfeld',      city:'Cologne',    propertyType: 'Single Room', type:'Move-in',  date:'2026-05-12', status:'Completed', email: 'krzysztof.n@aho-germany.de', phone: '+49 151 1000 2003', checklist: { done: 3, total: 3, items: ['Agreement signed', 'Deposit paid', 'ID verified'] } },
+  { id:'MOV-004', tenant:'Rohan Kulkarni',      unit:'F-2-018',    property:'Arrivio Düsseldorf Flingern', city:'Düsseldorf', propertyType: 'Single Room', type:'Move-out', date:'2026-05-26', status:'Scheduled', email: 'rohan.k@klinikum-duesseldorf.de', phone: '+49 151 1000 2150', checklist: { done: 2, total: 4, items: ['Inspection scheduled ✓', 'Final invoice issued ✓', 'Cleaning pending', 'Deposit refund pending'] } },
+  { id:'MOV-005', tenant:'Isabel Romero',       unit:'APT-BER-04', property:'Berlin apartment portfolio',  city:'Berlin',     propertyType: 'Studio',      type:'Move-out', date:'2026-05-28', status:'Scheduled', email: 'isabel.r@arrivio-direct.com', phone: '+49 151 1000 2160', checklist: { done: 1, total: 4, items: ['Notice received ✓', 'Inspection pending', 'Cleaning pending', 'Refund pending'] } },
+  { id:'MOV-006', tenant:'Luzviminda Reyes',    unit:'D-5-112',    property:'Arrivio Köln Deutz',          city:'Cologne',    propertyType: 'Single Room', type:'Move-in',  date:'2026-05-30', status:'Confirmed', email: 'luzviminda.r@uk-koeln.de', phone: '+49 151 1000 2004', checklist: { done: 3, total: 3, items: ['Agreement signed', 'Deposit paid', 'ID verified'] } },
+  { id:'MOV-007', tenant:'Marek Kowalski',      unit:'S-1-045',    property:'Arrivio Frankfurt Sachsenhausen', city:'Frankfurt', propertyType: 'Single Room', type:'Move-out', date:'2026-06-02', status:'Scheduled', email: 'marek.k@db-engineering.de', phone: '+49 151 1000 2170', checklist: { done: 0, total: 4, items: ['Inspection pending', 'Cleaning pending', 'Key return pending', 'Refund pending'] } },
+  { id:'MOV-008', tenant:'Elif Demir',          unit:'APT-AA-14',  property:'Aachen apartment portfolio',  city:'Aachen',     propertyType: 'Shared Room', type:'Move-in',  date:'2026-06-05', status:'Confirmed', email: 'elif.d@rwth-aachen.de', phone: '+49 151 1000 2006', checklist: { done: 2, total: 3, items: ['Agreement signed', 'Deposit paid', 'ID pending'] } },
+  { id:'MOV-009', tenant:'Roxana Popescu',      unit:'APT-DUS-08', property:'Düsseldorf apartment portfolio', city:'Düsseldorf', propertyType: 'Studio',      type:'Move-in',  date:'2026-06-08', status:'Confirmed', email: 'roxana.p@hhu-duesseldorf.de', phone: '+49 151 1000 2007', checklist: { done: 2, total: 3, items: ['Agreement signed', 'Deposit paid', 'ID pending'] } },
+  { id:'MOV-010', tenant:'Chinonso Okafor',     unit:'S-3-104',    property:'Arrivio Frankfurt Sachsenhausen', city:'Frankfurt', propertyType: 'Single Room', type:'Move-in',  date:'2026-06-12', status:'Scheduled', email: 'chinonso.o@db-engineering.de', phone: '+49 151 1000 2005', checklist: { done: 1, total: 3, items: ['Agreement signed', 'Deposit pending', 'ID pending'] } },
+  { id:'MOV-011', tenant:'Ayse Karaca',         unit:'APT-DUS-19', property:'Düsseldorf apartment portfolio', city:'Düsseldorf', propertyType: 'Studio',      type:'Move-out', date:'2026-06-15', status:'Scheduled', email: 'ayse.k@arrivio-direct.com', phone: '+49 151 1000 2180', checklist: { done: 0, total: 4, items: ['Notice received ✓', 'Inspection pending', 'Cleaning pending', 'Refund pending'] } },
+  { id:'MOV-012', tenant:'Ana Ionescu',         unit:'M-2-077',    property:'Arrivio München Schwabing',   city:'Munich',     propertyType: 'Single Room', type:'Move-in',  date:'2026-06-18', status:'Scheduled', email: 'ana.i@siemens-healthineers.com', phone: '+49 151 1000 2012', checklist: { done: 1, total: 3, items: ['Agreement signed', 'Deposit pending', 'ID pending'] } },
 ];
 
 // ── Blocked Applications ──────────────────────────────────────
-// `days` = days since the issue was flagged, anchored to DEMO_TODAY (2028-06-26).
+// `days` = days since the issue was flagged, anchored to DEMO_TODAY (2026-05-26).
 export const blockedApplications = [
   { id:'APP-1005', name:'Oliver Bennett',  reason:'Passport rejected — resubmission requested', days:12 },
   { id:'APP-1013', name:'Nina Okafor',     reason:'Proof of income missing',                    days:5  },
@@ -224,15 +223,15 @@ export const blockedApplications = [
 ];
 
 // ── Lease Expiry Radar ────────────────────────────────────────
-// Tenants pulled from allTenants. `daysRemaining` is hardcoded to match the
-// expiry date counted from real calendar today (≈ May 2026), so the figures
-// reconcile when an investor reads the row.
+// Tenants pulled from allTenants. Dates and `daysRemaining` are anchored to
+// real calendar today (≈ May 2026) and sit inside the "next 60 days" window
+// the widget advertises, so the figures reconcile when an investor reads them.
 export const leaseExpiries = [
-  { tenant: 'Selin Aydin',          unit: 'APT-BER-04', property: 'Berlin apartment portfolio',     city: 'Berlin',     endDate: '2028-07-04', daysRemaining: 770 },
-  { tenant: 'Krzysztof Nowak',      unit: 'E-4-206',    property: 'Arrivio Köln Ehrenfeld',         city: 'Cologne',    endDate: '2028-07-15', daysRemaining: 781 },
-  { tenant: 'Luzviminda Reyes',     unit: 'D-5-112',    property: 'Arrivio Köln Deutz',             city: 'Cologne',    endDate: '2028-07-22', daysRemaining: 788 },
-  { tenant: 'Mateusz Lewandowski',  unit: 'APT-DUS-19', property: 'Düsseldorf apartment portfolio', city: 'Düsseldorf', endDate: '2028-08-05', daysRemaining: 802 },
-  { tenant: 'Roxana Popescu',       unit: 'APT-DUS-08', property: 'Düsseldorf apartment portfolio', city: 'Düsseldorf', endDate: '2028-08-20', daysRemaining: 817 },
+  { tenant: 'Selin Aydin',          unit: 'APT-BER-04', property: 'Berlin apartment portfolio',     city: 'Berlin',     endDate: '2026-06-15', daysRemaining: 20 },
+  { tenant: 'Krzysztof Nowak',      unit: 'E-4-206',    property: 'Arrivio Köln Ehrenfeld',         city: 'Cologne',    endDate: '2026-06-25', daysRemaining: 30 },
+  { tenant: 'Luzviminda Reyes',     unit: 'D-5-112',    property: 'Arrivio Köln Deutz',             city: 'Cologne',    endDate: '2026-07-05', daysRemaining: 40 },
+  { tenant: 'Mateusz Lewandowski',  unit: 'APT-DUS-19', property: 'Düsseldorf apartment portfolio', city: 'Düsseldorf', endDate: '2026-07-15', daysRemaining: 50 },
+  { tenant: 'Roxana Popescu',       unit: 'APT-DUS-08', property: 'Düsseldorf apartment portfolio', city: 'Düsseldorf', endDate: '2026-07-22', daysRemaining: 57 },
 ];
 
 // ── Waitlist Hierarchical Data ─────────────────────────────────
@@ -255,8 +254,8 @@ export const waitlistProperties = [
             type: 'Studio',
             status: 'Occupied',
             waitlist: [
-              { id: 'WL-101', position: 1, name: 'Hans Müller', email: 'hans.m@gmail.de', dateAdded: '2028-02-15', moveIn: '2028-04-10', moveOut: '2028-06-10', daysWaiting: 36 },
-              { id: 'WL-102', position: 2, name: 'Petra Schmidt', email: 'petra.s@web.de', dateAdded: '2028-03-01', moveIn: '2028-06-14', moveOut: '2028-08-14', daysWaiting: 22 }
+              { id: 'WL-101', position: 1, name: 'Hans Müller', email: 'hans.m@gmail.de', dateAdded: '2026-02-15', moveIn: '2026-04-10', moveOut: '2026-06-10', daysWaiting: 36 },
+              { id: 'WL-102', position: 2, name: 'Petra Schmidt', email: 'petra.s@web.de', dateAdded: '2026-03-01', moveIn: '2026-06-14', moveOut: '2026-08-14', daysWaiting: 22 }
             ]
           },
           {
@@ -265,7 +264,7 @@ export const waitlistProperties = [
             type: 'Single Room',
             status: 'Occupied',
             waitlist: [
-              { id: 'WL-103', position: 1, name: 'Lucas Wagner', email: 'l.wagner@tech.de', dateAdded: '2028-03-10', moveIn: '2028-04-20', moveOut: '2028-06-20', daysWaiting: 13 }
+              { id: 'WL-103', position: 1, name: 'Lucas Wagner', email: 'l.wagner@tech.de', dateAdded: '2026-03-10', moveIn: '2026-04-20', moveOut: '2026-06-20', daysWaiting: 13 }
             ]
           }
         ]
@@ -290,9 +289,9 @@ export const waitlistProperties = [
             type: 'Single Room',
             status: 'Occupied',
             waitlist: [
-              { id: 'WL-201', position: 1, name: 'Elena Fischer', email: 'elena.f@berlin-ops.de', dateAdded: '2028-01-20', moveIn: '2028-03-30', moveOut: '2028-05-30', daysWaiting: 62 },
-              { id: 'WL-202', position: 2, name: 'Markus Weber', email: 'm.weber@design.de', dateAdded: '2028-02-10', moveIn: '2028-06-03', moveOut: '2028-08-03', daysWaiting: 41 },
-              { id: 'WL-203', position: 3, name: 'Sarah Hoffmann', email: 'sarah.h@media.berlin', dateAdded: '2028-03-05', moveIn: '2028-08-07', moveOut: '2028-10-07', daysWaiting: 18 }
+              { id: 'WL-201', position: 1, name: 'Elena Fischer', email: 'elena.f@berlin-ops.de', dateAdded: '2026-01-20', moveIn: '2026-03-30', moveOut: '2026-05-30', daysWaiting: 62 },
+              { id: 'WL-202', position: 2, name: 'Markus Weber', email: 'm.weber@design.de', dateAdded: '2026-02-10', moveIn: '2026-06-03', moveOut: '2026-08-03', daysWaiting: 41 },
+              { id: 'WL-203', position: 3, name: 'Sarah Hoffmann', email: 'sarah.h@media.berlin', dateAdded: '2026-03-05', moveIn: '2026-08-07', moveOut: '2026-10-07', daysWaiting: 18 }
             ]
           },
           {
@@ -301,7 +300,7 @@ export const waitlistProperties = [
             type: 'Studio',
             status: 'Occupied',
             waitlist: [
-              { id: 'WL-204', position: 1, name: 'Jonas Keller', email: 'jonas.k@startup.io', dateAdded: '2028-02-28', moveIn: '2028-04-05', moveOut: '2028-06-05', daysWaiting: 23 }
+              { id: 'WL-204', position: 1, name: 'Jonas Keller', email: 'jonas.k@startup.io', dateAdded: '2026-02-28', moveIn: '2026-04-05', moveOut: '2026-06-05', daysWaiting: 23 }
             ]
           }
         ]
@@ -336,7 +335,7 @@ export const waitlistProperties = [
             type: 'Shared Room',
             status: 'Occupied',
             waitlist: [
-              { id: 'WL-301', position: 1, name: 'Anja Richter', email: 'a.richter@telekom.de', dateAdded: '2028-03-12', moveIn: '2028-05-01', moveOut: '2028-07-01', daysWaiting: 11 }
+              { id: 'WL-301', position: 1, name: 'Anja Richter', email: 'a.richter@telekom.de', dateAdded: '2026-03-12', moveIn: '2026-05-01', moveOut: '2026-07-01', daysWaiting: 11 }
             ]
           }
         ]
@@ -348,13 +347,13 @@ export const waitlistProperties = [
 export const mockWaitlist = waitlistProperties.flatMap(c => c.properties.flatMap(p => p.units.flatMap(u => u.waitlist.map(w => ({ ...w, property: p.name, unit: u.name, city: c.city, unitType: u.type })))));
 
 // ── Recent Decisions ────────────────────────────────────────────
-// Timestamps in the last few days before DEMO_TODAY (2028-06-26).
+// Timestamps in the last few days before DEMO_TODAY (2026-05-26).
 export const recentDecisions = [
-  { id:'APP-1003', applicant:'Chen Wei',         decision:'Approved',  admin:'Sarah K.', timestamp:'2028-06-25 14:22' },
-  { id:'APP-1004', applicant:'Fatima Al-Rashid', decision:'Approved',  admin:'Tom B.',   timestamp:'2028-06-25 11:05' },
-  { id:'APP-1006', applicant:'Aisha Malik',       decision:'Rejected',  admin:'Tom B.',   timestamp:'2028-06-24 16:40' },
-  { id:'APP-1010', applicant:'Yuki Tanaka',       decision:'Approved',  admin:'Sarah K.', timestamp:'2028-06-23 09:30' },
-  { id:'APP-1002', applicant:'Priya Nair',        decision:'Approved',  admin:'Tom B.',   timestamp:'2028-06-22 13:15' },
+  { id:'APP-1003', applicant:'Chen Wei',         decision:'Approved',  admin:'Sarah K.', timestamp:'2026-05-25 14:22' },
+  { id:'APP-1004', applicant:'Fatima Al-Rashid', decision:'Approved',  admin:'Tom B.',   timestamp:'2026-05-25 11:05' },
+  { id:'APP-1006', applicant:'Aisha Malik',       decision:'Rejected',  admin:'Tom B.',   timestamp:'2026-05-24 16:40' },
+  { id:'APP-1010', applicant:'Yuki Tanaka',       decision:'Approved',  admin:'Sarah K.', timestamp:'2026-05-23 09:30' },
+  { id:'APP-1002', applicant:'Priya Nair',        decision:'Approved',  admin:'Tom B.',   timestamp:'2026-05-22 13:15' },
 ];
 
 // ── Status Breakdown ─────────────────────────────────────────────

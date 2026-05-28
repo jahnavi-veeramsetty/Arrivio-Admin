@@ -36,10 +36,10 @@ function generateInitialRooms(property) {
         ? 'Held for pipeline cohort'
         : 'Ready for assignment';
     const lastEventDate = status === 'Occupied'
-      ? '2028-06-01'
+      ? '2026-04-15'
       : status === 'Reserved'
-        ? '2028-06-15'
-        : '2028-06-20';
+        ? '2026-05-15'
+        : '2026-05-20';
 
     return { id, type, floor, status, assignedPartner, occupiedBy, lastEvent, lastEventDate };
   });
@@ -198,7 +198,7 @@ export default function RoomManagement({ property }) {
         ...draft,
         occupiedBy: draft.status === 'Occupied' ? (draft.assignedPartner ? `${draft.assignedPartner.split(' ')[0]} placement` : 'Direct B2C') : null,
         lastEvent: draft.status === 'Occupied' ? 'Lease active' : draft.status === 'Reserved' ? 'Held for pipeline cohort' : 'Ready for assignment',
-        lastEventDate: '2028-06-22',
+        lastEventDate: '2026-05-22',
       };
       if (exists) {
         return previous.map((room) => (room.id === draft.id ? { ...room, ...normalised } : room));

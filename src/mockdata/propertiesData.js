@@ -71,8 +71,8 @@ const generateUnits = (prefix, breakdown, rooms, occupancyRate, partnerName) => 
                 company: partnerName,
                 email: `resident.${idx}@arrivio.com`,
                 phone: '+49 30 000000',
-                moveIn: '2028-06-01',
-                leaseEnd: '2029-05-31',
+                moveIn: '2026-04-01',
+                leaseEnd: '2027-03-31',
               }
             : null,
       });
@@ -132,8 +132,8 @@ export const mockCities = [
 ];
 
 export const mockMaintenance = [
-  { id: 'MT-101', propertyId: 'prop-015', unitId: 'ALT-03', issue: 'Ventilation service in shared kitchen', priority: 'medium', status: 'scheduled', date: '2028-06-24' },
-  { id: 'MT-102', propertyId: 'apt-002', unitId: 'ACG-02', issue: 'Turnover repaint between tenant cycles', priority: 'low', status: 'planned', date: '2028-06-27' },
+  { id: 'MT-101', propertyId: 'prop-015', unitId: 'ALT-03', issue: 'Ventilation service in shared kitchen', priority: 'medium', status: 'scheduled', date: '2026-05-28' },
+  { id: 'MT-102', propertyId: 'apt-002', unitId: 'ACG-02', issue: 'Turnover repaint between tenant cycles', priority: 'low', status: 'planned', date: '2026-06-02' },
 ];
 
 export const mockUpdates = [

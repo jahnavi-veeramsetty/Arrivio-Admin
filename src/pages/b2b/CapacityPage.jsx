@@ -44,8 +44,8 @@ export default function CapacityPage() {
           onChange={(event) => setStatusFilter(event.target.value)}
         >
           <option value="All">All Statuses</option>
-          <option value="Pipeline Hold">Pipeline Hold</option>
-          <option value="Maintenance Buffer">Maintenance Buffer</option>
+          <option value="Reserved">Reserved</option>
+          <option value="Maintenance Buffer">Ready Buffer</option>
         </select>
       </div>
 

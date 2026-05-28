@@ -16,7 +16,7 @@ export default function DocumentsPage() {
   const appId = searchParams.get('appId');
 
   const [apps, setApps] = useState(() => {
-    const saved = localStorage.getItem('arrivio_b2c_apps_v3');
+    const saved = localStorage.getItem('arrivio_b2c_apps_v4');
     let baseApps = saved ? JSON.parse(saved) : [...mockApplications];
     
     // Merge applicantDocData into baseApps if not already present
@@ -34,7 +34,7 @@ export default function DocumentsPage() {
   });
 
   useEffect(() => {
-    localStorage.setItem('arrivio_b2c_apps_v3', JSON.stringify(apps));
+    localStorage.setItem('arrivio_b2c_apps_v4', JSON.stringify(apps));
     refreshCounts();
   }, [apps, refreshCounts]);
 
@@ -53,7 +53,7 @@ export default function DocumentsPage() {
   }
 
   const handleReset = () => {
-    localStorage.removeItem('arrivio_b2c_apps_v3');
+    localStorage.removeItem('arrivio_b2c_apps_v4');
     const resetData = mockApplications.map(app => {
       const docEntry = applicantDocData.find(d => d.appId === app.id);
       if (docEntry) {
