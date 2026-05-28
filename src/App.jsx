@@ -26,7 +26,6 @@ import WaitlistPage from './pages/b2c/WaitlistPage';
 import TenantsDashboard from './pages/tenants/TenantsDashboard';
 import AllTenants from './pages/tenants/AllTenants';
 import B2BCompaniesPage from './pages/tenants/B2BCompaniesPage';
-import LeasesPage from './pages/tenants/LeasesPage';
 import RentLedger from './pages/tenants/RentLedger';
 import TenantProfile from './pages/tenants/TenantProfile';
 
@@ -85,7 +84,6 @@ export default function App() {
                 <Route path="/admin/tenants" element={<TenantsDashboard />} />
                 <Route path="/admin/tenants/all" element={<AllTenants />} />
                 <Route path="/admin/tenants/b2b" element={<B2BCompaniesPage />} />
-                <Route path="/admin/tenants/leases" element={<LeasesPage />} />
                 <Route path="/admin/tenants/ledger" element={<RentLedger />} />
                 <Route path="/admin/tenants/profile/:id" element={<TenantProfile />} />
                 <Route path="/admin/b2b" element={<B2B_Dashboard />} />

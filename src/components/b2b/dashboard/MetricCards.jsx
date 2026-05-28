@@ -4,7 +4,7 @@ export default function MetricCards({ partners, employees, reservations }) {
   const totalPartners = partners.reduce((sum, partner) => sum + (partner.partnerCount || 1), 0);
   const totalReserved = reservations.reduce((sum, reservation) => sum + reservation.roomsReserved, 0);
   const pipelineReserved = reservations
-    .filter((reservation) => reservation.status === 'Pipeline Hold')
+    .filter((reservation) => reservation.status === 'Reserved')
     .reduce((sum, reservation) => sum + reservation.roomsReserved, 0);
   const maintenanceBuffer = reservations
     .filter((reservation) => reservation.status === 'Maintenance Buffer')

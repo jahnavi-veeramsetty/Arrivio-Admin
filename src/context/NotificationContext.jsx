@@ -26,7 +26,7 @@ export const NotificationProvider = ({ children }) => {
   };
 
   const refreshCounts = useCallback(() => {
-    const appsFromStorage = localStorage.getItem('arrivio_b2c_apps_v3');
+    const appsFromStorage = localStorage.getItem('arrivio_b2c_apps_v4');
     const allApps = appsFromStorage ? JSON.parse(appsFromStorage) : mockApplications.map(app => {
       const docEntry = applicantDocData.find(d => d.appId === app.id);
       return docEntry ? { ...app, docs: app.docs || docEntry.docs } : app;

@@ -26,7 +26,7 @@ export default function WeekSchedule() {
     return acc;
   }, {});
 
-  // Group by date (for calendar view) - 7 days starting at DEMO_TODAY (2028-06-26)
+  // Group by date (for calendar view) - 7 days starting at DEMO_TODAY (2026-05-26)
   const dates = weekDatesFromToday();
   const byDate = dates.reduce((acc, d) => {
     acc[d] = mockMoveEvents.filter(e => e.date === d);
